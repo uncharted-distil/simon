@@ -1,6 +1,8 @@
-from DataGenerator import *
+#from DataGenerator import *
+#from Encoder import *
 
-from Encoder import *
+from Simon.DataGenerator import DataGenerator
+from Simon.Encoder import Encoder
 
 import pandas as pd
 from keras.models import Model
@@ -23,7 +25,7 @@ import pickle
 class Simon():
     def __init__(self):
         self.encoder = Encoder()
-        
+
     def binarize(x, sz=71):
         return tf.to_float(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1))
     
