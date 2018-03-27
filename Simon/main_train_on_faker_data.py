@@ -39,9 +39,9 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
         encoder().process(raw_data, max_cells)
     
     # encode the data 
-    X, y = encoder.encode_data(raw_data, header, maxlen)
+    X, y = encoder().encode_data(raw_data, header, maxlen)
 
-    max_cells = encoder.cur_max_cells
+    max_cells = encoder().cur_max_cells
 
     data = None
     if should_train:
