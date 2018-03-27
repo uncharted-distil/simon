@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 import pprint
 import json
-from ColumnProcessor import ColType as ct
-import ColumnProcessor as cp
+from Simon.ColumnProcessor import ColType as ct
+import Simon.ColumnProcessor as cp
 import os.path
 from random import randint
 import random

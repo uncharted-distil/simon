@@ -1,6 +1,6 @@
 
 import numpy as np
-from DataGenerator import *
+from Simon.DataGenerator import *
 # reduces down a a x b matrix to (a*b) x 2 matrix where the second column
 # is the column names from the header
 
