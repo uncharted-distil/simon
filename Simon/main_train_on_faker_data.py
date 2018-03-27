@@ -1,6 +1,7 @@
 import Simon
 import os.path
 import Simon.Encoder as Encoder
+from Simon.DataGenerator import DataGenerator
 
 def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, try_reuse_data, batch_size, execution_config):
     maxlen = 20
