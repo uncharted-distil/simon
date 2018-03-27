@@ -12,6 +12,5 @@ setup(name='Simon',
         'scipy >= 0.19.0',
         'tensorflow >= 1.1.0',
         'h5py >= 2.7.0'],
-    data_files=[('',['Simon/types.json'])],
     include_package_data=True,
 )

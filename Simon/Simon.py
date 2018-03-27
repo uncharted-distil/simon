@@ -1,9 +1,5 @@
-#from DataGenerator import *
-#from Encoder import *
-
 from Simon.DataGenerator import DataGenerator
 from Simon.Encoder import Encoder
-
 import pandas as pd
 from keras.models import Model
 from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D

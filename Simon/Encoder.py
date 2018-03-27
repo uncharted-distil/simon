@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MultiLabelBinarizer
 from keras.utils import np_utils
-from LengthStandardizer import *
+from Simon.LengthStandardizer import *
 
 
 class StringToIntArrayEncoder:

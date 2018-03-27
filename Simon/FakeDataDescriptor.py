@@ -16,7 +16,7 @@ class FakeDataDescriptor:
         fake.random.seed(1234)
         self.fake = fake
     methods = None
-    with open('types.json') as data_file:
+    with open(os.path.join(os.path.dirname(__file__),'types.json')) as data_file:
         methods = json.load(data_file)
 
     def show_example_data(self):
