@@ -6,7 +6,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     max_cells = 500
     p_threshold = 0.5
 
-    Classifier = Simon()
+    Classifier = Simon
 
     checkpoint_dir = "checkpoints/"
     if not os.path.isdir(checkpoint_dir):
