@@ -1,5 +1,6 @@
 import Simon
 import os.path
+import numpy as np
 import Simon.Encoder as Encoder
 from Simon.DataGenerator import DataGenerator
 
