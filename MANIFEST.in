@@ -1,0 +1,2 @@
+include Simon/types.json
+include Simon/unencoded_chars.json
