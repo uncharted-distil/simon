@@ -1,10 +1,10 @@
 *.pyc
-checkpoints
-data
-logs
+Simon/checkpoints
+Simon/data
+Simon/logs
 __pycache__
 .DS_Store
-azure_utils/local_config.py
-azure_utils
-graphutils
-backup
+Simon/azure_utils/local_config.py
+Simon/azure_utils
+Simon/graphutils
+Simon/backup
