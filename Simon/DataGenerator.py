@@ -12,7 +12,7 @@ import random
 
 class FakeDataCreator:
     methods = None
-    with open('types.json') as data_file:
+    with open(os.path.join(os.path.dirname(__file__),'types.json')) as data_file:
         methods = json.load(data_file)
     filtered_dict = {k: v for k, v in methods.items() if len(v)
                      > 0 and not v in ['']}
