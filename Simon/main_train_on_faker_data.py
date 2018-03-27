@@ -36,7 +36,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
             checkpoint = config['checkpoint']
     else:
         encoder = Encoder
-        encoder.process(raw_data, max_cells)
+        encoder().process(raw_data, max_cells)
     
     # encode the data 
     X, y = encoder.encode_data(raw_data, header, maxlen)
