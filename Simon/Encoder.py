@@ -13,11 +13,12 @@ class StringToIntArrayEncoder:
 
 
 class Encoder:
-    def __init__(self):
+    def __init__(self,categories=categories):
         self._char_indicies = {}
         self._indices_char = {}
         self.cur_max_cells = 0
         self._encoder = LabelEncoder()
+        self.categories = categories
 
 
     def process(self, raw_data, max_cells):
@@ -103,8 +104,10 @@ class Encoder:
 
     def reverse_label_encode(self, y, p_threshold):
         
-        with open('Categories.txt','r') as f:
-            Categories = f.read().splitlines()
+        #with open('Categories.txt','r') as f:
+        #        Categories = f.read().splitlines()
+        Categories = encoder.categories
+        
         multi_encoder = MultiLabelBinarizer()
         multi_encoder.fit([Categories])
         

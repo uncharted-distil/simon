@@ -15,6 +15,9 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     if not os.path.isdir(checkpoint_dir):
         os.makedirs(checkpoint_dir)
 
+    with open('Categories.txt','r') as f:
+        Categories = f.read().splitlines()
+
 
     raw_data, header = DataGenerator.gen_test_data(
         (data_count, data_cols), try_reuse_data)
@@ -35,13 +38,13 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
         if checkpoint is None:
             checkpoint = config['checkpoint']
     else:
-        encoder = Encoder
-        encoder().process(raw_data, max_cells)
+        encoder = Encoder(categories=Categories)
+        encoder.process(raw_data, max_cells)
     
     # encode the data 
-    X, y = encoder().encode_data(raw_data, header, maxlen)
+    X, y = encoder.encode_data(raw_data, header, maxlen)
 
-    max_cells = encoder().cur_max_cells
+    max_cells = encoder.cur_max_cells
 
     data = None
     if should_train:
@@ -75,46 +78,6 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     print("DEBUG::The actual headers are:")
     print(header)
     evaluate_model(max_cells, model, data, encoder, p_threshold)
-
-def resolve_file_path(filename, dir):
-    if os.path.isfile(str(filename)):
-        return str(filename)
-    elif os.path.isfile(str(dir + str(filename))):
-        return dir + str(filename)
-
-def load_weights(checkpoint_name, config, model, checkpoint_dir):
-    if config and not checkpoint_name:
-        checkpoint_name = config['checkpoint']
-    if checkpoint_name:
-        checkpoint_path = resolve_file_path(checkpoint_name, checkpoint_dir)
-        print("Checkpoint : %s" % str(checkpoint_path))
-        model.load_weights(checkpoint_path)
-
-def save_config(execution_config, checkpoint_dir):
-    filename = ""
-    if not execution_config["checkpoint"] is None:
-        filename = execution_config["checkpoint"].rsplit( ".", 1 )[ 0 ] + ".pkl"
-    else:
-        filename = time.strftime("%Y%m%d-%H%M%S") + ".pkl"
-    with open(checkpoint_dir + filename, 'wb') as output:
-        pickle.dump(execution_config, output, pickle.HIGHEST_PROTOCOL)
-
-def load_config(execution_config_path, dir):
-    execution_config_path = resolve_file_path(execution_config_path, dir)
-    return pickle.load( open( execution_config_path, "rb" ) )
-
-def get_best_checkpoint(checkpoint_dir):
-    max_mtime = 0
-    max_file = ''
-    for dirname,subdirs,files in os.walk(checkpoint_dir):
-        for fname in files:
-            full_path = os.path.join(dirname, fname)
-            mtime = os.stat(full_path).st_mtime
-            if mtime > max_mtime:
-                max_mtime = mtime
-                max_dir = dirname
-                max_file = fname
-    return max_file
 
 if __name__ == '__main__':
     import argparse

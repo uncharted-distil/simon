@@ -1,5 +1,5 @@
-from Simon.DataGenerator import DataGenerator
-from Simon.Encoder import Encoder
+from Simon.DataGenerator import *
+from Simon.Encoder import *
 import pandas as pd
 from keras.models import Model
 from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
@@ -219,8 +219,9 @@ class Simon():
         max_index = np.argmax(probabilities, axis=1)
         # print("Associated fixed category indices:")
         # print(max_index)
-        with open('Categories.txt','r') as f:
-                Categories = f.read().splitlines()
+        #with open('Categories.txt','r') as f:
+        #        Categories = f.read().splitlines()
+        Categories = encoder.categories
         print("Remember that the fixed categories are:")
         print(Categories)
         print("Most Likely Predicted Category/Labels are: ")
