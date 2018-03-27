@@ -5,4 +5,6 @@ logs
 __pycache__
 .DS_Store
 azure_utils/local_config.py
+azure_utils
+graphutils
 backup

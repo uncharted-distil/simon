@@ -1,3 +1,4 @@
+from DataGenerator import *
 from Encoder import *
 import pandas as pd
 from keras.models import Model
@@ -12,77 +13,12 @@ import tensorflow as tf
 import re
 from keras import backend as K
 import keras.callbacks
+import sys
 import os
 import time
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import pickle
-import azure_utils.client as client
-import graphutils.getConnection as gc
-import random
-from LengthStandardizer import *
-from FetchLabeledData import *
-from penny.guesser import guess
-import logging
 
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
-
-class GeonamesCountriesTxtFileReader(object):
- """
-  A GeonamesCountriesTxtFileReader 
- """
- def __init__(self, input_file):
-  """Return a GeonamesCountriesTxtFileReader object"""   
-  self.input_file = input_file
-
- def get_header_row_postal(self):
-  return [ 
-   'country_code',
-   'postal_code',
-   'city',
-   'state',
-   'admin-code-1',
-   'admin-name-2',
-   'admin-code-2',
-   'admin-name-3',
-   'admin-code-3',
-   'latitude',
-   'longitude',
-   'accuracy' ]
-   
- def get_data_types_postal(self):
-  return { 
-   'country_code' : str,
-   'postal_code' : str,
-   'city' : str,
-   'state' : str,
-   'admin-code-1' : str,
-   'admin-name-2' : str,
-   'admin-code-2' : str,
-   'admin-name-3' : str,
-   'admin-code-3' : str,
-   'latitude' : str,
-   'longitude' : str,
-   'accuracy' : str }
-  
- def read_csv_postal(self):
-  start = time.time()
-  df = pd.read_csv(
-   self.input_file,
-   delim_whitespace=False,
-   sep='\t',
-   error_bad_lines=False,
-   skiprows=0,
-   encoding='utf-8',
-   names=self.get_header_row_postal(),
-   dtype=self.get_data_types_postal(),
-   na_values=['none'],
-   usecols=self.get_header_row_postal())
-  
-  end = time.time()
-  logger.info('Read CSV File (path = {}, elapsed-time = {})'.format(self.input_file, (end - start)))
-  
-  return df
 
 
 def binarize(x, sz=71):
@@ -114,12 +50,12 @@ def eval_false_positives(y_test, y_pred):
     # print(precision_matrix)
     for i in np.arange(y_test.shape[0]):
         for j in np.arange(y_test.shape[1]) :
-            if(false_positives[i,j]==1): #false positive label for ith sample and jth predicted category
+            if(false_positives[i,j]==1): #positive label for ith sample and jth predicted category
                 for k in np.arange(y_test.shape[1]):
                     if(y_test[i,k]==1): #positive label for ith sample and kth true category
-                        # print("DEBUG::i,j,k")
-                        # print("%d,%d,%d"%(i,j,k))
-                        false_positive_matrix[j,k] +=1
+                       # print("DEBUG::i,j,k")
+                       # print("%d,%d,%d"%(i,j,k)) 
+                       false_positive_matrix[j,k] +=1
     # print("DEBUG::precision matrix")
     # print(precision_matrix)
     return np.sum(false_positive_matrix),np.sum(false_positive_matrix, axis=0),false_positive_matrix
@@ -251,7 +187,7 @@ def train_model(batch_size, checkpoint_dir, model, nb_epoch, data):
     
     check_cb = keras.callbacks.ModelCheckpoint(checkpoint_dir + "text-class" + '.{epoch:02d}-{val_loss:.2f}.hdf5',
                                                monitor='val_loss', verbose=0, save_best_only=True, mode='min')
-    earlystop_cb = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, verbose=1, mode='auto',min_delta=0.05)
+    earlystop_cb = keras.callbacks.EarlyStopping(monitor='val_loss', patience=7, verbose=1, mode='auto')
 
     tbCallBack = keras.callbacks.TensorBoard(log_dir='./logs', histogram_freq=0, write_graph=True, write_images=False, embeddings_freq=0,
                                 embeddings_layer_names=None, embeddings_metadata=None)
@@ -262,9 +198,9 @@ def train_model(batch_size, checkpoint_dir, model, nb_epoch, data):
     print('losses: ')
     print(history.history['loss'])
     print('accuracies: ')
-    #print(history.history['acc'])
+    # print(history.history['acc'])
     print(history.history['val_binary_accuracy'])
-    plot_loss(history)
+    #plot_loss(history)
 
 def evaluate_model(max_cells, model, data, encoder, p_threshold):
     print("Starting predictions:")
@@ -278,11 +214,14 @@ def evaluate_model(max_cells, model, data, encoder, p_threshold):
     # return all predictions above a certain threshold
     # first, the maximum probability/class
     probabilities = model.predict(data.X_test, verbose=1)
+    # print("The prediction probabilities are:")
+    # print(probabilities)
     m = np.amax(probabilities, axis=1)
     max_index = np.argmax(probabilities, axis=1)
+    # print("Associated fixed category indices:")
+    # print(max_index)
     with open('Categories.txt','r') as f:
             Categories = f.read().splitlines()
-    Categories = sorted(Categories)
     print("Remember that the fixed categories are:")
     print(Categories)
     print("Most Likely Predicted Category/Labels are: ")
@@ -303,167 +242,45 @@ def evaluate_model(max_cells, model, data, encoder, p_threshold):
     print(eval_confusion(data.y_test,y_pred))
     print("False positive matrix is:")
     print(eval_false_positives(data.y_test,y_pred))
-    
-    return encoder.reverse_label_encode(probabilities,p_threshold)
 
 def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, try_reuse_data, batch_size, execution_config):
     maxlen = 20
     max_cells = 500
-    p_threshold = 0.5 # threshold for positive probability of a label
+    p_threshold = 0.5
 
-    # set this boolean to True to print debug messages (also terminate on *any* exception)
-    DEBUG = False
 
     checkpoint_dir = "checkpoints/"
     if not os.path.isdir(checkpoint_dir):
         os.makedirs(checkpoint_dir)
 
-        
-    # basic preliminaries for database calls
-    store_name = 'nktraining'
-    adl = client.get_adl_client(store_name)
-    files = adl.ls('training-data/CKAN')
-    random.shuffle(files)
-    cnxn = gc.getConnection()
-    cursor = cnxn.cursor()
-    
-    # make required database calls
-    out, out_array_header = FetchLabeledDataFromDatabase(max_cells, cursor, adl, DEBUG)
-    cnxn.close()
-    
-    
-    # orient the user a bit
-    print("read clustered data is: ")
-    print(out)
-    print("fixed categories are: ")
-    with open('Categories.txt','r') as f:
-            Categories = f.read().splitlines()
-    Categories = sorted(Categories)
-    print(Categories)
-    
-    nx,ny = out.shape
-    print("The size of the read raw data is %d rows by %d columns"%(nx,ny))
-     
 
-    # specify datalake data for the transfer-learning experiment
-    raw_data = out[0:max_cells,:] #truncate the rows (max_cells)
-    header = out_array_header
-    
-    #read "post-processed" header from file!
-#    with open('datalake_labels','r',newline='\n') as myfile:
-#        reader = csv.reader(myfile, delimiter=',')
-#        header = []
-#        for row in reader:
-#            header.append(row)
-    # OR header is out_array_header
-    
-    print("corresponding header length is: %d"%len(out_array_header))
-    #print(header)
-    
-    ## ADD GEODATA
-    import logging
-    logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(__name__)
-
-    # read-in relevant data
-    in_file_postal = 'data/geodata/allCountries_postal.txt'
-    reader_postal = GeonamesCountriesTxtFileReader(in_file_postal)
-    df_postal = reader_postal.read_csv_postal()
-    
-    # read-in country codes
-    in_file_cc = 'data/geodata/country_codes_csv.csv'
-    df_countries = pd.read_csv(in_file_cc,dtype=str)
-
-    # now, build up geo-data training data set
-    N_SAMPLES = 1000 # number of samples for each additional category
-    
-    start = time.time()
-    data = np.asarray(df_countries['Name'].sample(n=max_cells,replace='True'))[np.newaxis].T # draw first random column
-    data_header = list([['country','text'],]) # start with the 'country' category
-    for i in np.arange(1,N_SAMPLES): # draw remaining random columns
-        #print(data)
-        data = np.concatenate((data,np.asarray(df_countries['Name'].sample(n=max_cells,replace='True'))[np.newaxis].T),axis=1)
-        data_header.append(list(['country','text']))
-    # now, handle the remaining new geo categories
-    NewCategories = list(['state','city','postal_code','latitude','longitude','country_code'])
-    for category in NewCategories:
-        for i in np.arange(N_SAMPLES):
-            data = np.concatenate((data,np.asarray(df_postal[category].sample(n=max_cells,replace='True'))[np.newaxis].T),axis=1)
-            if((category=='latitude') or (category=='longitude')):
-                data_header.append(list([category,'float']))
-            elif(category=='postal_code'):
-                # label as 'int' where appropriate (one may also need to label as 'text' sometimes as well, but going with this for now)
-                data_header.append(list([category,'int']))
-            else :
-                data_header.append(list([category,'text']))
-                
-    print("DEBUG::the shape of geo data is:")
-    print(data.shape)
-    print("DEBUG::the length of the corresponding geo data header is:")
-    print(len(data_header))
-    print("DEBUG::the time elapsed to build the geo data set is (sec):")
-    print(time.time()-start)
-    
-    print("DEBUG::merging geo data with datalake data... ")
-    raw_data = np.column_stack((raw_data,data))
-    header.extend(data_header)
-    print("DEBUG::done!!")
-    
-    print("DEBUG::the shape of final merged data is:")
-    print(raw_data.shape)
-    print("DEBUG::the length of final merged data header is:")
-    print(len(header))
-    ## FINISHED ADDING GEODATA
-    
-    ## LABEL COMBINED DATA AS CATEGORICAL/ORDINAL
-    start_time_guess = time.time()
-    guesses = []
-    print("Beginning Guessing categorical/ordinal for geo+datalake data...")
-    category_count = 0
-    ordinal_count = 0
-    for i in np.arange(raw_data.shape[1]):
-        tmp = guess(raw_data[:,i], for_types ='category')
-        if tmp[0]=='category':
-            category_count += 1
-            header[i].append('categorical')
-            if ('int' in header[i]) or ('float' in header[i]) \
-                or ('datetime' in header[i]):
-                    ordinal_count += 1
-                    header[i].append('ordinal')
-        guesses.append(tmp)
-    
-    print(guesses)
-    print(len(guesses))
-    print("DEBUG::The number of categorical columns is %d"%category_count)
-    print("DEBUG::The number of ordinal columns is %d"%ordinal_count)
-    print(header)
-    elapsed_time = time.time()-start_time_guess
-    print("Total guessing time is : %.2f sec" % elapsed_time)
-    ## FINISHED LABELING COMBINED DATA AS CATEGORICAL/ORDINAL
-    
-    # load checkpoint from faker data
-    config = {}
-    if execution_config is None:
-        raise TypeError
-    config = load_config(execution_config, checkpoint_dir)
-    encoder = config['encoder']
-    if checkpoint is None:
-        checkpoint = config['checkpoint']
-        
-    # enable training mode for transfer-learning experiment
-    should_train = True
+    raw_data, header = DataGenerator.gen_test_data(
+        (data_count, data_cols), try_reuse_data)
+    print(raw_data)
     
     # transpose the data
     raw_data = np.char.lower(np.transpose(raw_data).astype('U'))
     
+    # do other processing and encode the data
+    if null_pct > 0:
+        DataGenerator.add_nulls_uniform(raw_data, null_pct)
+    config = {}
+    if not should_train:
+        if execution_config is None:
+            raise TypeError
+        config = load_config(execution_config, checkpoint_dir)
+        encoder = config['encoder']
+        if checkpoint is None:
+            checkpoint = config['checkpoint']
+    else:
+        encoder = Encoder()
+        encoder.process(raw_data, max_cells)
+    
     # encode the data 
     X, y = encoder.encode_data(raw_data, header, maxlen)
-    
-    print("DEBUG::The encoded labels (one row) are:")
-    #print(y[0,:])
-    #print(y)
 
     max_cells = encoder.cur_max_cells
+
     data = None
     if should_train:
         data = setup_test_sets(X, y)
@@ -477,72 +294,11 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     category_count = y.shape[1] 
     print('Number of fixed categories is :')
     print(category_count)
-
-    #model = generate_model(maxlen, max_cells, category_count-2)
-    max_len = maxlen
-    filter_length = [1, 3, 3]
-    nb_filter = [40, 200, 1000]
-    pool_length = 2
-    # document input
-    document = Input(shape=(max_cells, max_len), dtype='int64')
-    # sentence input
-    in_sentence = Input(shape=(max_len,), dtype='int64')
-    # char indices to one hot matrix, 1D sequence to 2D
-    embedded = Lambda(binarize, output_shape=binarize_outshape)(in_sentence)
-    # embedded: encodes sentence
-    for i in range(len(nb_filter)):
-        embedded = Convolution1D(nb_filter=nb_filter[i],
-                                 filter_length=filter_length[i],
-                                 border_mode='valid',
-                                 activation='relu',
-                                 init='glorot_normal',
-                                 subsample_length=1)(embedded)
-
-        embedded = Dropout(0.1)(embedded)
-        embedded = MaxPooling1D(pool_length=pool_length)(embedded)
-
-    forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(embedded)
-    backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                         dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
-
-    sent_encode = merge([forward_sent, backward_sent],
-                        mode='concat', concat_axis=-1)
-    sent_encode = Dropout(0.3)(sent_encode)
-    # sentence encoder
-
-    sentence_encoder = Model(input=in_sentence, output=sent_encode)
-
-    print(sentence_encoder.summary())
-    encoded = TimeDistributed(sentence_encoder)(document)
-
-    # encoded: sentences to bi-lstm for document encoding
-    forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                    dropout_U=0.2, consume_less='gpu')(encoded)
-    backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                     dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
-
-    merged = merge([forwards, backwards], mode='concat', concat_axis=-1)
-    output_pre = Dropout(0.3)(merged)
-    output_pre = Dense(128, activation='relu')(output_pre)
-    output_pre = Dropout(0.3)(output_pre)
-    output = Dense(category_count-2-6-1, activation='sigmoid')(output_pre)
-    # output = Activation('softmax')(output)
-    model = Model(input=document, output=output)
     
-    # having built model of previous size, load weights
+    model = generate_model(maxlen, max_cells, category_count)
+    
     load_weights(checkpoint, config, model, checkpoint_dir)
     
-    #having loaded weights,rebuild model using new category_count in last layer
-    output = Dense(category_count, activation='sigmoid')(output_pre)
-    model = Model(input=document, output=output)
-    
-    # retrain the last layer
-    for layer in model.layers[:7]:
-        layer.trainable = False
-    model.layers[8].trainable = True
-
-
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam', metrics=['binary_accuracy'])
     if(should_train):
@@ -550,12 +306,13 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
         train_model(batch_size, checkpoint_dir, model, nb_epoch, data)
         end = time.time()
         print("Time for training is %f sec"%(end-start))
-        
-        evaluate_model(max_cells, model, data, encoder, p_threshold)
-        
         config = { 'encoder' :  encoder,
                    'checkpoint' : get_best_checkpoint(checkpoint_dir) }
         save_config(config, checkpoint_dir)
+        
+    print("DEBUG::The actual headers are:")
+    print(header)
+    evaluate_model(max_cells, model, data, encoder, p_threshold)
 
 def resolve_file_path(filename, dir):
     if os.path.isfile(str(filename)):
