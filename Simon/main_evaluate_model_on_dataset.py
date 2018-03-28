@@ -7,7 +7,7 @@ from Simon.Encoder import *
 from Simon.DataGenerator import *
 from Simon.LengthStandardizer import *
 
-def main(execution_config, DEBUG):
+def main(checkpoint, DEBUG):
     maxlen = 20
     max_cells = 500
     p_threshold = 0.5
