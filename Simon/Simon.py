@@ -74,7 +74,7 @@ class Simon:
     def clean(s):
         return re.sub(r'[^\x00-\x7f]', r'', s)
 
-    def setup_test_sets(X, y):
+    def setup_test_sets(self,X, y):
         ids = np.arange(len(X))
         np.random.shuffle(ids)
 
