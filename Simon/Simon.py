@@ -19,8 +19,8 @@ import time
 import pickle
 
 class Simon():
-    def __init__(self):
-        self.encoder = Encoder()
+    def __init__(self,encoder):
+        self.encoder = encoder
 
     def binarize(x, sz=71):
         return tf.to_float(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1))

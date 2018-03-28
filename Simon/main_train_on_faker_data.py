@@ -9,8 +9,6 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     max_cells = 500
     p_threshold = 0.5
 
-    Classifier = Simon
-
     checkpoint_dir = "checkpoints/"
     if not os.path.isdir(checkpoint_dir):
         os.makedirs(checkpoint_dir)
@@ -45,6 +43,8 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     X, y = encoder.encode_data(raw_data, header, maxlen)
 
     max_cells = encoder.cur_max_cells
+
+    Classifier = Simon(encoder=encoder)
 
     data = None
     if should_train:
