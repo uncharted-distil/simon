@@ -17,6 +17,10 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     with open('Categories.txt','r') as f:
         Categories = f.read().splitlines()
 
+    # orient the user a bit
+    print("fixed categories are: ")
+    Categories = sorted(Categories)
+    print(Categories)
 
     raw_data, header = DataGenerator.gen_test_data(
         (data_count, data_cols), try_reuse_data)
