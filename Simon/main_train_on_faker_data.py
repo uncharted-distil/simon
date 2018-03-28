@@ -32,7 +32,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     if not should_train:
         if execution_config is None:
             raise TypeError
-        config = load_config(execution_config, checkpoint_dir)
+        config = Classifier.load_config(execution_config, checkpoint_dir)
         encoder = config['encoder']
         if checkpoint is None:
             checkpoint = config['checkpoint']
@@ -69,16 +69,16 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
                   optimizer='adam', metrics=['binary_accuracy'])
     if(should_train):
         start = time.time()
-        train_model(batch_size, checkpoint_dir, model, nb_epoch, data)
+        Classifier.train_model(batch_size, checkpoint_dir, model, nb_epoch, data)
         end = time.time()
         print("Time for training is %f sec"%(end-start))
         config = { 'encoder' :  encoder,
                    'checkpoint' : get_best_checkpoint(checkpoint_dir) }
-        save_config(config, checkpoint_dir)
+        Classifier.save_config(config, checkpoint_dir)
         
     print("DEBUG::The actual headers are:")
     print(header)
-    evaluate_model(max_cells, model, data, encoder, p_threshold)
+    Classifier.evaluate_model(max_cells, model, data, encoder, p_threshold)
 
 if __name__ == '__main__':
     import argparse

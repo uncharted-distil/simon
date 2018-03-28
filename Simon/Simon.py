@@ -181,7 +181,7 @@ class Simon:
         plt.legend(['train', 'test'], loc='upper left')
         plt.show()
 
-    def train_model(batch_size, checkpoint_dir, model, nb_epoch, data):
+    def train_model(self,batch_size, checkpoint_dir, model, nb_epoch, data):
         print("starting learning")
     
         check_cb = keras.callbacks.ModelCheckpoint(checkpoint_dir + "text-class" + '.{epoch:02d}-{val_loss:.2f}.hdf5',
@@ -201,7 +201,7 @@ class Simon:
         print(history.history['val_binary_accuracy'])
         #self.plot_loss(history)
 
-    def evaluate_model(max_cells, model, data, encoder, p_threshold):
+    def evaluate_model(self,max_cells, model, data, encoder, p_threshold):
         print("Starting predictions:")
     
         start = time.time()
@@ -257,7 +257,7 @@ class Simon:
             print("Checkpoint : %s" % str(checkpoint_path))
             model.load_weights(checkpoint_path)
 
-    def save_config(execution_config, checkpoint_dir):
+    def save_config(self,execution_config, checkpoint_dir):
         filename = ""
         if not execution_config["checkpoint"] is None:
             filename = execution_config["checkpoint"].rsplit( ".", 1 )[ 0 ] + ".pkl"
@@ -266,7 +266,7 @@ class Simon:
         with open(checkpoint_dir + filename, 'wb') as output:
             pickle.dump(execution_config, output, pickle.HIGHEST_PROTOCOL)
 
-    def load_config(execution_config_path, dir):
+    def load_config(self,execution_config_path, dir):
         execution_config_path = resolve_file_path(execution_config_path, dir)
         return pickle.load( open( execution_config_path, "rb" ) )
 
