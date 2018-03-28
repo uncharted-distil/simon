@@ -243,6 +243,8 @@ class Simon:
         print("False positive matrix is:")
         print(self.eval_false_positives(data.y_test,y_pred))
 
+        return encoder.reverse_label_encode(probabilities,p_threshold)
+
     def resolve_file_path(self,filename, dir):
         if os.path.isfile(str(filename)):
             return str(filename)

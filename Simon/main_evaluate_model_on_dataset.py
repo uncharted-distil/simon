@@ -24,23 +24,10 @@ def main(checkpoint, DEBUG):
     Categories = sorted(Categories)
     print(Categories)
     category_count = len(Categories)
-    
-    # load specified weights
-    if checkpoint is None:
-        raise TypeError
-    encoder = Encoder(categories=Categories)
-    Classifier = Simon(encoder=encoder) #text classifier for unit test
-        
-    model = Classifier.generate_model(maxlen, max_cells, category_count)
 
-    Classifier.load_weights(checkpoint, None, model, checkpoint_dir)
-    
-    model_compile = lambda m: m.compile(loss='categorical_crossentropy',
-                  optimizer='adam', metrics=['binary_accuracy'])
-    
-    model_compile(model)
-    
-    # perform specified unit test option
+    # read unit test data and pre-process it
+    encoder = Encoder(categories=Categories)
+
     dataset_name = "o_38" # o_38 or o_185
     if(DEBUG):
         print("DEBUG::BEGINNING UNIT TEST...")
@@ -65,8 +52,24 @@ def main(checkpoint, DEBUG):
         print(header)
         print("DEBUG::%d samples in header..."%len(header))
     
-     # transpose the data
-    tmp = np.char.lower(np.transpose(out).astype('U'))
+    tmp = np.char.lower(np.transpose(out).astype('U')) # transpose the data
+
+    encoder.process(raw_data, max_cells)
+
+    # load specified weights and build model
+    if checkpoint is None:
+        raise TypeError
+    
+    Classifier = Simon(encoder=encoder) # text classifier for unit test
+        
+    model = Classifier.generate_model(maxlen, max_cells, category_count)
+
+    Classifier.load_weights(checkpoint, None, model, checkpoint_dir)
+    
+    model_compile = lambda m: m.compile(loss='categorical_crossentropy',
+                  optimizer='adam', metrics=['binary_accuracy'])
+    
+    model_compile(model)
     
     # encode the data and evaluate model
     X, y = encoder.encode_data(tmp, header, maxlen)
@@ -79,7 +82,7 @@ def main(checkpoint, DEBUG):
     max_cells = encoder.cur_max_cells
     data = type('data_type', (object,), {'X_test': X, 'y_test':y})
     
-    result = evaluate_model(max_cells, model, data, encoder, p_threshold)
+    result = Classifier.evaluate_model(max_cells, model, data, encoder, p_threshold)
     
     
     # generate log
