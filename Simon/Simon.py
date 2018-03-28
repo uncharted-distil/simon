@@ -269,7 +269,7 @@ class Simon:
         execution_config_path = resolve_file_path(execution_config_path, dir)
         return pickle.load( open( execution_config_path, "rb" ) )
 
-    def get_best_checkpoint(checkpoint_dir):
+    def get_best_checkpoint(self,checkpoint_dir):
         max_mtime = 0
         max_file = ''
         for dirname,subdirs,files in os.walk(checkpoint_dir):
