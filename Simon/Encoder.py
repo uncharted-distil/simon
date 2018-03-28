@@ -53,7 +53,7 @@ class Encoder:
         
         # track unencoded chars
         unencoded_chars = None
-        with open('unencoded_chars.json') as data_file:
+        with open(os.path.join(os.path.dirname(__file__),'unencoded_chars.json')) as data_file:
             unencoded_chars = json.load(data_file)
         unencoded_dict = {k: v for k, v in unencoded_chars.items() if not v in ['']}
 
@@ -91,9 +91,8 @@ class Encoder:
 
     def label_encode(self, Y):
         # encode class values as integers
-        with open('Categories.txt','r') as f:
-            Categories = f.read().splitlines()
-                
+        Categories = self.categories
+
         # convert integers to dummy variables (i.e.  one hot encoded)
         multi_encoder = MultiLabelBinarizer()
         multi_encoder.fit([Categories])
@@ -104,9 +103,7 @@ class Encoder:
 
     def reverse_label_encode(self, y, p_threshold):
         
-        #with open('Categories.txt','r') as f:
-        #        Categories = f.read().splitlines()
-        Categories = encoder.categories
+        Categories = self.categories
 
         multi_encoder = MultiLabelBinarizer()
         multi_encoder.fit([Categories])
