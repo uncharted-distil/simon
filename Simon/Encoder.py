@@ -55,6 +55,7 @@ class Encoder:
         # track unencoded chars
         unencoded_chars = None
         if not os.path.isfile('unencoded_chars.json'):
+            open('unencoded_chars.json','w').close()
             unencoded_dict = {}
         else:
             with open('unencoded_chars.json') as data_file:
