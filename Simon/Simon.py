@@ -18,7 +18,7 @@ import os
 import time
 import pickle
 
-class Simon():
+class Simon:
     def __init__(self,encoder):
         self.encoder = encoder
 
