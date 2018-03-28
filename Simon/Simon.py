@@ -199,6 +199,7 @@ class Simon:
         # print(history.history['acc'])
         print(history.history['val_binary_accuracy'])
         #self.plot_loss(history)
+        return history
 
     def evaluate_model(self,max_cells, model, data, encoder, p_threshold):
         print("Starting predictions:")

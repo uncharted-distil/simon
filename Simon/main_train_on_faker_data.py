@@ -75,12 +75,13 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
                   optimizer='adam', metrics=['binary_accuracy'])
     if(should_train):
         start = time.time()
-        Classifier.train_model(batch_size, checkpoint_dir, model, nb_epoch, data)
+        history = Classifier.train_model(batch_size, checkpoint_dir, model, nb_epoch, data)
         end = time.time()
         print("Time for training is %f sec"%(end-start))
         config = { 'encoder' :  encoder,
                    'checkpoint' : Classifier.get_best_checkpoint(checkpoint_dir) }
         Classifier.save_config(config, checkpoint_dir)
+        # Classifier.plot_loss(history) #comment out on docker images...
         
     print("DEBUG::The actual headers are:")
     print(header)

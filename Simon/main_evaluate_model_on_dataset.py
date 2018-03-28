@@ -25,19 +25,15 @@ def main(execution_config, DEBUG):
     print(Categories)
     category_count = len(Categories)
     
-    # load specified configuration
-    config = {}
-    if execution_config is None:
+    # load specified weights
+    if checkpoint is None:
         raise TypeError
-    Classifier = Simon(encoder={}) #dummy text classifier
-    config = Classifier.load_config(execution_config, checkpoint_dir)
-    encoder = config['encoder']
-    checkpoint = config['checkpoint']
-    Classifier = Simon(encoder=encoder)#actual text classifier to use for unit test
+    encoder = Encoder(categories=Categories)
+    Classifier = Simon(encoder=encoder) #text classifier for unit test
         
     model = Classifier.generate_model(maxlen, max_cells, category_count)
 
-    Classifier.load_weights(checkpoint, config, model, checkpoint_dir)
+    Classifier.load_weights(checkpoint, None, model, checkpoint_dir)
     
     model_compile = lambda m: m.compile(loss='categorical_crossentropy',
                   optimizer='adam', metrics=['binary_accuracy'])
@@ -107,12 +103,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='attempts to discern data types looking at columns holistically.')
 
-    parser.add_argument('--config', dest='execution_config',
-                        help='execution configuration to load. contains max_cells, and encoder config.')
+    parser.add_argument('--cp', dest='checkpoint',
+                        help='checkpoint to load.')
 
     parser.add_argument('--debug', dest='debug_config',default="True",
                         help='whether or not to print debug information.')
 
     args = parser.parse_args()
 
-    main(args.execution_config,args.debug_config)
+    main(args.checkpoint,args.debug_config)
