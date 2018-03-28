@@ -73,7 +73,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
         end = time.time()
         print("Time for training is %f sec"%(end-start))
         config = { 'encoder' :  encoder,
-                   'checkpoint' : get_best_checkpoint(checkpoint_dir) }
+                   'checkpoint' : Classifier.get_best_checkpoint(checkpoint_dir) }
         Classifier.save_config(config, checkpoint_dir)
         
     print("DEBUG::The actual headers are:")
