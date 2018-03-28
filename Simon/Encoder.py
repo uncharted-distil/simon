@@ -75,7 +75,7 @@ class Encoder:
                                 unencoded_dict[char] = unencoded_dict[char]+1
                             else:
                                 unencoded_dict[char] = 1
-        with open('unencoded_chars.json',w) as out_file:
+        with open('unencoded_chars.json','w') as out_file:
             json.dump(unencoded_dict, out_file)
         print("X shape: {0}\ny shape: {1}".format(X.shape, y.shape))
         
