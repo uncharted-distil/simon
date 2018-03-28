@@ -29,9 +29,11 @@ def main(execution_config, DEBUG):
     config = {}
     if execution_config is None:
         raise TypeError
+    Classifier = Simon(encoder={}}) #dummy text classifier
     config = Classifier.load_config(execution_config, checkpoint_dir)
     encoder = config['encoder']
     checkpoint = config['checkpoint']
+    Classifier = Simon(encoder=encoder)#actual text classifier to use for unit test
         
     model = Classifier.generate_model(maxlen, max_cells, category_count)
 
