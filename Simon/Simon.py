@@ -18,6 +18,16 @@ import os
 import time
 import pickle
 
+# record history of training
+class LossHistory(keras.callbacks.Callback):
+    def on_train_begin(self, logs={}):
+        self.losses = []
+        self.accuracies = []
+
+    def on_batch_end(self, batch, logs={}):
+        self.losses.append(logs.get('loss'))
+        self.accuracies.append(logs.get('binary_accuracy'))
+
 class Simon:
     def __init__(self,encoder):
         self.encoder = encoder
@@ -150,18 +160,7 @@ class Simon:
 
         return model
 
-
-    # record history of training
-    class LossHistory(keras.callbacks.Callback):
-        def on_train_begin(self, logs={}):
-            self.losses = []
-            self.accuracies = []
-
-        def on_batch_end(self, batch, logs={}):
-            self.losses.append(logs.get('loss'))
-            self.accuracies.append(logs.get('binary_accuracy'))
-
-    def plot_loss(history):
+    def plot_loss(self,history):
         import matplotlib.pyplot as plt
         # summarize history for accuracy
         plt.subplot('121')
