@@ -13,7 +13,7 @@ class StringToIntArrayEncoder:
 
 
 class Encoder:
-    def __init__(self,categories=categories):
+    def __init__(self,categories):
         self._char_indicies = {}
         self._indices_char = {}
         self.cur_max_cells = 0
@@ -107,7 +107,7 @@ class Encoder:
         #with open('Categories.txt','r') as f:
         #        Categories = f.read().splitlines()
         Categories = encoder.categories
-        
+
         multi_encoder = MultiLabelBinarizer()
         multi_encoder.fit([Categories])
         
