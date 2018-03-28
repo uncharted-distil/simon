@@ -47,14 +47,14 @@ def main(checkpoint, DEBUG):
     
     nx,ny = out.shape
     if(DEBUG):
-        print("DEBUG::%d rows by %d columns (post truncation/length-standardization) in dataset"%(nx,ny))
+        print("DEBUG::%d rows by %d columns in dataset"%(nx,ny))
         print("DEBUG::manually annotated header:")
         print(header)
         print("DEBUG::%d samples in header..."%len(header))
     
     tmp = np.char.lower(np.transpose(out).astype('U')) # transpose the data
 
-    encoder.process(raw_data, max_cells)
+    encoder.process(tmp, max_cells)
 
     # load specified weights and build model
     if checkpoint is None:
