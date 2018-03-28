@@ -55,10 +55,11 @@ class Encoder:
         # track unencoded chars
         unencoded_chars = None
         if not os.path.isfile('unencoded_chars.json'):
-            open('unencoded_chars.json','w').close()
-        with open('unencoded_chars.json') as data_file:
-            unencoded_chars = json.load(data_file)
-        unencoded_dict = {k: v for k, v in unencoded_chars.items() if not v in ['']}
+            unencoded_dict = {}
+        else:
+            with open('unencoded_chars.json') as data_file:
+                unencoded_chars = json.load(data_file)
+            unencoded_dict = {k: v for k, v in unencoded_chars.items() if not v in ['']}
 
         for i, column in enumerate(raw_data):
             for j, cell in enumerate(column):
@@ -144,9 +145,12 @@ class Encoder:
                 
         # track unencoded chars
         unencoded_chars = None
-        with open('unencoded_chars.json') as data_file:
-            unencoded_chars = json.load(data_file)
-        unencoded_dict = {k: v for k, v in unencoded_chars.items() if not v in ['']}
+        if not os.path.isfile('unencoded_chars.json'):
+            unencoded_dict = {}
+        else:
+            with open('unencoded_chars.json') as data_file:
+                unencoded_chars = json.load(data_file)
+            unencoded_dict = {k: v for k, v in unencoded_chars.items() if not v in ['']}
 
         for i, column in enumerate(raw_data):
             for j, cell in enumerate(column):
