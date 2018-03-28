@@ -62,7 +62,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     
     model = Classifier.generate_model(maxlen, max_cells, category_count)
     
-    load_weights(checkpoint, config, model, checkpoint_dir)
+    Classifier.load_weights(checkpoint, config, model, checkpoint_dir)
     
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam', metrics=['binary_accuracy'])

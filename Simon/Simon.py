@@ -249,7 +249,7 @@ class Simon:
         elif os.path.isfile(str(dir + str(filename))):
             return dir + str(filename)
 
-    def load_weights(checkpoint_name, config, model, checkpoint_dir):
+    def load_weights(self,checkpoint_name, config, model, checkpoint_dir):
         if config and not checkpoint_name:
             checkpoint_name = config['checkpoint']
         if checkpoint_name:
