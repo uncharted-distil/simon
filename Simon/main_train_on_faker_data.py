@@ -1,3 +1,4 @@
+import time
 import os.path
 import numpy as np
 from Simon import *
