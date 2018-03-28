@@ -39,7 +39,7 @@ class Simon:
         # need some threshold-specific rounding code here, presently only for 0.5 thresh.
         return K.mean(K.round(np.multiply(y_true,y_pred)),axis=0)
     
-    def eval_binary_accuracy(y_test, y_pred):
+    def eval_binary_accuracy(self,y_test, y_pred):
         correct_indices = y_test==y_pred
         all_correct_predictions = np.zeros(y_test.shape)
         all_correct_predictions[correct_indices] = 1
@@ -47,7 +47,7 @@ class Simon:
         #print(all_correct_predictions)
         return np.mean(all_correct_predictions),np.mean(all_correct_predictions, axis=0),all_correct_predictions
     
-    def eval_confusion(y_test, y_pred):
+    def eval_confusion(self,y_test, y_pred):
         wrong_indices = y_test!=y_pred
         all_wrong_predictions = np.zeros(y_test.shape)
         all_wrong_predictions[wrong_indices] = 1
@@ -55,7 +55,7 @@ class Simon:
         #print(all_wrong_predictions)
         return np.mean(all_wrong_predictions),np.mean(all_wrong_predictions, axis=0),all_wrong_predictions
     
-    def eval_false_positives(y_test, y_pred):
+    def eval_false_positives(self,y_test, y_pred):
         false_positive_matrix = np.zeros((y_test.shape[1],y_test.shape[1]))
         false_positives = np.multiply(y_pred,1-y_test)
         # print(precision_matrix)
@@ -236,11 +236,11 @@ class Simon:
         print("DEBUG::y_pred:")
         print(y_pred)
         print("'Binary' accuracy (true positives + true negatives) is:")
-        print(eval_binary_accuracy(data.y_test,y_pred))
+        print(self.eval_binary_accuracy(data.y_test,y_pred))
         print("'Binary' confusion (false positives + false negatives) is:")
-        print(eval_confusion(data.y_test,y_pred))
+        print(self.eval_confusion(data.y_test,y_pred))
         print("False positive matrix is:")
-        print(eval_false_positives(data.y_test,y_pred))
+        print(self.eval_false_positives(data.y_test,y_pred))
 
     def resolve_file_path(filename, dir):
         if os.path.isfile(str(filename)):
