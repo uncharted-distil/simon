@@ -22,7 +22,7 @@ class Simon:
     def __init__(self,encoder):
         self.encoder = encoder
 
-    def binarize(x, sz=71):
+    def binarize(self,x, sz=71):
         return tf.to_float(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1))
     
     def custom_multi_label_accuracy(y_true, y_pred):
@@ -61,7 +61,7 @@ class Simon:
         # print(precision_matrix)
         return np.sum(false_positive_matrix),np.sum(false_positive_matrix, axis=0),false_positive_matrix
     
-    def binarize_outshape(in_shape):
+    def binarize_outshape(self,in_shape):
         return in_shape[0], in_shape[1], 71
 
     def max_1d(x):
@@ -106,7 +106,7 @@ class Simon:
         # sentence input
         in_sentence = Input(shape=(max_len,), dtype='int64')
         # char indices to one hot matrix, 1D sequence to 2D
-        embedded = Lambda(binarize, output_shape=binarize_outshape)(in_sentence)
+        embedded = Lambda(self.binarize, output_shape=self.binarize_outshape)(in_sentence)
         # embedded: encodes sentence
         for i in range(len(nb_filter)):
             embedded = Convolution1D(nb_filter=nb_filter[i],
