@@ -44,7 +44,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
 
     max_cells = encoder.cur_max_cells
 
-    Classifier = Simon(encoder=encoder)
+    Classifier = Simon(encoder=encoder())
 
     data = None
     if should_train:
