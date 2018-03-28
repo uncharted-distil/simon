@@ -54,7 +54,9 @@ class Encoder:
         
         # track unencoded chars
         unencoded_chars = None
-        with open(os.path.join(os.path.dirname(__file__),'unencoded_chars.json')) as data_file:
+        if not os.path.isfile('unencoded_chars.json'):
+            file('unencoded_chars.json','w').close()
+        with open('unencoded_chars.json') as data_file:
             unencoded_chars = json.load(data_file)
         unencoded_dict = {k: v for k, v in unencoded_chars.items() if not v in ['']}
 
@@ -71,7 +73,7 @@ class Encoder:
                                 unencoded_dict[char] = unencoded_dict[char]+1
                             else:
                                 unencoded_dict[char] = 1
-        with open(os.path.join(os.path.dirname(__file__),'unencoded_chars.json')) as out_file:
+        with open('unencoded_chars.json') as out_file:
             json.dump(unencoded_dict, out_file)
         print("X shape: {0}\ny shape: {1}".format(X.shape, y.shape))
         
