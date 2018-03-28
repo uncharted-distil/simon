@@ -252,7 +252,7 @@ class Simon:
         if config and not checkpoint_name:
             checkpoint_name = config['checkpoint']
         if checkpoint_name:
-            checkpoint_path = resolve_file_path(checkpoint_name, checkpoint_dir)
+            checkpoint_path = self.resolve_file_path(checkpoint_name, checkpoint_dir)
             print("Checkpoint : %s" % str(checkpoint_path))
             model.load_weights(checkpoint_path)
 
