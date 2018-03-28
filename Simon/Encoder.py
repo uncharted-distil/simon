@@ -70,7 +70,7 @@ class Encoder:
                         try:
                             X[i, j, (max_len - 1 - k)] = self.char_indices[char]
                         except Exception:
-                            X[i, j, (max_len - 1 - k)] = self.char_indices[' '];
+                            #X[i, j, (max_len - 1 - k)] = self.char_indices[' ']
                             if char in unencoded_dict.keys():
                                 unencoded_dict[char] = unencoded_dict[char]+1
                             else:
