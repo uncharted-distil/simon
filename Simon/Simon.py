@@ -242,7 +242,7 @@ class Simon:
         print("False positive matrix is:")
         print(self.eval_false_positives(data.y_test,y_pred))
 
-    def resolve_file_path(filename, dir):
+    def resolve_file_path(self,filename, dir):
         if os.path.isfile(str(filename)):
             return str(filename)
         elif os.path.isfile(str(dir + str(filename))):
@@ -266,7 +266,7 @@ class Simon:
             pickle.dump(execution_config, output, pickle.HIGHEST_PROTOCOL)
 
     def load_config(self,execution_config_path, dir):
-        execution_config_path = resolve_file_path(execution_config_path, dir)
+        execution_config_path = self.resolve_file_path(execution_config_path, dir)
         return pickle.load( open( execution_config_path, "rb" ) )
 
     def get_best_checkpoint(self,checkpoint_dir):
