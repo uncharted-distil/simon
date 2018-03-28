@@ -37,7 +37,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
         if execution_config is None:
             raise TypeError
         #encoder = Encoder(categories=Categories) #dummy encoder
-        Classifier = Simon(encoder={}}) #dummy text classifier
+        Classifier = Simon(encoder={}) #dummy text classifier
         config = Classifier.load_config(execution_config, checkpoint_dir)
         encoder = config['encoder']
         if checkpoint is None:
