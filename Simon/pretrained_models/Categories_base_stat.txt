@@ -1,0 +1,11 @@
+address
+boolean
+datetime
+email
+float
+int
+phone
+text
+uri
+categorical
+ordinal

@@ -1,0 +1,11 @@
+FILENAME <=> DESCRIPTION
+------------------------
+
+TBD <=> faker-trained checkpoint (Categories_base classes)
+
+TBD <=> base+categorical/ordinal (Categorical_base_stat classes)
+
+TBD <=> base+categorical/ordinal+geographic (Categorical_base_stat_geo classes)
+
+
+

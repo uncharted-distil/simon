@@ -7,7 +7,7 @@ from Simon.Encoder import *
 from Simon.DataGenerator import *
 from Simon.LengthStandardizer import *
 
-def main(checkpoint, DEBUG):
+def main(execution_config, DEBUG):
     maxlen = 20
     max_cells = 500
     p_threshold = 0.5
@@ -25,9 +25,14 @@ def main(checkpoint, DEBUG):
     print(Categories)
     category_count = len(Categories)
 
-    # read unit test data and pre-process it
-    encoder = Encoder(categories=Categories)
+    # load specified execution configuration
+    if execution_config is None:
+        raise TypeError
+    Classifier = Simon(encoder={}) # dummy text classifier
+    config = Classifier.load_config(execution_config, checkpoint_dir)
+    encoder = config['encoder']
 
+    # read unit test data
     dataset_name = "o_38" # o_38 or o_185
     if(DEBUG):
         print("DEBUG::BEGINNING UNIT TEST...")
@@ -54,12 +59,7 @@ def main(checkpoint, DEBUG):
     
     tmp = np.char.lower(np.transpose(out).astype('U')) # transpose the data
 
-    encoder.process(tmp, max_cells)
-
-    # load specified weights and build model
-    if checkpoint is None:
-        raise TypeError
-    
+    # build classifier model    
     Classifier = Simon(encoder=encoder) # text classifier for unit test
         
     model = Classifier.generate_model(maxlen, max_cells, category_count)
@@ -106,8 +106,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='attempts to discern data types looking at columns holistically.')
 
-    parser.add_argument('--cp', dest='checkpoint',
-                        help='checkpoint to load.')
+    parser.add_argument('--config', dest='execution_config',
+                        help='execution configuration to load. contains max_cells, and encoder config.')
 
     parser.add_argument('--debug', dest='debug_config',default="True",
                         help='whether or not to print debug information.')
