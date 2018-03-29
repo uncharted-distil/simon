@@ -23,7 +23,7 @@ The first included script is main_train_on_faker_data.py. This script will attem
 
 A pretrained model is also included if one wants to proceed to performing semantic classification in predict mode (--no_train flag). Use the following command to generate some fake data and classify it using the included pretrained model.
 
-`python3 --data_count 1000 --data_cols 10 --nullpct .1 --no_train --config `
+`python3 --data_count 1000 --data_cols 10 --nullpct .1 --no_train --config text-class.20-0.38.pkl`
 
 The following command will evaluate the same model on a prespecified dataset and print a comparison of hand-labeled to predicted classes.
 
@@ -38,10 +38,10 @@ To run tensorflow's tensorboard, open up another terminal and run:
 Then visit localhost:6006
 
 Noteworthy files:
-main_faker_data.py - Main entry point for data type classification
-types.json - maps Faker method generators to fairly specific types.
-DataGenerator - creates the fake data
-Encoder - encodes characters
+- main_faker_data.py - Main entry point for data type classification
+- types.json - maps Faker method generators to fairly specific types.
+- DataGenerator - creates the fake data
+- Encoder - encodes/reverse-encodes input characters and data labels
 
 Other files:
 FakeDataDescriptor - helper class to get a view of what Faker generates and how our types.json classifies it as

@@ -196,9 +196,7 @@ class Simon:
         print('losses: ')
         print(history.history['loss'])
         print('accuracies: ')
-        # print(history.history['acc'])
         print(history.history['val_binary_accuracy'])
-        #self.plot_loss(history)
         return history
 
     def evaluate_model(self,max_cells, model, data, encoder, p_threshold):
@@ -213,14 +211,8 @@ class Simon:
         # return all predictions above a certain threshold
         # first, the maximum probability/class
         probabilities = model.predict(data.X_test, verbose=1)
-        # print("The prediction probabilities are:")
-        # print(probabilities)
         m = np.amax(probabilities, axis=1)
         max_index = np.argmax(probabilities, axis=1)
-        # print("Associated fixed category indices:")
-        # print(max_index)
-        #with open('Categories.txt','r') as f:
-        #        Categories = f.read().splitlines()
         Categories = encoder.categories
         print("Remember that the fixed categories are:")
         print(Categories)

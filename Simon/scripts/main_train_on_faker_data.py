@@ -80,7 +80,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
         config = { 'encoder' :  encoder,
                    'checkpoint' : Classifier.get_best_checkpoint(checkpoint_dir) }
         Classifier.save_config(config, checkpoint_dir)
-        # Classifier.plot_loss(history) #comment out on docker images...
+        Classifier.plot_loss(history) #comment out on docker images...
         
     print("DEBUG::The actual headers are:")
     print(header)
