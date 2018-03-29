@@ -1,7 +1,7 @@
 *.pyc
-Simon/checkpoints
-Simon/data
-Simon/logs
+Simon/scripts/checkpoints
+Simon/scripts/data
+Simon/scripts/logs
 __pycache__
 .DS_Store
 Simon/azure_utils/local_config.py
