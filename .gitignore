@@ -2,6 +2,7 @@
 Simon/scripts/checkpoints
 Simon/scripts/data
 Simon/scripts/logs
+Simon/scripts/unencoded_chars.json
 __pycache__
 .DS_Store
 Simon/azure_utils/local_config.py
