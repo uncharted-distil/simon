@@ -1,56 +1,48 @@
-# simon
+# Simon
 Character-level CNN+LSTM model for text classification.
+
+The acronym Simon stands for Semantic Inference for the Modeling of ONtologies
 
 This work is heavily influenced by the following academic article: http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classifica
 
-This app will attempt to use CNN + LSTM to classify fake generated data.  The app will generate x columns (data_cols) with y rows (data_count) each using Faker as the data source.  The code will automatically insert "null"s across the dataset. It will crop off each cell to have a max length of 20 chars, and will only look at the first 500 rows in a column.
+# Getting Started
 
-This works best and tested in Python 3
+To get started, make sure you are using python v3.5+ and pip install via
 
-To install all dependencies:
-pip install -r requirements.txt
+`pip3 install git+https://github.com/NewKnowledge/simon`
+
+Remember to first install all dependencies:
+
+`pip3 install -r requirements.txt`
+
+Then, study the scripts and pretrained models included in the Simon/scripts subdirectory.
+
+The first included script is main_train_on_faker_data.py. This script will attempt to use CNN + LSTM to classify fake generated data into semantic types (ints, floats, strings, etc).  The app will generate x columns (data_cols) with y rows (data_count) in training mode, using the Faker library as the data source.  The code will automatically insert "null"s across the dataset, with a user-specified percentage (--nullpct flag). It will crop off each cell to have a max length of 20 chars, and will only look at the first 500 rows in a column. The training classes are specified by Categories.txt and types.json. The following command will achieve ~98% training/validation accuracy.
+
+`python3 main_train_on_faker_data.py --data_count 500 --data_cols 1000 --nb_epoch 20 --nullpct .1 --batch_size 32`
+
+A pretrained model is also included if one wants to proceed to performing semantic classification in predict mode (--no_train flag). Use the following command to generate some fake data and classify it using the included pretrained model.
+
+`python3 --data_count 1000 --data_cols 10 --nullpct .1 --no_train --config `
+
+The following command will evaluate the same model on a prespecified dataset and print a comparison of hand-labeled to predicted classes.
+
+`python3 main_evaluate_model_in_dataset --config text-class.20-0.38.pkl`
+
+Upcoming developments include transfer learning and both GPU and heterogeneous parallelization capabilities.
+
+To run tensorflow's tensorboard, open up another terminal and run:
+
+`python -m tensorflow.tensorboard --logdir=logs`
+
+Then visit localhost:6006
 
 Noteworthy files:
 main_faker_data.py - Main entry point for data type classification
-main_transfer_to_datalake.py - trains on data in the datalake using the faker weights as initial condition for training ("transfer learning")
-
-Other main_* files have self-documenting names. This will shortly be carefully documented (code will also need to be shortly re-structured to avoid code replication among the various main_*.py files). Importantly, now we can transfer to new categories, can handle categorical/ordinal variables and are able to do multiple-GPU (in-graph replication) training. Hyper-parameters have been tuned to make everything significantly faster as well (even in the single-GPU case). Additionally, we can handle various geographic variables (although kinks in this are still being worked out).
-
-Types.json - maps Faker method generators to fairly specific types.
+types.json - maps Faker method generators to fairly specific types.
 DataGenerator - creates the fake data
-Encoder - encodes
+Encoder - encodes characters
 
 Other files:
-FakeDataDescriptor - helper class to get a view of what Faker generates and how our types.json classifies it as.
+FakeDataDescriptor - helper class to get a view of what Faker generates and how our types.json classifies it as
 
-
-Current limitations:
-   - probably highly overfit to Faker data
-   - The model may benefit from analyzing each cell before aggregating across rows.
-     
-Usages:
-# transfer learning
---data_count 1000 --data_cols 10 --no_train --config text-class.14-0.13.pkl
-
-#basic and fast faker training - yields 50-70% accuracy
-
-`python main_faker_data.py --data_count 100 --data_cols 100 --nb_epoch 20 --nullpct .1 --batch_size 10`
-
-
-#98+% accuracy faker training:
-
-`python main_faker_data.py --data_count 1000 --data_cols 10000 --nb_epoch 40 --nullpct .1 --batch_size 10`
-
-
-#nearly 100% accuracy
-
-`python main_faker_data.py --data_count 1000 --data_cols 10 --nullpct .1 --no_train --config text-class.36-0.02.pkl`
-
-#nearly 0% accuracy
-
-`python main_faker_data.py --data_count 10 --data_cols 10 --nullpct .1 --no_train --config text-class.36-0.02.pkl`
-
-#to run tensorflow's tensorboard, open up another terminal and run:
-
-`python -m tensorflow.tensorboard --logdir=logs`
-#Then visit localhost:6006
