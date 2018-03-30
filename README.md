@@ -21,7 +21,7 @@ The first included script is main_train_on_faker_data.py. This script will attem
 
 `python3 main_train_on_faker_data.py --data_count 500 --data_cols 1000 --nb_epoch 20 --nullpct .1 --batch_size 32`
 
-A pretrained model is also included if one wants to proceed to performing semantic classification in predict mode (--no_train flag). Use the following command to generate some fake data and classify it using the included pretrained model.
+A pretrained model is also included if one wants to proceed to performing semantic classification in predict mode (--no_train flag). Use the following command to generate some fake data and classify it using the included pretrained model (be sure to set checkpoint_dir to pretrained_models/ in script first, if not already set to it).
 
 `python3 main_train_on_faker_data.py --data_count 1000 --data_cols 10 --nullpct .1 --no_train --config text-class.20-0.38.pkl`
 
@@ -43,6 +43,6 @@ Then visit localhost:6006
 - DataGenerator - creates the fake data
 - Encoder - encodes/reverse-encodes input characters and data labels
 
-Other files:
-FakeDataDescriptor - helper class to get a view of what Faker generates and how our types.json classifies it as
+# Other files
+- FakeDataDescriptor - helper class to get a view of what Faker generates and how our types.json classifies it as
 

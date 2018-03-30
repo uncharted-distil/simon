@@ -10,7 +10,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     max_cells = 500
     p_threshold = 0.5
 
-    checkpoint_dir = "checkpoints/"
+    checkpoint_dir = "pretrained_models/"
     if not os.path.isdir(checkpoint_dir):
         os.makedirs(checkpoint_dir)
 

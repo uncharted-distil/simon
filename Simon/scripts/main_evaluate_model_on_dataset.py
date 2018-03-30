@@ -114,4 +114,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    main(args.checkpoint,args.debug_config)
+    main(args.execution_config,args.debug_config)
