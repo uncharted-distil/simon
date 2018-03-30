@@ -19,6 +19,8 @@ class Encoder:
         self._indices_char = {}
         self.cur_max_cells = 0
         self._encoder = LabelEncoder()
+        self._multi_encoder = MultiLabelBinarizer()
+        self._multi_encoder.fit([categories])
         self.categories = categories
 
 
@@ -99,8 +101,7 @@ class Encoder:
         Categories = self.categories
 
         # convert integers to dummy variables (i.e.  one hot encoded)
-        multi_encoder = MultiLabelBinarizer()
-        multi_encoder.fit([Categories])
+        multi_encoder = self._multi_encoder
                 
         ret_val = multi_encoder.transform(Y)
         
@@ -110,8 +111,7 @@ class Encoder:
         
         Categories = self.categories
 
-        multi_encoder = MultiLabelBinarizer()
-        multi_encoder.fit([Categories])
+        multi_encoder = self._multi_encoder
         
         prediction_indices = y > p_threshold
         y_pred = np.zeros(y.shape)
