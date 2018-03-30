@@ -36,8 +36,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     if not should_train:
         if execution_config is None:
             raise TypeError
-        Classifier = Simon() # dummy text classifier
-        config = Classifier.load_config(execution_config, checkpoint_dir)
+        config = Simon({}).load_config(execution_config, checkpoint_dir)
         encoder = config['encoder']
         if checkpoint is None:
             checkpoint = config['checkpoint']
