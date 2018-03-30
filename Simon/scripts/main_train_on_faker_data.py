@@ -1,9 +1,9 @@
 import time
 import os.path
 import numpy as np
-import Simon
-from Simon.Encoder import Encoder
-from Simon.DataGenerator import DataGenerator
+from Simon import Simon 
+from Simon import Encoder
+from Simon import DataGenerator
 
 def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, try_reuse_data, batch_size, execution_config):
     maxlen = 20
