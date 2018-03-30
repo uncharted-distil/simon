@@ -2,8 +2,8 @@ import time
 import os.path
 import numpy as np
 from Simon import Simon 
-from Simon import Encoder
-from Simon import DataGenerator
+from Simon.Encoder import Encoder
+from Simon.DataGenerator import DataGenerator
 
 def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, try_reuse_data, batch_size, execution_config):
     maxlen = 20
@@ -36,7 +36,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     if not should_train:
         if execution_config is None:
             raise TypeError
-        Classifier = Simon(encoder={}) # dummy text classifier
+        Classifier = Simon() # dummy text classifier
         config = Classifier.load_config(execution_config, checkpoint_dir)
         encoder = config['encoder']
         if checkpoint is None:
