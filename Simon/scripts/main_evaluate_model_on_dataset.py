@@ -31,8 +31,7 @@ def main(execution_config, DEBUG):
     Classifier = Simon(encoder={}) # dummy text classifier
     config = Classifier.load_config(execution_config, checkpoint_dir)
     encoder = config['encoder']
-    if checkpoint is None:
-            checkpoint = config['checkpoint']
+    checkpoint = config['checkpoint']
 
     # read unit test data
     dataset_name = "o_38" # o_38 or o_185
