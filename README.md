@@ -27,7 +27,7 @@ A pretrained model is also included if one wants to proceed to performing semant
 
 The following command will evaluate the same model on a prespecified dataset and print a comparison of hand-labeled to predicted classes.
 
-`python3 main_evaluate_model_on_dataset.py --config text-class.20-0.38.pkl`
+`python3 main_evaluate_model_on_dataset.py --config Base.pkl`
 
 Upcoming developments include transfer learning and both GPU and heterogeneous parallelization capabilities.
 
