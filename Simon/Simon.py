@@ -262,7 +262,9 @@ class Simon:
 
     def load_config(self,execution_config_path, dir):
         execution_config_path = self.resolve_file_path(execution_config_path, dir)
-        return pickle.load( open( execution_config_path, "rb" ) )
+        config = pickle.load( open( execution_config_path, "rb" ) )
+        self.encoder = config['encoder']
+        return config
 
     def get_best_checkpoint(self,checkpoint_dir):
         max_mtime = 0
