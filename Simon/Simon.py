@@ -159,6 +159,69 @@ class Simon:
         model = Model(input=document, output=output)
 
         return model
+        
+    def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post):
+        filter_length = [1, 3, 3]
+        nb_filter = [40, 200, 1000]
+        pool_length = 2
+        # document input
+        document = Input(shape=(max_cells, max_len), dtype='int64')
+        # sentence input
+        in_sentence = Input(shape=(max_len,), dtype='int64')
+        # char indices to one hot matrix, 1D sequence to 2D
+        embedded = Lambda(self.binarize, output_shape=self.binarize_outshape)(in_sentence)
+        # embedded: encodes sentence
+        for i in range(len(nb_filter)):
+            embedded = Convolution1D(nb_filter=nb_filter[i],
+                                     filter_length=filter_length[i],
+                                     border_mode='valid',
+                                     activation='relu',
+                                     init='glorot_normal',
+                                     subsample_length=1)(embedded)
+
+            embedded = Dropout(0.1)(embedded)
+            embedded = MaxPooling1D(pool_length=pool_length)(embedded)
+
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
+
+        sent_encode = merge([forward_sent, backward_sent],
+                            mode='concat', concat_axis=-1)
+        sent_encode = Dropout(0.3)(sent_encode)
+        # sentence encoder
+
+        encoder = Model(input=in_sentence, output=sent_encode)
+
+        print(encoder.summary())
+        encoded = TimeDistributed(encoder)(document)
+
+        # encoded: sentences to bi-lstm for document encoding
+        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(encoded)
+        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+
+        merged = merge([forwards, backwards], mode='concat', concat_axis=-1)
+        output_pre = Dropout(0.3)(merged)
+        output_pre = Dense(128, activation='relu')(output_pre)
+        output_pre = Dropout(0.3)(output_pre)
+        output = Dense(category_count_prior, activation='sigmoid')(output_pre)
+        # output = Activation('softmax')(output)
+        model = Model(input=document, output=output)
+    
+        # having built model of prior size, load weights
+        load_weights(checkpoint, config, model, checkpoint_dir)
+        # having loaded weights,rebuild model using new category_count in last layer
+        output = Dense(category_count_post, activation='sigmoid')(output_pre)
+        model = Model(input=document, output=output)
+        # retrain the last layer
+        for layer in model.layers[:7]:
+            layer.trainable = False
+            model.layers[8].trainable = True
+
+        return model
 
     def plot_loss(self,history):
         import matplotlib.pyplot as plt
