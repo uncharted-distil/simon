@@ -160,7 +160,7 @@ class Simon:
 
         return model
         
-    def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post):
+    def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post, checkpoint, checkpoint_dir):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
         pool_length = 2
@@ -212,7 +212,7 @@ class Simon:
         model = Model(input=document, output=output)
     
         # having built model of prior size, load weights
-        load_weights(checkpoint, config, model, checkpoint_dir)
+        self.load_weights(checkpoint, None, model, checkpoint_dir)
         # having loaded weights,rebuild model using new category_count in last layer
         output = Dense(category_count_post, activation='sigmoid')(output_pre)
         model = Model(input=document, output=output)

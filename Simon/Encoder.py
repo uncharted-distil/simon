@@ -20,7 +20,6 @@ class Encoder:
         self.cur_max_cells = 0
         self._encoder = LabelEncoder()
         self._multi_encoder = MultiLabelBinarizer()
-        self._multi_encoder.fit([categories])
         self.categories = categories
 
 
@@ -28,7 +27,7 @@ class Encoder:
         chars = {}
         for doc in raw_data:
             for cell in doc:
-                for c in cell:
+                for c in str(cell):
                     if not c in chars:
                         chars[c] = True
         #this line is sounding increasingly unnecesary, probably should just always leave it capped to 500
@@ -98,7 +97,8 @@ class Encoder:
 
     def label_encode(self, Y):
         # encode class values as integers
-        Categories = self.categories
+        categories = self.categories
+        self._multi_encoder.fit([categories])
 
         # convert integers to dummy variables (i.e.  one hot encoded)
         multi_encoder = self._multi_encoder
@@ -109,8 +109,6 @@ class Encoder:
 
     def reverse_label_encode(self, y, p_threshold):
         
-        Categories = self.categories
-
         multi_encoder = self._multi_encoder
         
         prediction_indices = y > p_threshold
