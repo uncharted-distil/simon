@@ -2,6 +2,7 @@
 
 * GPU acceleration
 * Heterogeneous acceleration (multiple CPUs, GPUs)
+* ROC optimization of p_threshold on a per-class basis
 
 # v1.2.0
 * Added transfer learning capability via Classifier.generate_transfer_model method
