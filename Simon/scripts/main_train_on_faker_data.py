@@ -69,7 +69,7 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     
     Classifier.load_weights(checkpoint, config, model, checkpoint_dir)
     
-    model.compile(loss='categorical_crossentropy',
+    model.compile(loss='binary_crossentropy',
                   optimizer='adam', metrics=['binary_accuracy'])
     if(should_train):
         start = time.time()
