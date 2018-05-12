@@ -7,7 +7,7 @@
 # v1.2.0
 * Added transfer learning capability via Classifier.generate_transfer_model method
 * Includes a new method, that guesses categorical/ordinal type classification based on some fixed statistical/proportion rules
-* Includes pretrained models of base types + categorical/ordinal and base types + categorical/ordinal + 7 geographical categories
+* Includes pretrained models of base types + categorical/ordinal and base types + categorical/ordinal + 7 geographical categories, i.e. 'address', 'boolean', 'categorical', 'city', 'country', 'country_code', 'datetime', 'email', 'float', 'int', 'latitude', 'longitude', 'ordinal', 'phone', 'postal_code', 'state', 'text', 'uri'
 * Added a rest/docker interface for deploying classifier
 
 # v1.1.0

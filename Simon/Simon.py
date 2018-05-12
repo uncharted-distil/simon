@@ -271,18 +271,18 @@ class Simon:
         print("Accuracy: %.2f%% \n Time: {0}s \n Time/example : {1}s/ex".format(
             end - start, (end - start) / data.X_test.shape[0]) % (scores[1] * 100))
     
-        # return all predictions above a certain threshold
+#         return all predictions above a certain threshold
         # first, the maximum probability/class
         probabilities = model.predict(data.X_test, verbose=1)
-        m = np.amax(probabilities, axis=1)
-        max_index = np.argmax(probabilities, axis=1)
-        Categories = encoder.categories
-        print("Remember that the fixed categories are:")
-        print(Categories)
-        print("Most Likely Predicted Category/Labels are: ")
-        print((np.array(Categories))[max_index])
-        print("Associated max probabilities/confidences:")
-        print(m)
+#        m = np.amax(probabilities, axis=1)
+#        max_index = np.argmax(probabilities, axis=1)
+#        Categories = encoder.categories
+#        print("Remember that the fixed categories are:")
+#        print(Categories)
+#        print("Most Likely Predicted Category/Labels are: ")
+#        print((np.array(Categories))[max_index])
+#        print("Associated max probabilities/confidences:")
+#        print(m)
         # next, all probabilities above a certain threshold
         print("DEBUG::y_test:")
         print(data.y_test)
