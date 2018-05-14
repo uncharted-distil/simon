@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from dateutil.parser import parse
-from penny.geo_lookup import get_places_by_type
-from address import AddressParser
+#from penny.geo_lookup import get_places_by_type
+#from address import AddressParser
 from email.utils import parseaddr
 from .utils import prep_value, strip_non_ascii
-import phonenumbers
+# import phonenumbers
 import re
 import time
 import datetime

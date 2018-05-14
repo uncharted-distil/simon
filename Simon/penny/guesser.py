@@ -1,9 +1,9 @@
 from collections import Counter
 from .utils import to_unicode
-from .value_checks import (is_a_date, is_a_number, is_a_nothing,
+''' from .value_checks import (is_a_date, is_a_number, is_a_nothing,
     is_a_latitude, is_a_longitude, is_a_coord_pair, is_a_country, is_a_city, 
     is_a_state, is_a_address, is_a_text, is_a_label, is_a_zip, is_a_street, 
-    is_a_phone, is_a_url, is_a_email, is_a_time, is_a_currency, is_a_percent)  
+    is_a_phone, is_a_url, is_a_email, is_a_time, is_a_currency, is_a_percent) '''
 
 # currently understands
 # category
@@ -30,6 +30,20 @@ from .value_checks import (is_a_date, is_a_number, is_a_nothing,
 # name
 
 # ordinal???
+
+from .utils import prep_value
+
+def is_a_nothing(value, header=None):
+    value = prep_value(value).lower()
+
+    if not value:
+        return True
+    
+    if value in ['none','nan','null','n/a']:
+        return True
+    
+    return False
+
 
 def guess(column_values, header=None, for_types=None):
     types = []
