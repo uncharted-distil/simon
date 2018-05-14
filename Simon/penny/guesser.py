@@ -29,7 +29,7 @@ from .utils import to_unicode
 # coming soon
 # name
 
-# ordinal???
+# ordinal??? -- can obtain from categorical/int info...
 
 from .utils import prep_value
 
