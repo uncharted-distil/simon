@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common \
         unzip \
         python3-tk \
+        git-core \
         apt-transport-https 
         
 RUN apt-get clean && \
@@ -51,6 +52,8 @@ RUN pip3 --no-cache-dir install \
         requests \
         && \
     python3 -m ipykernel.kernelspec
+
+RUN pip3 install git+https://github.com/NewKnowledge/simon@pa/transfer-learning
     
 # matplotlib config (used by benchmark)
 RUN mkdir -p /root/.config/matplotlib

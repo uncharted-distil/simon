@@ -1,12 +1,12 @@
 import requests
 from json import JSONDecoder
 
-address = "http://localhost:5001"
+address = "http://localhost:5000"
 decoder = JSONDecoder()
 
-test_file_name = '185_baseball' #185_baseball, 26_radon_seed, 30_personae, 196_autoMpg, 313_spectrometer etc
+test_file_name = 'o_185' #o_185, o_38
 
-filename = "data/"+test_file_name+".csv"
+filename = "unit_test_data/"+test_file_name+".csv"
 
 print("DEBUG::chkpt0")
 print(filename)
@@ -18,9 +18,8 @@ try:
 	print("DEBUG::chkpt2")
 	result = decoder.decode(r.text)
 	print("DEBUG::success!!")
-	print("The output from the duke docker image is:")
+	print("The output from the simon docker image is:")
 	print(result)
 except Exception as e:
 	print(e)
 	print("DEBUG::Failure! Sorry! Please check and try again...")
-

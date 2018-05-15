@@ -1,11 +1,11 @@
-FILENAME <=> DESCRIPTION
+FILENAME <=> DESCRIPTION (list of corresponding classes)
 ------------------------
 
-TBD <=> faker-trained checkpoint (Categories_base classes)
+Base.pkl <=> faker-trained checkpoint of base classes (Categories_base.txt is the list of classes; weights in text-class.19-0.02.hdf5)
 
-TBD <=> base+categorical/ordinal (Categorical_base_stat classes)
+TBD <=> base classes + categorical/ordinal (Categorical_base_stat.txt is the list of classes; presently not deployed)
 
-TBD <=> base+categorical/ordinal+geographic (Categorical_base_stat_geo classes)
+Base_stat_geo.pkl <=> base+categorical/ordinal+geographic (Categorical_base_stat_geo.txt is the list of classes, note we call categorical/ordinal "statistical" or "stat" classes; weights in text-class.19-0.06.hdf5)
 
 
-
+PS => for each model of use, modify config.ini at top level for docker deployment, and replace Categories.txt in scripts/ folder with the corresponding list of Categories (note that these will be sorted in alphabetical order in the end, when interpreting results) 
