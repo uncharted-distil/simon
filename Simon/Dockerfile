@@ -53,7 +53,7 @@ RUN pip3 --no-cache-dir install \
         && \
     python3 -m ipykernel.kernelspec
 
-RUN pip3 install git+https://github.com/NewKnowledge/simon@pa/transfer-learning
+RUN pip3 install git+https://github.com/NewKnowledge/simon
     
 # matplotlib config (used by benchmark)
 RUN mkdir -p /root/.config/matplotlib

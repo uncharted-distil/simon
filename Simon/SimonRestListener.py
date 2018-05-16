@@ -90,6 +90,8 @@ class SimonRestListener:
         elapsed_time = time.time()-start_time_guess
         print("Total statistical variable guessing time is : %.2f sec" % elapsed_time)
         ## FINISHED LABELING COMBINED DATA AS CATEGORICAL/ORDINAL
+
+        Classifier.clear_session()
         
         return self.encoder.encode((result))
 

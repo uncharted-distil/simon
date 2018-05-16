@@ -34,6 +34,11 @@ class Simon:
 
     def binarize(self,x, sz=71):
         return tf.to_float(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1))
+
+    def clear_session(self):
+        K.clear_session()
+
+        return
     
     def custom_multi_label_accuracy(y_true, y_pred):
         # need some threshold-specific rounding code here, presently only for 0.5 thresh.
