@@ -1,7 +1,9 @@
 FILENAME <=> DESCRIPTION (list of corresponding classes)
 ------------------------
 
-Base.pkl <=> faker-trained checkpoint of base classes (Categories_base.txt is the list of classes; weights in text-class.19-0.02.hdf5)
+Base_faker.pkl <=> faker-trained checkpoint of base classes (Categories_base.txt is the list of classes; weights in text-class.19-0.02.hdf5)
+
+Base.pkl <=> transferred from faker-trained checkpoint of base classes above to real data with no extra classes (Categories_base.txt is the list of classes; weights in text-class.17-0.04.hdf5)
 
 TBD <=> base classes + categorical/ordinal (Categorical_base_stat.txt is the list of classes; presently not deployed)
 
