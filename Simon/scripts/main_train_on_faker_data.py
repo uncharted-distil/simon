@@ -81,9 +81,11 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
         Classifier.save_config(config, checkpoint_dir)
         Classifier.plot_loss(history) #comment out on docker images...
         
+    pred_headers = Classifier.evaluate_model(max_cells, model, data, encoder, p_threshold)
+    print("DEBUG::The predicted headers are:")
+    print(pred_headers)
     print("DEBUG::The actual headers are:")
     print(header)
-    Classifier.evaluate_model(max_cells, model, data, encoder, p_threshold)
 
 if __name__ == '__main__':
     import argparse

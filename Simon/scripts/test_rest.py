@@ -18,7 +18,7 @@ try:
 	print("DEBUG::chkpt2")
 	result = decoder.decode(r.text)
 	print("DEBUG::success!!")
-	print("The output from the simon docker image is:")
+	print("The output from the simon REST is:")
 	print(result)
 except Exception as e:
 	print(e)

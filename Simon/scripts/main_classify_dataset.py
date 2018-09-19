@@ -35,7 +35,7 @@ def main(execution_config, DEBUG):
     checkpoint = config['checkpoint']
 
     # read unit test data
-    dataset_name = "replicate_eval_error" # o_38 or o_185
+    dataset_name = "replicate_eval_error" # alternatively, o_38 or o_185
     if(DEBUG):
         print("DEBUG::BEGINNING UNIT TEST...")
     frame = pd.read_csv('unit_test_data/'+dataset_name+'.csv',dtype='str', header=None)
