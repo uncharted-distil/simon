@@ -39,8 +39,8 @@ def DataLengthColumnStandardizerRaw(column, max_cells):
             column = np.delete(column,np.arange(max_cells,nrows))
     else:
         # replicate some randomly-selected cells
-        column = column.append(column[np.random.choice(nrows, max_cells - nrows)])
         column = np.asarray(column)
+        column = np.concatenate([column,column[np.random.choice(nrows, max_cells - nrows)]])
         
     return column[np.newaxis].T
 

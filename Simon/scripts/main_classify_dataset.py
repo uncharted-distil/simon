@@ -35,13 +35,13 @@ def main(execution_config, DEBUG):
     checkpoint = config['checkpoint']
 
     # read unit test data
-    dataset_name = "o_38" # o_38 or o_185
+    dataset_name = "replicate_eval_error" # o_38 or o_185
     if(DEBUG):
         print("DEBUG::BEGINNING UNIT TEST...")
-    frame = pd.read_csv('unit_test_data/'+dataset_name+'.csv',dtype='str')
+    frame = pd.read_csv('unit_test_data/'+dataset_name+'.csv',dtype='str', header=None)
 
     X = encoder.encodeDataFrame(frame)
-            
+
     # build classifier model
     model = Classifier.generate_model(maxlen, max_cells, category_count)
     Classifier.load_weights(checkpoint, None, model, checkpoint_dir)
