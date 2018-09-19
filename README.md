@@ -25,9 +25,13 @@ A pretrained model is also included if one wants to proceed to performing semant
 
 `python3 main_train_on_faker_data.py --data_count 1000 --data_cols 10 --nullpct .1 --no_train --config Base.pkl`
 
-The following command will evaluate the same model on a prespecified dataset and print a comparison of hand-labeled to predicted classes.
+The following command will rigorously evaluate the same model on a prespecified dataset and print a comparison of hand-labeled to predicted classes. Please note that for this to work, the classes specified in the hand-labeled header cannot be outside those the specified model was trained to recognize, otherwise the software will error out.
 
 `python3 main_evaluate_model_on_dataset.py --config Base.pkl`
+
+To simply classify the columns of a dataset, execute the following command. The corresponding script also demonstrates how to use included rule-based classification functions for categorical/ordinal variables - however note that some of the included pretrained models can classify these using the neural net itself, but at a slightly lower accuracy.
+
+`python3 main_classify_dataset.py --config Base.pkl`
 
 Upcoming developments include transfer learning and both GPU and heterogeneous parallelization capabilities.
 
