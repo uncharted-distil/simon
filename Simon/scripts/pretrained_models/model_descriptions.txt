@@ -5,7 +5,7 @@ Base_faker.pkl <=> faker-trained checkpoint of base classes (Categories_base.txt
 
 Base.pkl <=> transferred from faker-trained checkpoint of base classes above to real data with no extra classes (Categories_base.txt is the list of classes; weights in text-class.17-0.04.hdf5)
 
-TBD <=> base classes + categorical/ordinal (Categorical_base_stat.txt is the list of classes; presently not deployed)
+Base_stat.pkl <=> base classes + categorical/ordinal (Categorical_base_stat.txt is the list of classes; text-class.20-1.55.hdf5 the weights)
 
 Base_stat_geo.pkl <=> base+categorical/ordinal+geographic (Categorical_base_stat_geo.txt is the list of classes, note we call categorical/ordinal "statistical" or "stat" classes; weights in text-class.19-0.06.hdf5)
 

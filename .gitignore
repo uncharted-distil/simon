@@ -10,4 +10,7 @@ Simon/azure_utils
 Simon/graphutils
 Simon/backup
 Simon/data
-Simon/dev
+Simon/dev/data
+Simon/dev/azure_utils/local_config.py
+Simon/dev/checkpoints
+Simon/dev/logs/events.out.tfevents.*

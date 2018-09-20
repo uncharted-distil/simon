@@ -1,0 +1,506 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Consolas'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Status: 0x0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">X-Content-Type-Options: nosniff</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Strict-Transport-Security: max-age=15724800; includeSubDomains</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Date: Thu, 10 May 2018 22:15:07 GMT</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.core:Fetch: data/data.gov/2015Catheter-AssociatedUrinaryTractInfectionsCAUTITable.csv, 0-73781</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.lib:HTTP Request</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">GET https://nktraining.azuredatalakestore.net/webhdfs/v1/data/data.gov/2015Catheter-AssociatedUrinaryTractInfectionsCAUTITable.csv</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">OPEN 'data/data.gov/2015Catheter-AssociatedUrinaryTractInfectionsCAUTITable.csv' offset=0 length=73781 read=true</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-client-request-id: 98e0fa1a-549f-11e8-88b2-000d3a139b57</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">User-Agent: python/3.5.2 (Windows-8.1-6.3.9600-SP0) azure.datalake.store.lib/0.0.9 Azure-Data-Lake-Store-SDK-For-Python</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImlCakwxUmNxemhpeTRmcHhJeGRacW9oTTJZayIsImtpZCI6ImlCakwxUmNxemhpeTRmcHhJeGRacW9oTTJZayJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuY29yZS53aW5kb3dzLm5ldC8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9iMzVhY2I3Ni1kZWZjLTQ4NGUtOTlkNC0xYmMxMWUwOWQwMjMvIiwiaWF0IjoxNTI1OTg4OTYwLCJuYmYiOjE1MjU5ODg5NjAsImV4cCI6MTUyNTk5Mjg2MCwiYWlvIjoiWTJkZ1lOam5kdFg0aFVMZm5XMW56VFVWelhSTkFBPT0iLCJhcHBpZCI6IjVlNTA4NGEwLWM1YTctNDMwZC1iY2FlLTBhNmRiODRmMmY0NyIsImFwcGlkYWNyIjoiMSIsImVfZXhwIjoyNjI4MDAsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2IzNWFjYjc2LWRlZmMtNDg0ZS05OWQ0LTFiYzExZTA5ZDAyMy8iLCJvaWQiOiI1ODgyMTM4Zi00NGViLTQyZjItOGVmZi1iYTM0NTU5ZTE4NGMiLCJzdWIiOiI1ODgyMTM4Zi00NGViLTQyZjItOGVmZi1iYTM0NTU5ZTE4NGMiLCJ0aWQiOiJiMzVhY2I3Ni1kZWZjLTQ4NGUtOTlkNC0xYmMxMWUwOWQwMjMiLCJ1dGkiOiJJMVBtRmFucHBVV3RTVnY3UFZ4cUFBIiwidmVyIjoiMS4wIn0.K7d60JKDRkhuYP2kbjSggNMDSV9OpymJR63PrjErnaThEOwe6eqACeOeLcjlUHveE8duiCW4WlyXb_lFYkMa28x65Wp1km6kKNwbAjazrA4gwXOvg9qmJONN082AtUIEc_2A7nKSi4YOnTYwtF2hlufQOCqCHqcf8iFJupY5jPPa8ghiFZtHr7zv5nwHjLIgiSz1p8l1bssp4QGZu4c6f_aMiUGodhc-dxjS6dIUOvMDIj_WddZY3By-2XitrkJFCrGLEbzoJh6q0kvVOZwQghzRdR0H5PSuxp-ZvIVQRAFsfGc8R6_2_xhcQhRyLXt_SfkLQpMvc-mhByI0590bMA</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:requests.packages.urllib3.connectionpool:https://nktraining.azuredatalakestore.net:443 &quot;GET /webhdfs/v1/data/data.gov/2015Catheter-AssociatedUrinaryTractInfectionsCAUTITable.csv?api-version=2016-11-01&amp;offset=0&amp;length=73781&amp;read=true&amp;OP=OPEN HTTP/1.1&quot; 200 None</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.lib:HTTP Response</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">200</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cache-Control: no-cache, no-cache, no-store, max-age=0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Pragma: no-cache</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Transfer-Encoding: chunked</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Content-Type: application/octet-stream</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Expires: -1</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-request-id: 9a86ab5e-97b0-4e02-a57d-e3605882a7c4</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-webhdfs-version: 17.04.24.00</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Status: 0x0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">X-Content-Type-Options: nosniff</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Strict-Transport-Security: max-age=15724800; includeSubDomains</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Date: Thu, 10 May 2018 22:15:07 GMT</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.core:Fetch: data/data.gov/StateParkFacilityPoints.csv, 0-39515</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.lib:HTTP Request</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">GET https://nktraining.azuredatalakestore.net/webhdfs/v1/data/data.gov/StateParkFacilityPoints.csv</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">OPEN 'data/data.gov/StateParkFacilityPoints.csv' offset=0 length=39515 read=true</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-client-request-id: 98f1aab6-549f-11e8-a19c-000d3a139b57</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">User-Agent: python/3.5.2 (Windows-8.1-6.3.9600-SP0) azure.datalake.store.lib/0.0.9 Azure-Data-Lake-Store-SDK-For-Python</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImlCakwxUmNxemhpeTRmcHhJeGRacW9oTTJZayIsImtpZCI6ImlCakwxUmNxemhpeTRmcHhJeGRacW9oTTJZayJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuY29yZS53aW5kb3dzLm5ldC8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9iMzVhY2I3Ni1kZWZjLTQ4NGUtOTlkNC0xYmMxMWUwOWQwMjMvIiwiaWF0IjoxNTI1OTg4OTYwLCJuYmYiOjE1MjU5ODg5NjAsImV4cCI6MTUyNTk5Mjg2MCwiYWlvIjoiWTJkZ1lOam5kdFg0aFVMZm5XMW56VFVWelhSTkFBPT0iLCJhcHBpZCI6IjVlNTA4NGEwLWM1YTctNDMwZC1iY2FlLTBhNmRiODRmMmY0NyIsImFwcGlkYWNyIjoiMSIsImVfZXhwIjoyNjI4MDAsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2IzNWFjYjc2LWRlZmMtNDg0ZS05OWQ0LTFiYzExZTA5ZDAyMy8iLCJvaWQiOiI1ODgyMTM4Zi00NGViLTQyZjItOGVmZi1iYTM0NTU5ZTE4NGMiLCJzdWIiOiI1ODgyMTM4Zi00NGViLTQyZjItOGVmZi1iYTM0NTU5ZTE4NGMiLCJ0aWQiOiJiMzVhY2I3Ni1kZWZjLTQ4NGUtOTlkNC0xYmMxMWUwOWQwMjMiLCJ1dGkiOiJJMVBtRmFucHBVV3RTVnY3UFZ4cUFBIiwidmVyIjoiMS4wIn0.K7d60JKDRkhuYP2kbjSggNMDSV9OpymJR63PrjErnaThEOwe6eqACeOeLcjlUHveE8duiCW4WlyXb_lFYkMa28x65Wp1km6kKNwbAjazrA4gwXOvg9qmJONN082AtUIEc_2A7nKSi4YOnTYwtF2hlufQOCqCHqcf8iFJupY5jPPa8ghiFZtHr7zv5nwHjLIgiSz1p8l1bssp4QGZu4c6f_aMiUGodhc-dxjS6dIUOvMDIj_WddZY3By-2XitrkJFCrGLEbzoJh6q0kvVOZwQghzRdR0H5PSuxp-ZvIVQRAFsfGc8R6_2_xhcQhRyLXt_SfkLQpMvc-mhByI0590bMA</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:requests.packages.urllib3.connectionpool:https://nktraining.azuredatalakestore.net:443 &quot;GET /webhdfs/v1/data/data.gov/StateParkFacilityPoints.csv?api-version=2016-11-01&amp;offset=0&amp;length=39515&amp;read=true&amp;OP=OPEN HTTP/1.1&quot; 200 None</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.lib:HTTP Response</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">200</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cache-Control: no-cache, no-cache, no-store, max-age=0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Pragma: no-cache</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Transfer-Encoding: chunked</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Content-Type: application/octet-stream</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Expires: -1</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-request-id: bff9ba56-26f3-48cd-a92b-cbc347329d77</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-webhdfs-version: 17.04.24.00</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Status: 0x0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">X-Content-Type-Options: nosniff</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Strict-Transport-Security: max-age=15724800; includeSubDomains</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Date: Thu, 10 May 2018 22:15:07 GMT</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.core:Fetch: data/data.gov/ACCDEventListings.csv, 0-30446</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.lib:HTTP Request</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">GET https://nktraining.azuredatalakestore.net/webhdfs/v1/data/data.gov/ACCDEventListings.csv</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">OPEN 'data/data.gov/ACCDEventListings.csv' offset=0 length=30446 read=true</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-client-request-id: 9904bd5c-549f-11e8-a6bd-000d3a139b57</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">User-Agent: python/3.5.2 (Windows-8.1-6.3.9600-SP0) azure.datalake.store.lib/0.0.9 Azure-Data-Lake-Store-SDK-For-Python</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImlCakwxUmNxemhpeTRmcHhJeGRacW9oTTJZayIsImtpZCI6ImlCakwxUmNxemhpeTRmcHhJeGRacW9oTTJZayJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuY29yZS53aW5kb3dzLm5ldC8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9iMzVhY2I3Ni1kZWZjLTQ4NGUtOTlkNC0xYmMxMWUwOWQwMjMvIiwiaWF0IjoxNTI1OTg4OTYwLCJuYmYiOjE1MjU5ODg5NjAsImV4cCI6MTUyNTk5Mjg2MCwiYWlvIjoiWTJkZ1lOam5kdFg0aFVMZm5XMW56VFVWelhSTkFBPT0iLCJhcHBpZCI6IjVlNTA4NGEwLWM1YTctNDMwZC1iY2FlLTBhNmRiODRmMmY0NyIsImFwcGlkYWNyIjoiMSIsImVfZXhwIjoyNjI4MDAsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2IzNWFjYjc2LWRlZmMtNDg0ZS05OWQ0LTFiYzExZTA5ZDAyMy8iLCJvaWQiOiI1ODgyMTM4Zi00NGViLTQyZjItOGVmZi1iYTM0NTU5ZTE4NGMiLCJzdWIiOiI1ODgyMTM4Zi00NGViLTQyZjItOGVmZi1iYTM0NTU5ZTE4NGMiLCJ0aWQiOiJiMzVhY2I3Ni1kZWZjLTQ4NGUtOTlkNC0xYmMxMWUwOWQwMjMiLCJ1dGkiOiJJMVBtRmFucHBVV3RTVnY3UFZ4cUFBIiwidmVyIjoiMS4wIn0.K7d60JKDRkhuYP2kbjSggNMDSV9OpymJR63PrjErnaThEOwe6eqACeOeLcjlUHveE8duiCW4WlyXb_lFYkMa28x65Wp1km6kKNwbAjazrA4gwXOvg9qmJONN082AtUIEc_2A7nKSi4YOnTYwtF2hlufQOCqCHqcf8iFJupY5jPPa8ghiFZtHr7zv5nwHjLIgiSz1p8l1bssp4QGZu4c6f_aMiUGodhc-dxjS6dIUOvMDIj_WddZY3By-2XitrkJFCrGLEbzoJh6q0kvVOZwQghzRdR0H5PSuxp-ZvIVQRAFsfGc8R6_2_xhcQhRyLXt_SfkLQpMvc-mhByI0590bMA</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:requests.packages.urllib3.connectionpool:https://nktraining.azuredatalakestore.net:443 &quot;GET /webhdfs/v1/data/data.gov/ACCDEventListings.csv?api-version=2016-11-01&amp;offset=0&amp;length=30446&amp;read=true&amp;OP=OPEN HTTP/1.1&quot; 200 None</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG:azure.datalake.store.lib:HTTP Response</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">200</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Cache-Control: no-cache, no-cache, no-store, max-age=0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Pragma: no-cache</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Transfer-Encoding: chunked</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Content-Type: application/octet-stream</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Expires: -1</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-request-id: 1d2e8c8f-7e10-453f-9271-4d86e9ec6e16</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">x-ms-webhdfs-version: 17.04.24.00</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Status: 0x0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">X-Content-Type-Options: nosniff</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Strict-Transport-Security: max-age=15724800; includeSubDomains</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Date: Thu, 10 May 2018 22:15:08 GMT</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::500 cells by 15 samples fetched...</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DONE w/ SQL queries...!!!</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Time elapsed for DB calls (getting data from db+multilabel postprocess) is: 1247.37 sec</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">read data is: </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[['3540   WILSHIRE BLVD 1109 LOS ANGELES CA 90010' '225 FRONT STREET'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  '36 PECK SLIP' ..., 'New England' 'medium' 'NaN']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ['299  W Hillcrest DR 117 Thousand Oaks CA 91360' '10 LIBERTY STREET'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  '2 GOLD STREET' ..., 'New England' 'large' 'NaN']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ['30011   Ivy Glenn DR 224 Laguna Niguel CA 92677' '345 SOUTH END AVENUE'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  '399 CHAMBERS STREET' ..., 'Middle Atlantic' 'medium' 'NaN']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ..., </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ['7887   Safeguard   Valley View OH 44125' '123 WEST 44 STREET'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  '24 WEST 9 STREET' ..., 'East North Central' 'medium' 'NaN']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ['1003  E Brier DR  San Bernardino CA 92408' '123 WEST 44 STREET'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  '239 PARK AVENUE SOUTH' ..., 'West North Central' 'medium' 'NaN']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ['3540   WILSHIRE BLVD 1109 LOS ANGELES CA 90010' '45 WEST 60 STREET'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  '220 PARK AVENUE SOUTH' ..., 'Middle Atlantic' 'medium' 'NaN']]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">fixed categories are: </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">['address', 'boolean', 'categorical', 'city', 'country', 'country_code', 'datetime', 'email', 'float', 'int', 'latitude', 'longitude', 'ordinal', 'phone', 'postal_code', 'state', 'text', 'uri']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">The size of the read raw data is 500 rows by 3117 columns</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">corresponding header length is: 3117</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">INFO:__main__:Read CSV File (path = data/geodata/allCountries_postal.txt, elapsed-time = 2.3437416553497314)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::the shape of geo data is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">(500, 3500)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::the length of the corresponding geo data header is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3500</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::the time elapsed to build the geo data set is (sec):</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">114.77866506576538</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::merging geo data with datalake data... </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::done!!</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::the shape of final merged data is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">(500, 6617)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::the length of final merged data header is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">6617</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Beginning Guessing categorical/ordinal for geo+datalake data...</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::The number of categorical columns is 1923</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::The number of ordinal columns is 647</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Total guessing time is : 4.97 sec</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\sklearn\base.py:315: UserWarning: Trying to unpickle estimator MultiLabelBinarizer from version 0.19.1 when using version 0.18.1. This might lead to breaking code or invalid results. Use at your own risk.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  UserWarning)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\sklearn\base.py:315: UserWarning: Trying to unpickle estimator LabelEncoder from version 0.19.1 when using version 0.18.1. This might lead to breaking code or invalid results. Use at your own risk.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  UserWarning)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:180: UserWarning: Update your `Conv1D` call to the Keras 2 API: `Conv1D(padding=&quot;valid&quot;, kernel_size=1, filters=40, activation=&quot;relu&quot;, kernel_initializer=&quot;glorot_normal&quot;, strides=1)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  subsample_length=1)(embedded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">WARNING:tensorflow:From C:\Anaconda\envs\py35\lib\site-packages\tensorflow\python\util\deprecation.py:497: calling conv1d (from tensorflow.python.ops.nn_ops) with data_format=NHWC is deprecated and will be removed in a future version.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Instructions for updating:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">`NHWC` for data_format is deprecated, use `NWC` instead</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">WARNING:tensorflow:From C:\Anaconda\envs\py35\lib\site-packages\tensorflow\python\util\deprecation.py:497: calling conv1d (from tensorflow.python.ops.nn_ops) with data_format=NHWC is deprecated and will be removed in a future version.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Instructions for updating:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">`NHWC` for data_format is deprecated, use `NWC` instead</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:183: UserWarning: Update your `MaxPooling1D` call to the Keras 2 API: `MaxPooling1D(pool_size=2)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  embedded = MaxPooling1D(pool_length=pool_length)(embedded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:180: UserWarning: Update your `Conv1D` call to the Keras 2 API: `Conv1D(padding=&quot;valid&quot;, kernel_size=3, filters=200, activation=&quot;relu&quot;, kernel_initializer=&quot;glorot_normal&quot;, strides=1)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  subsample_length=1)(embedded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:180: UserWarning: Update your `Conv1D` call to the Keras 2 API: `Conv1D(padding=&quot;valid&quot;, kernel_size=3, filters=1000, activation=&quot;relu&quot;, kernel_initializer=&quot;glorot_normal&quot;, strides=1)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  subsample_length=1)(embedded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:186: UserWarning: Update your `LSTM` call to the Keras 2 API: `LSTM(256, recurrent_dropout=0.2, return_sequences=False, dropout=0.2, implementation=2)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  dropout_U=0.2, consume_less='gpu')(embedded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:188: UserWarning: Update your `LSTM` call to the Keras 2 API: `LSTM(256, return_sequences=False, dropout=0.2, go_backwards=True, recurrent_dropout=0.2, implementation=2)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:191: UserWarning: The `merge` function is deprecated and will be removed after 08/2017. Use instead layers from `keras.layers.merge`, e.g. `add`, `concatenate`, etc.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  mode='concat', concat_axis=-1)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\keras\legacy\layers.py:464: UserWarning: The `Merge` layer is deprecated and will be removed after 08/2017. Use instead layers from `keras.layers.merge`, e.g. `add`, `concatenate`, etc.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  name=name)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:195: UserWarning: Update your `Model` call to the Keras 2 API: `Model(outputs=Tensor(&quot;dr..., inputs=Tensor(&quot;in...)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  encoder = Model(input=in_sentence, output=sent_encode)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Layer (type)                    Output Shape         Param #     Connected to                     </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">==================================================================================================</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">input_2 (InputLayer)            (None, 20)           0                                            </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">lambda_1 (Lambda)               (None, 20, 71)       0           input_2[0][0]                    </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">conv1d_1 (Conv1D)               (None, 20, 40)       2880        lambda_1[0][0]                   </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">dropout_1 (Dropout)             (None, 20, 40)       0           conv1d_1[0][0]                   </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">max_pooling1d_1 (MaxPooling1D)  (None, 10, 40)       0           dropout_1[0][0]                  </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">conv1d_2 (Conv1D)               (None, 8, 200)       24200       max_pooling1d_1[0][0]            </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">dropout_2 (Dropout)             (None, 8, 200)       0           conv1d_2[0][0]                   </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">max_pooling1d_2 (MaxPooling1D)  (None, 4, 200)       0           dropout_2[0][0]                  </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">conv1d_3 (Conv1D)               (None, 2, 1000)      601000      max_pooling1d_2[0][0]            </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">dropout_3 (Dropout)             (None, 2, 1000)      0           conv1d_3[0][0]                   </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">max_pooling1d_3 (MaxPooling1D)  (None, 1, 1000)      0           dropout_3[0][0]                  </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">lstm_1 (LSTM)                   (None, 256)          1287168     max_pooling1d_3[0][0]            </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">lstm_2 (LSTM)                   (None, 256)          1287168     max_pooling1d_3[0][0]            </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">merge_1 (Merge)                 (None, 512)          0           lstm_1[0][0]                     </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">                                                                 lstm_2[0][0]                     </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">dropout_4 (Dropout)             (None, 512)          0           merge_1[0][0]                    </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">==================================================================================================</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Total params: 3,202,416</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Trainable params: 3,202,416</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Non-trainable params: 0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">__________________________________________________________________________________________________</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">None</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:202: UserWarning: Update your `LSTM` call to the Keras 2 API: `LSTM(128, recurrent_dropout=0.2, return_sequences=False, dropout=0.2, implementation=2)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  dropout_U=0.2, consume_less='gpu')(encoded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:204: UserWarning: Update your `LSTM` call to the Keras 2 API: `LSTM(128, return_sequences=False, dropout=0.2, go_backwards=True, recurrent_dropout=0.2, implementation=2)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:206: UserWarning: The `merge` function is deprecated and will be removed after 08/2017. Use instead layers from `keras.layers.merge`, e.g. `add`, `concatenate`, etc.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  merged = merge([forwards, backwards], mode='concat', concat_axis=-1)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:212: UserWarning: Update your `Model` call to the Keras 2 API: `Model(outputs=Tensor(&quot;de..., inputs=Tensor(&quot;in...)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  model = Model(input=document, output=output)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Checkpoint : checkpoints/text-class.08-0.31.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:218: UserWarning: Update your `Model` call to the Keras 2 API: `Model(outputs=Tensor(&quot;de..., inputs=Tensor(&quot;in...)`</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  model = Model(input=document, output=output)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">X shape: (6617, 500, 20)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">y shape: (6617, 18)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::y is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[[1 0 0 ..., 0 1 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [1 0 0 ..., 0 1 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [1 0 0 ..., 0 1 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ..., </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 1 ..., 0 1 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 1 ..., 0 1 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 1 ..., 0 1 0]]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::The encoded labels (first row) are:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::per class p_threshold is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[ 0.01612091  0.00528967  0.29395466  0.07657431  0.07607053  0.07279597</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.03350126  0.00050378  0.26876574  0.23375315  0.07732997  0.07506297</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.10428212  0.00201511  0.07858942  0.07380353  0.46876574  0.00151134]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">starting learning</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">WARNING:tensorflow:From C:\Anaconda\envs\py35\lib\site-packages\tensorflow\contrib\learn\python\learn\datasets\base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Instructions for updating:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Use the retry module or similar alternatives.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">WARNING:tensorflow:From C:\Anaconda\envs\py35\lib\site-packages\tensorflow\contrib\learn\python\learn\datasets\base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Instructions for updating:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Use the retry module or similar alternatives.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C:\Anaconda\envs\py35\lib\site-packages\Simon\Simon.py:257: UserWarning: The `nb_epoch` argument in `fit` has been renamed `epochs`.</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  nb_epoch=nb_epoch, shuffle=True, callbacks=[earlystop_cb, check_cb, loss_history, tbCallBack])</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Train on 3970 samples, validate on 1985 samples</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 1/5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3970/3970 [==============================] - 3995s 1s/step - loss: 3.3048 - binary_accuracy: 0.8965 - val_loss: 2.8403 - val_binary_accuracy: 0.9359</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 2/5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3970/3970 [==============================] - 3992s 1s/step - loss: 2.9786 - binary_accuracy: 0.9332 - val_loss: 2.7546 - val_binary_accuracy: 0.9340</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 3/5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3970/3970 [==============================] - 3999s 1s/step - loss: 2.7569 - binary_accuracy: 0.9445 - val_loss: 2.6057 - val_binary_accuracy: 0.9489</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 4/5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3970/3970 [==============================] - 4006s 1s/step - loss: 2.6841 - binary_accuracy: 0.9475 - val_loss: 2.6377 - val_binary_accuracy: 0.9430</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Epoch 5/5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3970/3970 [==============================] - 4006s 1s/step - loss: 2.6688 - binary_accuracy: 0.9478 - val_loss: 2.4666 - val_binary_accuracy: 0.9586</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">losses: </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[3.304789496008635, 2.9786372097673586, 2.7569434405574271, 2.684139273328805, 2.6687625068561256]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">accuracies: </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[0.9358801910799156, 0.93400501889605969, 0.94886648069400936, 0.94301706207188907, 0.9585782032769633]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Time for training is 20024.116943 sec</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><img src="05112018_per_class_threshold_fail_files/qt_img324540613787652.png"></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Starting predictions:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Accuracy: 95.97% </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> Time: 43.20257091522217s </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> Time/example : 0.06535941136947378s/ex</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">661/661 [==============================] - 44s 66ms/step</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Remember that the fixed categories are:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">['address', 'boolean', 'categorical', 'city', 'country', 'country_code', 'datetime', 'email', 'float', 'int', 'latitude', 'longitude', 'ordinal', 'phone', 'postal_code', 'state', 'text', 'uri']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Most Likely Predicted Category/Labels are: </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">['float' 'float' 'int' 'text' 'text' 'text' 'float' 'int' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'text' 'text' 'text' 'int' 'float' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'float' 'int' 'text' 'text' 'text' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'postal_code' 'text' 'float' 'text' 'text' 'text' 'int' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'float' 'int' 'text' 'text' 'text' 'text' 'text' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'text' 'text' 'float' 'float' 'text' 'float' 'float' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'text' 'float' 'text' 'float' 'float' 'text' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'float' 'text' 'int' 'float' 'text' 'float' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'text' 'int' 'text' 'text' 'int' 'text' 'float' 'int' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'int' 'text' 'float' 'text' 'float' 'text' 'text' 'postal_code'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'text' 'float' 'int' 'int' 'int' 'text' 'int' 'float' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'float' 'text' 'text' 'float' 'text' 'text' 'int' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'int' 'text' 'int' 'text' 'text' 'postal_code' 'text' 'int' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'float' 'float' 'int' 'text' 'text' 'int' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'text' 'text' 'float' 'float' 'float' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'float' 'text' 'text' 'int' 'text' 'float' 'int' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'text' 'int' 'text' 'text' 'text' 'text' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'postal_code' 'float' 'text' 'text' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'datetime' 'text' 'int' 'text' 'float' 'float' 'text' 'text' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'text' 'float' 'float' 'float' 'float' 'text' 'float' 'text' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'datetime' 'postal_code' 'text' 'float' 'text' 'int' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'int' 'int' 'text' 'float' 'int' 'text' 'int' 'int' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'float' 'float' 'text' 'float' 'float' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'datetime' 'text' 'float' 'postal_code' 'float' 'text' 'text' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'float' 'text' 'float' 'text' 'postal_code' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'int' 'float' 'float' 'float' 'text' 'text' 'text' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'float' 'int' 'text' 'text' 'text' 'float' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'int' 'float' 'float' 'float' 'float' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'postal_code' 'float' 'float' 'float' 'text' 'float' 'int' 'int' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'int' 'text' 'float' 'float' 'text' 'postal_code' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'text' 'float' 'text' 'text' 'postal_code' 'float' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'text' 'int' 'text' 'text' 'text' 'text' 'int' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'int' 'float' 'text' 'postal_code' 'text' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'text' 'text' 'text' 'text' 'float' 'int' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'text' 'text' 'float' 'float' 'postal_code' 'float' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'float' 'text' 'float' 'text' 'float' 'postal_code' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'float' 'text' 'text' 'text' 'text' 'text' 'float' 'text' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'text' 'text' 'float' 'text' 'text' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'float' 'int' 'text' 'text' 'text' 'text' 'int' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'float' 'text' 'float' 'int' 'postal_code' 'int' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'datetime' 'text' 'float' 'float' 'float' 'float' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'int' 'text' 'int' 'int' 'text' 'float' 'text' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'float' 'text' 'text' 'int' 'text' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'text' 'text' 'float' 'int' 'int' 'text' 'int' 'text' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'float' 'int' 'text' 'text' 'text' 'text' 'float' 'float' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'int' 'int' 'text' 'text' 'text' 'text' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'text' 'text' 'text' 'int' 'datetime' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'int' 'text' 'text' 'text' 'postal_code' 'float' 'float' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'int' 'text' 'text' 'int' 'int' 'text' 'float' 'text' 'text' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'int' 'int' 'float' 'text' 'float' 'int' 'text' 'text' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'text' 'text' 'float' 'text' 'int' 'text' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'int' 'text' 'text' 'int' 'text' 'text' 'float' 'text' 'int' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'int' 'float' 'datetime' 'int' 'text' 'int' 'text' 'float' 'text' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'postal_code' 'text' 'int' 'int' 'text' 'text' 'text' 'text' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'float' 'text' 'text' 'float' 'text' 'text' 'float' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'float' 'int' 'text' 'text' 'postal_code' 'int' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'text' 'float' 'text' 'text' 'text' 'text' 'postal_code' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'postal_code' 'text' 'text' 'text' 'float' 'float' 'text' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'text' 'int' 'text' 'float' 'text' 'float' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'int' 'float' 'float' 'int' 'text' 'datetime' 'text' 'text' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'categorical' 'text' 'int' 'text' 'float' 'text' 'postal_code'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'text' 'text' 'int' 'text' 'text' 'text' 'float' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'int' 'text' 'text' 'text' 'postal_code' 'float' 'postal_code'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'int' 'int' 'text' 'text' 'text' 'int' 'float' 'float' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'float' 'int' 'text' 'int' 'text' 'float' 'int' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'float' 'int' 'text' 'float' 'text' 'float' 'float' 'float' 'int'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'int' 'text' 'text' 'text' 'text' 'float' 'int' 'int' 'int' 'float'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'text' 'text' 'float' 'text' 'int' 'float' 'text' 'text' 'text' 'text'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> 'float' 'int' 'text']</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Associated max probabilities/confidences:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[ 0.98726392  0.99975401  0.97723323  0.92516458  0.95750725  0.96238226</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.39826432  0.98667729  0.99973422  0.96092343  0.99921274  0.97354454</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.67014772  0.96752042  0.9594571   0.79984868  0.99972254  0.99288046</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.94893157  0.96782166  0.96028137  0.99918753  0.99943453  0.92473137</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96474952  0.96221006  0.9559375   0.61424941  0.97629911  0.92927527</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.94982821  0.99972504  0.89910895  0.97643989  0.97627038  0.93428296</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.9886573   0.96509147  0.97037226  0.99279094  0.99972695  0.97503054</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97627038  0.96211946  0.90830398  0.97630352  0.99272293  0.97761852</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.43300185  0.97572827  0.96181035  0.89854926  0.94545573  0.86665869</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96509814  0.99976808  0.99975246  0.97655326  0.97586614  0.99287993</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99972695  0.97624391  0.99946791  0.99922073  0.96526295  0.96933401</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96239102  0.94994938  0.97677284  0.99947923  0.99272209  0.93947166</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99938953  0.13627003  0.99940228  0.96651888  0.91117078  0.95896983</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97641695  0.95500451  0.97674823  0.97465229  0.94904923  0.97392154</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.9752177   0.99972838  0.94036871  0.99268085  0.95225924  0.99267077</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97821552  0.96302074  0.9995479   0.9666521   0.97563642  0.96069598</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95370597  0.91132003  0.99917597  0.96449518  0.96053779  0.99952996</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97483802  0.97788572  0.97746861  0.97579736  0.97643548  0.99968863</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.94023114  0.99282104  0.97575605  0.97105747  0.95817614  0.96596932</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.64190245  0.99278945  0.95857292  0.97327977  0.92609096  0.95395976</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.87105262  0.93761283  0.97429591  0.97147942  0.99236661  0.91926152</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.939946    0.97097045  0.97217888  0.95527208  0.96632928  0.99208611</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.86817443  0.91147453  0.99237472  0.97647732  0.97805417  0.97416365</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97618961  0.99970752  0.99292326  0.96619487  0.99289858  0.91065806</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99975568  0.99918205  0.99948359  0.99974197  0.95970362  0.99955493</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99974138  0.94332755  0.96250761  0.98658794  0.97429579  0.99948561</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.78080142  0.98968571  0.96504641  0.99957639  0.94165367  0.92728603</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.93306386  0.94260281  0.96619785  0.95529675  0.99792165  0.9514516</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99257398  0.99945897  0.92109042  0.99945396  0.95698458  0.95491105</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96643806  0.99287647  0.96538872  0.99971384  0.30643287  0.99270201</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97824222  0.96823132  0.99968994  0.99973696  0.94797993  0.99273646</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97297102  0.97351009  0.95707583  0.88034368  0.96550792  0.98517668</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99974436  0.97369283  0.99974662  0.95779634  0.97778237  0.95688587</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.999385    0.24685898  0.89156342  0.73408043  0.9994837   0.99156266</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.98242503  0.97540796  0.97429997  0.96041662  0.97831386  0.9768737</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97572351  0.99972028  0.97826266  0.92441666  0.9761011   0.96724677</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95007175  0.99956363  0.96265727  0.9993062   0.95799136  0.99274457</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99931121  0.99976307  0.99948788  0.95970768  0.24719885  0.97619176</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99973196  0.91406065  0.85929394  0.9545489   0.96580052  0.98989362</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99907851  0.96008617  0.99971753  0.99280977  0.99953961  0.99273419</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.90999985  0.99286252  0.9926824   0.99364704  0.96136338  0.9737671</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.9096148   0.99939704  0.94082159  0.96398377  0.97495383  0.9545489</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97522563  0.94832492  0.95672935  0.90850693  0.95488179  0.96758962</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96073776  0.9195314   0.94281441  0.99975234  0.85796088  0.97694331</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97481245  0.99531388  0.99959272  0.99842763  0.85781193  0.96526086</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97934729  0.95937389  0.93583584  0.9995479   0.99952197  0.98198849</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95965177  0.98820764  0.97521883  0.97414678  0.95229393  0.96763366</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97765952  0.98966706  0.99906582  0.99957258  0.99280071  0.85686588</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97535646  0.96138179  0.97318619  0.95701206  0.9658649   0.99287933</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96646357  0.94901454  0.99974853  0.99953461  0.96439838  0.95595193</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95628017  0.95091242  0.97234255  0.95682991  0.97627038  0.96628332</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99283993  0.93702304  0.99975508  0.95477474  0.96442288  0.97724575</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99909568  0.96313882  0.86362946  0.9762646   0.9903807   0.73514622</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96504152  0.99947792  0.96819413  0.96100658  0.96818215  0.96595454</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99126852  0.97706056  0.99363226  0.99954623  0.9629637   0.98789561</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.92444909  0.95579427  0.98165876  0.84244704  0.9293865   0.99790239</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97875595  0.96510458  0.99956471  0.91862494  0.97627038  0.99946743</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97397757  0.99919325  0.94579607  0.98739189  0.99974304  0.99949145</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95689529  0.95131022  0.95604593  0.9584251   0.96123946  0.20701392</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96252847  0.9138248   0.97263217  0.96216297  0.96413523  0.95104545</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99971956  0.96997458  0.96788353  0.96349859  0.96381545  0.95917624</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.999744    0.99294233  0.98994482  0.94533116  0.99286216  0.9692626</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95223266  0.9620226   0.94798422  0.9927839   0.99973756  0.99898511</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95880634  0.38928142  0.97627878  0.90138054  0.97293717  0.98635811</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99958688  0.99948955  0.29553512  0.99275315  0.9738487   0.99967742</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99953568  0.99903464  0.99961698  0.93660718  0.99954921  0.99253464</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96595764  0.99287671  0.97669607  0.97290695  0.97628933  0.9995541</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96030641  0.98610109  0.99595547  0.99276477  0.99974424  0.97464061</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97492754  0.97515815  0.97611868  0.95667756  0.96094239  0.96946311</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96410733  0.99270916  0.95821536  0.97559386  0.99964762  0.97390193</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97578388  0.92263758  0.97682762  0.95159674  0.9775753   0.97416502</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.78132737  0.97622627  0.97357732  0.95224911  0.95875996  0.96550548</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99922192  0.99974209  0.97835058  0.85629278  0.97311854  0.98239088</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.9601922   0.95893425  0.9924075   0.95409006  0.95132124  0.99282563</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.9592312   0.99956673  0.96053678  0.9927758   0.9579004   0.11038555</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97466087  0.30113268  0.99944979  0.99951839  0.99943167  0.97555166</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.94991368  0.96122241  0.88697815  0.90863007  0.87795335  0.9995383</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97392154  0.95071971  0.98436016  0.97627038  0.96879715  0.95223171</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.75913769  0.99271262  0.98506761  0.95731354  0.72322404  0.97388995</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.992773    0.97767639  0.9370355   0.99917066  0.95572811  0.99973947</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97773141  0.9754926   0.95232284  0.99966466  0.96644807  0.95729256</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96626651  0.97144157  0.99955398  0.96144032  0.97673279  0.97257417</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99953461  0.93746811  0.97844386  0.97661316  0.96281207  0.97627038</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97450191  0.94865757  0.99270505  0.99956959  0.96237314  0.97318846</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96399188  0.95101678  0.99860966  0.24720007  0.97744316  0.95712805</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96230799  0.99272281  0.98380709  0.9899658   0.97276843  0.90382183</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95713872  0.97582078  0.97467345  0.892802    0.93921846  0.97028697</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.67376637  0.99974102  0.99976903  0.94982767  0.88791817  0.96900606</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99289531  0.98843527  0.9704991   0.27105224  0.99950719  0.97830278</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95434558  0.85800874  0.99876451  0.9103356   0.96000916  0.95888752</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.92015439  0.97771502  0.97430903  0.99974495  0.92183906  0.99819869</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.9635787   0.90133524  0.99286979  0.96555436  0.92195952  0.99951446</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.89449996  0.94444984  0.99296546  0.97484905  0.96412635  0.9454779</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99938369  0.97394347  0.9994728   0.9620676   0.98763925  0.96140605</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97367281  0.94869632  0.94801551  0.9587146   0.99973887  0.99955887</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99953818  0.97606206  0.94132346  0.99973911  0.98335302  0.97389483</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.94995648  0.21685654  0.97009778  0.9621101   0.99959344  0.99951065</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.09528515  0.99278259  0.97467256  0.99250692  0.9997527   0.96262515</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.94501615  0.9926762   0.95806956  0.99272656  0.99282032  0.94237864</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95713741  0.95605671  0.96740526  0.99962723  0.9928965   0.99953067</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.94469166  0.99268395  0.95434767  0.9928388   0.89312065  0.99955601</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.86828965  0.9926765   0.97715169  0.97585732  0.96945679  0.94647545</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96086401  0.97392154  0.99951661  0.99960095  0.94610173  0.94755256</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96673733  0.99974662  0.98633933  0.96330851  0.97721237  0.96065241</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99872667  0.97250122  0.99922931  0.96695966  0.99941015  0.97732145</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.96282721  0.99959308  0.97424227  0.99941421  0.94079393  0.9991855</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97926545  0.99282116  0.94699526  0.9458158   0.99261355  0.95179123</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.97364616  0.99840289  0.97629434  0.82983947  0.98018289  0.95559764</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.99267453  0.95695227  0.99956208  0.96374899  0.97739834  0.99956864</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.95086998  0.99287707  0.96230513  0.9612636   0.84512156  0.97312284</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  0.9928236 ]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::y_test:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[[0 0 0 ..., 0 0 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 0 ..., 0 0 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 1 ..., 0 0 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ..., </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 0 ..., 0 0 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 0 ..., 0 0 0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [0 0 1 ..., 0 1 0]]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">DEBUG::y_pred:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[[ 0.  0.  0. ...,  0.  0.  0.]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [ 0.  0.  0. ...,  0.  0.  0.]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [ 0.  0.  1. ...,  0.  0.  0.]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> ..., </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [ 0.  0.  0. ...,  0.  0.  0.]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [ 0.  0.  1. ...,  0.  0.  0.]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"> [ 1.  1.  1. ...,  1.  1.  1.]]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">'Binary' accuracy (true positives + true negatives) is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">(0.77752563456043033, array([ 0.53857791,  0.54311649,  0.63388805,  0.58547655,  0.63086233,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">        0.6172466 ,  0.84266263,  0.99848714,  0.98940998,  0.99394856,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">        0.86838124,  0.84266263,  0.92435703,  0.85779123,  0.99848714,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">        0.6096823 ,  0.98638427,  0.53403933]), array([[ 1.,  1.,  1., ...,  1.,  1.,  1.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 1.,  1.,  1., ...,  1.,  1.,  1.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 1.,  1.,  1., ...,  1.,  1.,  1.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       ..., </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 1.,  1.,  1., ...,  1.,  1.,  1.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 1.,  1.,  0., ...,  1.,  1.,  1.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 0.,  0.,  1., ...,  0.,  1.,  0.]]))</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">'Binary' confusion (false positives + false negatives) is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">(0.22247436543956967, array([ 0.46142209,  0.45688351,  0.36611195,  0.41452345,  0.36913767,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">        0.3827534 ,  0.15733737,  0.00151286,  0.01059002,  0.00605144,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">        0.13161876,  0.15733737,  0.07564297,  0.14220877,  0.00151286,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">        0.3903177 ,  0.01361573,  0.46596067]), array([[ 0.,  0.,  0., ...,  0.,  0.,  0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 0.,  0.,  0., ...,  0.,  0.,  0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 0.,  0.,  0., ...,  0.,  0.,  0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       ..., </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 0.,  0.,  0., ...,  0.,  0.,  0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 0.,  0.,  1., ...,  0.,  0.,  0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [ 1.,  1.,  0., ...,  1.,  0.,  1.]]))</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">False positive matrix is:</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">(5086.0, array([  6.60000000e+01,   2.70000000e+01,   8.30000000e+02,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">         2.94000000e+02,   4.06000000e+02,   2.82000000e+02,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">         2.50000000e+01,   0.00000000e+00,   2.83000000e+02,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">         1.76000000e+02,   4.30000000e+01,   5.90000000e+01,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">         5.10000000e+01,   5.00000000e+00,   2.00000000e+00,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">         3.99000000e+02,   2.11700000e+03,   2.10000000e+01]), array([[   0.,    4.,  118.,   43.,   58.,   47.,    2.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    0.,    0.,   57.,  299.,    3.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   9.,    0.,  113.,   42.,   58.,   47.,    0.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           1.,    0.,    0.,    0.,    0.,    0.,   57.,  301.,    3.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   9.,    0.,    0.,   42.,   58.,    0.,    2.,    0.,    2.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">          41.,    0.,    0.,    0.,    0.,    0.,   57.,  193.,    3.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [  10.,    4.,  119.,    0.,   58.,   47.,    2.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    1.,    0.,   57.,  267.,    3.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   9.,    3.,  114.,   43.,    0.,   47.,    0.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    0.,    0.,   57.,  241.,    3.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   9.,    4.,   70.,   34.,   58.,    0.,    1.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    0.,    0.,   57.,  248.,    3.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   1.,    0.,   50.,    2.,    0.,    0.,    0.,    0.,    4.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">          88.,    0.,    0.,   47.,    3.,    1.,    0.,    7.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           1.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    0.,    0.,    0.,    0.,    1.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    1.,    0.,    0.,    1.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    2.,    0.,    0.,    0.,    0.,    0.,    3.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    1.,    0.,    0.,    0.,    1.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,   87.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,   56.,    0.,    0.,    0.,    0.,    0.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,  104.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,   43.,    0.,    0.,    0.,    0.,    0.,    0.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    1.,    0.,    0.,    0.,    5.,    0.,    2.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">          41.,    0.,    0.,    0.,    0.,    0.,    0.,    1.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    3.,    2.,    0.,    0.,    8.,    0.,   80.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           2.,    0.,    3.,    3.,    0.,    1.,    0.,    4.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    1.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [  10.,    4.,  119.,   43.,   58.,   47.,    2.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    0.,    0.,    0.,  252.,    3.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   0.,    4.,    4.,    0.,    0.,    0.,    2.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [   9.,    4.,  117.,   43.,   58.,   47.,    0.,    0.,    0.,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">           2.,    0.,    0.,    0.,    0.,    0.,   57.,  302.,    0.]]))</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">2</span><span style=" color:#000080;">]:</span> </p></body></html>

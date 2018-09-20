@@ -33,6 +33,8 @@ To simply classify the columns of a dataset, execute the following command. The 
 
 `python3 main_classify_dataset.py --config Base.pkl`
 
+Note that the code should work directly on a GPU-enabled machine. Be sure to set batch_size to something relatively large, like 64 (default is 5) to take full advantage of the GPU power with the flag addition `--batch_size 64`
+
 Upcoming developments include transfer learning and both GPU and heterogeneous parallelization capabilities.
 
 To run tensorflow's tensorboard, open up another terminal and run:

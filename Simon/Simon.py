@@ -222,7 +222,7 @@ class Simon:
         output = Dense(category_count_post, activation='sigmoid')(output_pre)
         model = Model(input=document, output=output)
         # retrain the last layer
-        for layer in model.layers[:7]:
+        for layer in model.layers[:8]:
             layer.trainable = False
         model.layers[8].trainable = True
 
