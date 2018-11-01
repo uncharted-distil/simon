@@ -7,6 +7,8 @@ import azure_utils.client as client
 import graphutils.getConnection as gc
 from FetchLabeledData import *
 
+from Simon.penny.guesser import guess
+
 from Simon import *
 from Simon.Encoder import *
 from Simon.DataGenerator import *
@@ -53,13 +55,41 @@ def main(checkpoint, data_count, data_cols, should_train, nb_epoch, null_pct, tr
     raw_data = out[0:max_cells,:] #truncate the rows (max_cells)
     
     #read "post-processed" header from file, this includes categorical and ordinal classifications...
-    with open('datalake_labels','r',newline='\n') as myfile:
-        reader = csv.reader(myfile, delimiter=',')
-        header = []
-        for row in reader:
-            header.append(row)
+#    with open('datalake_labels','r',newline='\n') as myfile:
+#        reader = csv.reader(myfile, delimiter=',')
+#        header = []
+#        for row in reader:
+#            header.append(row)
     # OR 
-    # header = out_array_header
+    header = out_array_header
+    
+    ## LABEL COMBINED DATA AS CATEGORICAL/ORDINAL
+    start_time_guess = time.time()
+    guesses = []
+    print("Beginning Guessing categorical/ordinal for datalake data...")
+    category_count = 0
+    ordinal_count = 0
+    for i in np.arange(raw_data.shape[1]):
+        tmp = guess(raw_data[:,i], for_types ='category')
+        if tmp[0]=='category':
+            category_count += 1
+            header[i].append('categorical')
+            if ('int' in header[i]) or ('float' in header[i]) \
+                or ('datetime' in header[i]):
+                    ordinal_count += 1
+                    header[i].append('ordinal')
+        guesses.append(tmp)
+    
+    if(DEBUG):
+        #print(guesses)
+        #print(len(guesses))
+        print("DEBUG::The number of categorical columns is %d"%category_count)
+        print("DEBUG::The number of ordinal columns is %d"%ordinal_count)
+        #print(header)
+        
+    elapsed_time = time.time()-start_time_guess
+    print("Total guessing time is : %.2f sec" % elapsed_time)
+    ## FINISHED LABELING COMBINED DATA AS CATEGORICAL/ORDINAL
     
     # transpose the data
     raw_data = np.char.lower(np.transpose(raw_data).astype('U'))

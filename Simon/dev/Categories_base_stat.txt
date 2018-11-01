@@ -1,11 +1,11 @@
 address
 boolean
+categorical
 datetime
 email
 float
 int
+ordinal
 phone
 text
 uri
-categorical
-ordinal
