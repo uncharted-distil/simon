@@ -1,6 +1,6 @@
 from DataGenerator import *
-from DataLengthRandomizer import *
-from DataLengthStandardizer import *
+#from DataLengthRandomizer import *
+from LengthStandardizer import *
 from Encoder import *
 from keras.models import Model
 from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D

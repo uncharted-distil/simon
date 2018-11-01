@@ -109,7 +109,7 @@ def FetchLabeledDataColumns(datasets, max_cells, cursor, adl, DEBUG, LARGE):
     maxlen = 20
     with adl.open(datasets[0][0], blocksize=2**20) as f:
         try:
-            frame = pandas.read_csv(f,nrows=max_cells, encoding = "ISO-8859-1")
+            frame = pandas.read_csv(f,nrows=max_cells, encoding = "ISO-8859-1",dtype=str)
             out = DataLengthColumnStandardizerRaw(frame.ix[:,datasets[0][1]], max_cells)
             unique_column_id = [datasets[0][2],]
         except:
@@ -129,7 +129,7 @@ def FetchLabeledDataColumns(datasets, max_cells, cursor, adl, DEBUG, LARGE):
             try_count=0
 #            while(try_count<5):
             try:
-                frame = pandas.read_csv(f,nrows=max_cells,encoding = "ISO-8859-1")
+                frame = pandas.read_csv(f,nrows=max_cells,encoding = "ISO-8859-1",dtype=str)
                 if DEBUG:
                     print("starting a new frame...")
                     print(i)
@@ -192,6 +192,7 @@ def FetchLabeledDataFromDatabase(max_cells, cursor, adl, DEBUG):
             else:
                 for i in np.arange(ny):
                     out_array_header.append(list([category]))
+                        
         
         # Now, postprocess fetched data to collapse repeated multilabeled columns
         if DEBUG:
@@ -237,8 +238,6 @@ def FetchLabeledDataFromDatabase(max_cells, cursor, adl, DEBUG):
             #del out_array_header[np.asarray(indices_list[1:])]
             out_array = np.delete(out_array, np.asarray(indices_list[1:]),axis=1)
             unique_column_id_np_array = np.delete(unique_column_id_np_array, np.asarray(indices_list[1:]))
-            
-        
         
         if DEBUG:
             print(out_array)
