@@ -113,7 +113,7 @@ class Simon:
         data = type('data_type', (object,), {'X_train' : X_train, 'X_cv_test': X_cv_test, 'X_test': X_test, 'y_train': y_train, 'y_cv_test': y_cv_test, 'y_test':y_test})
         return data
 
-    def generate_model(self,max_len, max_cells, category_count):
+    def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
         pool_length = 2
@@ -160,13 +160,13 @@ class Simon:
         output = Dropout(0.3)(merged)
         output = Dense(128, activation='relu')(output)
         output = Dropout(0.3)(output)
-        output = Dense(category_count, activation='sigmoid')(output)
+        output = Dense(category_count, activation=activation)(output)
         # output = Activation('softmax')(output)
         model = Model(input=document, output=output)
 
         return model
         
-    def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post, checkpoint, checkpoint_dir):
+    def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post, checkpoint, checkpoint_dir,activation='sigmoid'):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
         pool_length = 2
@@ -213,8 +213,7 @@ class Simon:
         output_pre = Dropout(0.3)(merged)
         output_pre = Dense(128, activation='relu')(output_pre)
         output_pre = Dropout(0.3)(output_pre)
-        output = Dense(category_count_prior, activation='sigmoid')(output_pre)
-        # output = Activation('softmax')(output)
+        output = Dense(category_count_prior, activation=activation)(output_pre)
         model = Model(input=document, output=output)
     
         # having built model of prior size, load weights
