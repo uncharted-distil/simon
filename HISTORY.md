@@ -1,6 +1,8 @@
 # vNEXT
 * Heterogeneous acceleration (multiple CPUs, GPUs)
 * ROC optimization of p_threshold on a per-class basis
+* more complete set of metrics in evaluation function (precision, recall, F1...)
+* .csv data processing utility
 
 # v1.2.2
 * activation in last fully-connected layer now an optional keyword argument

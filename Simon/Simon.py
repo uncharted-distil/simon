@@ -49,33 +49,33 @@ class Simon:
         correct_indices = y_test==y_pred
         all_correct_predictions = np.zeros(y_test.shape)
         all_correct_predictions[correct_indices] = 1
-        #print("DEBUG::binary accuracy matrix")
-        #print(all_correct_predictions)
         return np.mean(all_correct_predictions),np.mean(all_correct_predictions, axis=0),all_correct_predictions
     
     def eval_confusion(self,y_test, y_pred):
         wrong_indices = y_test!=y_pred
         all_wrong_predictions = np.zeros(y_test.shape)
         all_wrong_predictions[wrong_indices] = 1
-        #print("DEBUG::confusion matrix")
-        #print(all_wrong_predictions)
         return np.mean(all_wrong_predictions),np.mean(all_wrong_predictions, axis=0),all_wrong_predictions
     
     def eval_false_positives(self,y_test, y_pred):
         false_positive_matrix = np.zeros((y_test.shape[1],y_test.shape[1]))
         false_positives = np.multiply(y_pred,1-y_test)
-        # print(precision_matrix)
         for i in np.arange(y_test.shape[0]):
             for j in np.arange(y_test.shape[1]) :
                 if(false_positives[i,j]==1): #positive label for ith sample and jth predicted category
                     for k in np.arange(y_test.shape[1]):
                         if(y_test[i,k]==1): #positive label for ith sample and kth true category
-                            # print("DEBUG::i,j,k")
-                            # print("%d,%d,%d"%(i,j,k)) 
                             false_positive_matrix[j,k] +=1
-        # print("DEBUG::precision matrix")
-        # print(precision_matrix)
         return np.sum(false_positive_matrix),np.sum(false_positive_matrix, axis=0),false_positive_matrix
+    
+    def eval_ROC_metrics(y_test, y_pred):
+        true_positive = y_pred*y_test
+        true_negative = (1-y_pred)*(1-y_test)
+        false_positive = y_pred*(1-y_test)
+        false_negative = (1-y_pred)*y_test
+
+        return np.sum(true_positive,axis=0),np.sum(true_negative,axis=0),np.sum(false_positive,axis=0),np.sum(false_negative,axis=0)
+    
     
     def binarize_outshape(self,in_shape):
         return in_shape[0], in_shape[1], 71
@@ -288,19 +288,27 @@ class Simon:
         # print("Associated max probabilities/confidences:")
         # print(m)
         # next, all probabilities above a certain threshold
-        print("DEBUG::y_test:")
-        print(data.y_test)
         prediction_indices = probabilities > p_threshold
         y_pred = np.zeros(data.y_test.shape)
         y_pred[prediction_indices] = 1
-        print("DEBUG::y_pred:")
-        print(y_pred)
-        print("'Binary' accuracy (true positives + true negatives) is:")
+        # print("DEBUG::y_test:")
+        # print(data.y_test)
+        # print("DEBUG::y_pred:")
+        # print(y_pred)
+        print("'Binary' accuracy (TP+TN)/total is:")
         print(self.eval_binary_accuracy(data.y_test,y_pred))
-        print("'Binary' confusion (false positives + false negatives) is:")
+        print("'Binary' confusion (FP+FN)/total is:")
         print(self.eval_confusion(data.y_test,y_pred))
-        print("False positive matrix is:")
+        print("False Positive (FP) matrix is:")
         print(self.eval_false_positives(data.y_test,y_pred))
+        TP,TN,FP,FN = eval_ROC_metrics(data.y_test, y_pred)
+        print("Precision is:")
+        print(TP/(TP+FP))
+        print("Recall is:")
+        print(TP/(TP+FN))
+        print("F1 score is:")
+        print(2*TP/(2*TP+FP+FN))
+
 
         return encoder.reverse_label_encode(probabilities,p_threshold)
 
@@ -474,3 +482,41 @@ class Simon:
                 merged.append(concatenate(outputs,
                                         axis=0))
             return Model(model.inputs, merged)
+
+    def tune_ROC_metrics(max_cells, model, data, encoder,p_thresholds):
+        print("Starting to compute ROC metrics...")
+
+        start = time.time()
+        scores = model.evaluate(data.X_test, data.y_test, verbose=0)
+        end = time.time()
+        print("Initial Accuracy: %.2f%% \n Time: {0}s \n Time/example : {1}s/ex".format(
+            end - start, (end - start) / data.X_test.shape[0]) % (scores[1] * 100))
+
+        probabilities = model.predict(data.X_test, verbose=1)
+
+        Categories = encoder.categories
+        print("The fixed categories are:")
+        print(Categories)
+
+        # evaluate ROC metrics for a number of p_threholds
+        TPR_arr = np.zeros((p_thresholds.shape[0],data.y_test.shape[1]))
+        FPR_arr = np.zeros((p_thresholds.shape[0],data.y_test.shape[1]))
+        i = 0
+        for p_threshold in p_thresholds:
+            prediction_indices = probabilities > p_threshold
+            y_pred = np.zeros(data.y_test.shape)
+            y_pred[prediction_indices] = 1
+            TP,TN,FP,FN = eval_ROC_metrics(data.y_test, y_pred)
+            TPR_arr[i,:]= TP/(TP+FN)
+            FPR_arr[i,:]= FP/(FP+TN)
+            i = i+1
+
+        # save data for analysis later?
+        # np.save("TP",TP)
+        # np.save("TN",TN)
+        # np.save("FP",FP)
+        # np.save("FN",FN)
+        # np.save("TPR_arr",TPR_arr)
+        # np.save("FPR_arr",FPR_arr)
+
+        return TPR_arr,FPR_arr
