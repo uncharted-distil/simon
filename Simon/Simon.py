@@ -301,7 +301,7 @@ class Simon:
         print(self.eval_confusion(data.y_test,y_pred))
         print("False Positive (FP) matrix is:")
         print(self.eval_false_positives(data.y_test,y_pred))
-        TP,TN,FP,FN = eval_ROC_metrics(data.y_test, y_pred)
+        TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
         print("Precision is:")
         print(TP/(TP+FP))
         print("Recall is:")
