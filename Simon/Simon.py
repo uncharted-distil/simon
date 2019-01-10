@@ -68,7 +68,7 @@ class Simon:
                             false_positive_matrix[j,k] +=1
         return np.sum(false_positive_matrix),np.sum(false_positive_matrix, axis=0),false_positive_matrix
     
-    def eval_ROC_metrics(y_test, y_pred):
+    def eval_ROC_metrics(self,y_test, y_pred):
         true_positive = y_pred*y_test
         true_negative = (1-y_pred)*(1-y_test)
         false_positive = y_pred*(1-y_test)
