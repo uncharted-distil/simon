@@ -483,7 +483,7 @@ class Simon:
                                         axis=0))
             return Model(model.inputs, merged)
 
-    def tune_ROC_metrics(max_cells, model, data, encoder,p_thresholds):
+    def tune_ROC_metrics(self,max_cells, model, data, encoder,p_thresholds):
         print("Starting to compute ROC metrics...")
 
         start = time.time()
