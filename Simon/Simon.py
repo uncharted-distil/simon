@@ -296,18 +296,18 @@ class Simon:
         # print("DEBUG::y_pred:")
         # print(y_pred)
         print("'Binary' accuracy (TP+TN)/total is:")
-        print(self.eval_binary_accuracy(data.y_test,y_pred))
+        print(self.eval_binary_accuracy(data.y_test,y_pred)[0])
         print("'Binary' confusion (FP+FN)/total is:")
-        print(self.eval_confusion(data.y_test,y_pred))
+        print(self.eval_confusion(data.y_test,y_pred)[0])
         print("False Positive (FP) matrix is:")
-        print(self.eval_false_positives(data.y_test,y_pred))
+        print(self.eval_false_positives(data.y_test,y_pred)[0])
         TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
         print("Precision is:")
-        print(TP/(TP+FP))
+        print(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
         print("Recall is:")
-        print(TP/(TP+FN))
+        print(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
         print("F1 score is:")
-        print(2*TP/(2*TP+FP+FN))
+        print(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
 
 
         return encoder.reverse_label_encode(probabilities,p_threshold)
@@ -506,9 +506,9 @@ class Simon:
             prediction_indices = probabilities > p_threshold
             y_pred = np.zeros(data.y_test.shape)
             y_pred[prediction_indices] = 1
-            TP,TN,FP,FN = eval_ROC_metrics(data.y_test, y_pred)
-            TPR_arr[i,:]= TP/(TP+FN)
-            FPR_arr[i,:]= FP/(FP+TN)
+            TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
+            TPR_arr[i,:]= np.sum(TP)/(np.sum(TP)+np.sum(FN))
+            FPR_arr[i,:]= np.sum(FP)/(np.sum(FP)+np.sum(TN))
             i = i+1
 
         # save data for analysis later?
