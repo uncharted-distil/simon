@@ -499,8 +499,8 @@ class Simon:
         print(Categories)
 
         # evaluate ROC metrics for a number of p_threholds
-        TPR_arr = np.zeros((p_thresholds.shape[0],data.y_test.shape[1]))
-        FPR_arr = np.zeros((p_thresholds.shape[0],data.y_test.shape[1]))
+        TPR_arr = np.zeros((p_thresholds.shape[0],1))
+        FPR_arr = np.zeros((p_thresholds.shape[0],1))
         i = 0
         for p_threshold in p_thresholds:
             prediction_indices = probabilities > p_threshold
