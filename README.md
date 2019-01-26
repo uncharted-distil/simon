@@ -1,7 +1,11 @@
 # Simon
 Character-level CNN+LSTM model for text classification.
 
-The acronym Simon stands for Semantic Inference for the Modeling of ONtologies
+The acronym Simon stands for Semantic Inference for the Modeling of ONtologies.
+
+Please see our paper on arxiv for more details about the implementation and some experimental results - https://arxiv.org/abs/1901.08456
+
+You can also see NK-TexasAISummit.pdf at the top level of the repo for a brief introduction via our 2019 Texas AI Summit talk. 
 
 This work is heavily influenced by the following academic article: http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classifica
 
