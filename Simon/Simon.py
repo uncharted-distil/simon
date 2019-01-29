@@ -140,8 +140,7 @@ class Simon:
         backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
 
-        sent_encode = merge([forward_sent, backward_sent],
-                            mode='concat', concat_axis=-1)
+        sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
         # sentence encoder
 
@@ -156,7 +155,7 @@ class Simon:
         backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
 
-        merged = merge([forwards, backwards], mode='concat', concat_axis=-1)
+        merged = concatenate([forwards, backwards], axis=-1)
         output = Dropout(0.3)(merged)
         output = Dense(128, activation='relu')(output)
         output = Dropout(0.3)(output)
