@@ -139,7 +139,7 @@ class DataGenerator:
             # print(ret_header)
             # print(ret_header.shape)
             # print(ret_val.shape)
-            return ret_val, ret_header 
+            return ret_val, ret_header
         print("creating data")
         ret_val = np.empty(shape, dtype="object")
         headers = np.empty(shape[1], dtype="object")
@@ -162,7 +162,7 @@ class DataGenerator:
             np.save(matrix_file, ret_val)
         with open(header_name, 'wb') as header_file:
             np.save(header_file, headers)
-        
+
         temp_header = data_creator.map_column_names_to_types(headers)
         ret_header = np.asarray([temp_header[i] for i in np.arange(temp_header.shape[0]) if not temp_header[i]==None])
         del_idx = np.zeros(ret_val.shape[1]-ret_header.shape[0], dtype='object')
@@ -172,7 +172,7 @@ class DataGenerator:
                 del_idx[k] = j #deleting column j
                 k = k+1
         ret_val = np.delete(ret_val,del_idx,axis=1) #delete redundant faker columns from data...
-        
+
         return ret_val, ret_header
 
     @staticmethod
@@ -188,14 +188,60 @@ class DataGenerator:
             DataGenerator.add_col_nulls(data,idx, percent)
 
 
-if __name__ == '__main__':
-    from Encoder import *
-    import ColumnProcessor as cp
-    data, header = DataGenerator.gen_test_data((100, 50))
-    encoded_data = Encoder.encode_matrix(data, StringToIntArrayEncoder())
+def get_test_data(shape=(100, 50)):
+    str_shape = 'x'.join([str(x) for x in shape])
+    data_path = "data/"
+    if not os.path.isdir(data_path):
+        os.makedirs(data_path)
+    matrix_name = data_path + "matrix_{0}.npy".format(str_shape)
+    header_name = data_path + "header_{0}.npy".format(str_shape)
+    data_creator = FakeDataCreator()
 
-    processor = cp.MatrixProcessor(data, header)
-    col_types, matrix = processor.process()
-    print(matrix)
+    print("creating data")
+    ret_val = np.empty(shape, dtype="object")
+    headers = np.empty(shape[1], dtype="object")
+
+    for j in range(shape[1]):
+        col_data, column_name = DataGenerator.gen_col_data(data_creator, shape[0])
+        # fake_func, column_name = data_creator.get_generator()
+        headers[j] = column_name
+        ret_val[:, j] = col_data
+        # for i in range(shape[0]):
+        #     try:
+        #         val= fake_func()
+        #         #TODO: utf-8 is probably not acceptable for
+        #         internationalization
+        #         ret_val[i,j] = str(val)#repr.encode('utf-8')
+        #     except Exception:
+        #         print "error: {0}".format(fake_func())
+
+
+    temp_header = data_creator.map_column_names_to_types(headers)
+    ret_header = np.asarray([temp_header[i] for i in np.arange(temp_header.shape[0]) if not temp_header[i]==None])
+    del_idx = np.zeros(ret_val.shape[1]-ret_header.shape[0], dtype='object')
+    k = 0
+    for j in np.arange(temp_header.shape[0]):
+        if(temp_header[j]==None):
+            del_idx[k] = j #deleting column j
+            k = k+1
+    ret_val = np.delete(ret_val,del_idx,axis=1) #delete redundant faker columns from data...
+    ret_val = np.char.lower(np.transpose(ret_val).astype('U'))
+
+    df = pd.DataFrame({'labels': ret_header, 'content': ret_val.tolist()})
+    df.to_json('faker-data.json')
+    df.to_csv('faker-data.csv')
+
+    return ret_val, ret_header
+
+if __name__ == '__main__':
+    # from Encoder import *
+    # import ColumnProcessor as cp
+    raw_data, header = get_test_data((100, 50))
+
+    # encoded_data = Encoder.encode_matrix(data, StringToIntArrayEncoder())
+
+    # processor = cp.MatrixProcessor(data, header)
+    # col_types, matrix = processor.process()
+    # print(matrix)
     #pd_matrix = pd.DataFrame(data, columns=header[:,0])
     #type_provider = cp.ColProcessor(pd_matrix)
