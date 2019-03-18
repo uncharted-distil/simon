@@ -45,6 +45,12 @@ To simply classify the columns of a dataset, execute the following command. The 
 
 Note that the code should work directly on a GPU-enabled machine. Be sure to set batch_size to something relatively large, like 64 (default is 5) to take full advantage of the GPU power with the flag addition `--batch_size 64`
 
+`python3 main_generate_feature_model.py --datapath home/azunre/Downloads/enron.jsonl --index 0 --config Base.pkl`
+
+This script demonstrates how to use the function `generate_feature_model`. This function generates a feature model whose output is the final 128-d feature vector learned by SIMON. This example script takes a datapath and an index as 
+command line arguments (in this example, the Enron email corpus) and prints out the 128d feature vector that represents 
+the input data (a single Enron email in this case).
+
 Upcoming developments include transfer learning and both GPU and heterogeneous parallelization capabilities.
 
 To run tensorflow's tensorboard, open up another terminal and run:
