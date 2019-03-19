@@ -3,7 +3,7 @@
 * .csv data processing utility
 
 # v1.2.4
-* Aded function to generate feature model whose output is the final 128-d feature vector learned by SIMON
+* Added function to generate feature model whose output is the final 128-d feature vector learned by SIMON
 # v1.2.3
 * ROC optimization of p_threshold on a per-class basis
 * more complete set of metrics in evaluation function (precision, recall, F1...)
