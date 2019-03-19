@@ -7,12 +7,3 @@ int
 phone
 text
 uri
-categorical
-ordinal
-state
-city
-postal_code
-latitude
-longitude
-country
-country_code
