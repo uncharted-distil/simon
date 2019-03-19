@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='Simon',
-    version='1.2.3',
+    version='1.2.4',
     description='Character-level CNN+LSTM model for text classification',
     packages=['Simon'],
     install_requires=['Faker >= 0.7.7',

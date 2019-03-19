@@ -226,6 +226,63 @@ class Simon:
 
         return model
 
+    def generate_feature_model(self, max_len, max_cells, category_count, checkpoint_dir, config, DEBUG = True):
+        '''
+            Generate SIMON feature model which produces 128-d SIMON features as last layer
+        '''
+        filter_length = [1, 3, 3]
+        nb_filter = [40, 200, 1000]
+        pool_length = 2
+        # document input
+        document = Input(shape=(max_cells, max_len), dtype='int64')
+        # sentence input
+        in_sentence = Input(shape=(max_len,), dtype='int64')
+        # char indices to one hot matrix, 1D sequence to 2D
+        embedded = Lambda(self.binarize, output_shape=self.binarize_outshape)(in_sentence)
+        # embedded: encodes sentence
+        for i in range(len(nb_filter)):
+            embedded = Convolution1D(nb_filter=nb_filter[i],
+                                        filter_length=filter_length[i],
+                                        border_mode='valid',
+                                        activation='relu',
+                                        init='glorot_normal',
+                                        subsample_length=1)(embedded)
+
+            embedded = Dropout(0.1)(embedded)
+            embedded = MaxPooling1D(pool_length=pool_length)(embedded)
+
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
+
+        sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
+        sent_encode = Dropout(0.3)(sent_encode)
+        # sentence encoder
+
+        encoder = Model(input=in_sentence, output=sent_encode)
+
+        #print(encoder.summary())
+        encoded = TimeDistributed(encoder)(document)
+
+        # encoded: sentences to bi-lstm for document encoding
+        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(encoded)
+        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+
+        merged = concatenate([forwards, backwards], axis=-1)
+        output_pre = Dropout(0.3)(merged)
+        output_pre = Dense(128, activation='relu', name='features')(output_pre)
+        output = Dropout(0.3)(output_pre)
+        output = Dense(category_count, activation='softmax')(output)
+        model = Model(input=document, output=output)
+        self.load_weights(config['checkpoint'],config,model,checkpoint_dir)
+
+        '''GENERATE MODEL FOR INTERMEDIATE LAYER'''
+        intermediate_model = Model(inputs=model.input, outputs=model.get_layer('features').output)
+        return intermediate_model
+
     def plot_loss(self,history):
         import matplotlib.pyplot as plt
         # summarize history for accuracy
