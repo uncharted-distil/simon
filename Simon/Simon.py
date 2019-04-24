@@ -163,6 +163,7 @@ class Simon:
         output = Dense(category_count, activation=activation)(output)
         # output = Activation('softmax')(output)
         model = Model(input=document, output=output)
+        print(model.summary())
 
         return model
         
