@@ -350,7 +350,7 @@ class AttentionLSTMCell(Layer):
         alpha = K.exp(attention_)
 
         if dp_mask is not None:
-            alpha *= dp_mask[0]
+            alpha = K.dot(alpha, dp_mask[0])
 
         alpha /= K.sum(alpha, axis=1, keepdims=True)
         alpha_r = K.repeat(alpha, self.input_dim)
