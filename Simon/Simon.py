@@ -116,7 +116,7 @@ class Simon:
 
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
         filter_length = [1, 3, 3]
-        nb_filter = [40, 200, 1000]
+        nb_filter = [40, 200, 500]
         pool_length = 2
         # document input
         document = Input(shape=(max_cells, max_len), dtype='int64')
@@ -151,10 +151,10 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
-        forwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(encoded)
-        backwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(encoded)
+        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(encoded)
+        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output = Dropout(0.3)(merged)

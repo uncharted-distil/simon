@@ -348,16 +348,15 @@ class AttentionLSTMCell(Layer):
         attention_ = K.squeeze(K.dot(attention_, self.attention_recurrent_bias), 2)  # energy
 
         alpha = K.exp(attention_)
-
         if dp_mask is not None:
-            alpha = K.dot(alpha, dp_mask[0])
-
+            alpha *= dp_mask[0]
         alpha /= K.sum(alpha, axis=1, keepdims=True)
         alpha_r = K.repeat(alpha, self.input_dim)
         alpha_r = K.permute_dimensions(alpha_r, (0, 2, 1))
 
         # make context vector (soft attention after Bahdanau et al.)
-        z_hat = inputs * alpha_r
+        #z_hat = inputs * alpha_r
+        z_hat = K.dot(inputs, alpha_r)
         context_sequence = z_hat
         z_hat = K.sum(z_hat, axis=1)
 
