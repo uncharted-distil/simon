@@ -117,15 +117,15 @@ class Simon:
         return data
 
     # attention block copied from https://github.com/philipperemy/keras-attention-mechanism/blob/master/attention_lstm.py
-    def attention_3d_block(inputs):
+    def attention_3d_block(self, inputs):
         # inputs.shape = (batch_size, time_steps, input_dim)
         input_dim = int(inputs.shape[2])
         a = Permute((2, 1))(inputs)
         a = Reshape((input_dim, TIME_STEPS))(a) # this line is not useful. It's just to know which dimension is what.
         a = Dense(TIME_STEPS, activation='softmax')(a)
-        if SINGLE_ATTENTION_VECTOR:
-            a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
-            a = RepeatVector(input_dim)(a)
+        #if SINGLE_ATTENTION_VECTOR:
+        a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
+        a = RepeatVector(input_dim)(a)
         a_probs = Permute((2, 1), name='attention_vec')(a)
         output_attention_mul = merge([inputs, a_probs], name='attention_mul', mode='mul')
         return output_attention_mul
@@ -167,7 +167,7 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
-        attention = attention_3d_block(encoded)
+        attention = Simon.attention_3d_block(encoded)
         forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu')(attention)
         backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
