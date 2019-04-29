@@ -118,7 +118,7 @@ class Simon:
 
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
         filter_length = [1, 3, 3]
-        nb_filter = [40, 200, 500]
+        nb_filter = [40, 200, 1000]
         pool_length = 2
         # document input
         document = Input(shape=(max_cells, max_len), dtype='int64')
@@ -137,7 +137,7 @@ class Simon:
 
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
-            
+
         forward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu')(embedded)
         backward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
