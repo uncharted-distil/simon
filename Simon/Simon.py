@@ -128,7 +128,7 @@ class Simon:
         a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
         a = RepeatVector(input_dim)(a)
         a_probs = Permute((2, 1), name='attention_vec')(a)
-        output_attention_mul = multiply([inputs, a_probs], name='attention_mul'r)
+        output_attention_mul = multiply([inputs, a_probs], name='attention_mul')
         return output_attention_mul
 
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
