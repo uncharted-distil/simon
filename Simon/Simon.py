@@ -7,7 +7,7 @@ from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1
 from keras.layers import LSTM, Lambda, merge, Masking
 from keras.layers import Embedding, TimeDistributed
 from keras.layers.normalization import BatchNormalization
-from keras.layers.merge import concatenate
+from keras.layers.merge import concatenate, multiply
 from keras.optimizers import SGD
 from keras.utils import np_utils
 import numpy as np
@@ -128,7 +128,7 @@ class Simon:
         a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
         a = RepeatVector(input_dim)(a)
         a_probs = Permute((2, 1), name='attention_vec')(a)
-        output_attention_mul = merge([inputs, a_probs], name='attention_mul', mode='mul')
+        output_attention_mul = multiply([inputs, a_probs], name='attention_mul'r)
         return output_attention_mul
 
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
