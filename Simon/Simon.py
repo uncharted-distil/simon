@@ -116,6 +116,20 @@ class Simon:
         data = type('data_type', (object,), {'X_train' : X_train, 'X_cv_test': X_cv_test, 'X_test': X_test, 'y_train': y_train, 'y_cv_test': y_cv_test, 'y_test':y_test})
         return data
 
+    # attention block copied from https://github.com/philipperemy/keras-attention-mechanism/blob/master/attention_lstm.py
+    def attention_3d_block(inputs):
+        # inputs.shape = (batch_size, time_steps, input_dim)
+        input_dim = int(inputs.shape[2])
+        a = Permute((2, 1))(inputs)
+        a = Reshape((input_dim, TIME_STEPS))(a) # this line is not useful. It's just to know which dimension is what.
+        a = Dense(TIME_STEPS, activation='softmax')(a)
+        if SINGLE_ATTENTION_VECTOR:
+            a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
+            a = RepeatVector(input_dim)(a)
+        a_probs = Permute((2, 1), name='attention_vec')(a)
+        output_attention_mul = merge([inputs, a_probs], name='attention_mul', mode='mul')
+        return output_attention_mul
+
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 500]
@@ -138,10 +152,10 @@ class Simon:
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = AttentionLSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(embedded)
-        backward_sent = AttentionLSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(embedded)
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
@@ -153,10 +167,11 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
+        attention = attention_3d_block(encoded)
         forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(encoded)
+                        dropout_U=0.2, consume_less='gpu')(attention)
         backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(attention)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output = Dropout(0.3)(merged)
