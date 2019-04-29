@@ -3,7 +3,7 @@ from Simon.Encoder import *
 import pandas as pd
 from .attention import AttentionLSTM
 from keras.models import Model
-from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
+from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D, Permute
 from keras.layers import LSTM, Lambda, merge, Masking
 from keras.layers import Embedding, TimeDistributed
 from keras.layers.normalization import BatchNormalization
@@ -120,9 +120,10 @@ class Simon:
     def attention_3d_block(self, inputs):
         # inputs.shape = (batch_size, time_steps, input_dim)
         input_dim = int(inputs.shape[2])
+        time_steps = int(inputs.shape[1])
         a = Permute((2, 1))(inputs)
-        a = Reshape((input_dim, TIME_STEPS))(a) # this line is not useful. It's just to know which dimension is what.
-        a = Dense(TIME_STEPS, activation='softmax')(a)
+        #a = Reshape((input_dim, TIME_STEPS))(a) # this line is not useful. It's just to know which dimension is what.
+        a = Dense(time_steps, activation='softmax')(a)
         #if SINGLE_ATTENTION_VECTOR:
         a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
         a = RepeatVector(input_dim)(a)
@@ -167,7 +168,7 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
-        attention = Simon.attention_3d_block(encoded)
+        attention = self.attention_3d_block(encoded)
         forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu')(attention)
         backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
