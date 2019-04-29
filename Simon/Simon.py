@@ -138,9 +138,9 @@ class Simon:
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu')(embedded)
-        backward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
@@ -191,9 +191,9 @@ class Simon:
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu')(embedded)
-        backward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
@@ -255,9 +255,9 @@ class Simon:
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu')(embedded)
-        backward_sent = LSTM(128, return_sequences=False, dropout_W=0.2,
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
                         dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
