@@ -1,7 +1,6 @@
 from Simon.DataGenerator import *
 from Simon.Encoder import *
 import pandas as pd
-from .attention import AttentionLSTM
 from keras.models import Model
 from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D, Permute, RepeatVector
 from keras.layers import LSTM, Lambda, merge, Masking
