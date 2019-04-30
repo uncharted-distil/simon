@@ -133,7 +133,7 @@ class Simon:
 
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
         filter_length = [1, 3, 3]
-        nb_filter = [40, 200, 500]
+        nb_filter = [40, 200, 1000]
         pool_length = 2
         # document input
         document = Input(shape=(max_cells, max_len), dtype='int64')
