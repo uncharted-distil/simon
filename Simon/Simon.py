@@ -372,7 +372,7 @@ class Simon:
         print("'Binary' accuracy ((TP+TN)/total) sample number is:")
         #print(self.eval_binary_accuracy(data.y_test,y_pred)[0])
         print(accuracy_score(data.y_test,y_pred))
-        tn, fp, fn, tp = confusion_matrix(data.y_test, y_pred).ravel()
+        tn, fp, fn, tp = confusion_matrix(data.y_test.argmax(axis=1), y_pred.argmax(axis=1)).ravel()
         print("'Binary' confusion ((FP+FN)/total) sample number is:")
         print((fp + fn) / (fp + fn + tn + tp))
         #print(self.eval_confusion(data.y_test,y_pred)[0])
@@ -380,14 +380,14 @@ class Simon:
         print(fp)
         #print(self.eval_false_positives(data.y_test,y_pred)[0])
         #TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
-        print("Precision is:")
-        print(precision_score(data.y_test,y_pred))
+        print("Precision (micro, calculated globally) is:")
+        print(precision_score(data.y_test,y_pred, average='micro'))
         #print(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
-        print("Recall is:")
-        print(recall_score(data.y_test,y_pred))
+        print("Recall (micro, calculated globally) is:")
+        print(recall_score(data.y_test,y_pred, average='micro'))
         #print(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
-        print("F1 score is:")
-        print(f1_score(data.y_test,y_pred))
+        print("F1 score (micro, calculated globally) is:")
+        print(f1_score(data.y_test,y_pred, average='micro'))
         #print(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
 
 
@@ -587,7 +587,7 @@ class Simon:
             prediction_indices = probabilities > p_threshold
             y_pred = np.zeros(data.y_test.shape)
             y_pred[prediction_indices] = 1
-            TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
+            TN, FP, FN, TP = confusion_matrix(data.y_test.argmax(axis=1), y_pred.argmax(axis=1)).ravel()
             TPR_arr[i,:]= np.sum(TP)/(np.sum(TP)+np.sum(FN))
             FPR_arr[i,:]= np.sum(FP)/(np.sum(FP)+np.sum(TN))
             i = i+1
