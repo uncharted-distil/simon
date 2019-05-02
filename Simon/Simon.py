@@ -1,6 +1,7 @@
 from Simon.DataGenerator import *
 from Simon.Encoder import *
 import pandas as pd
+from .attention import AttentionLSTM
 from keras.models import Model
 from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
 from keras.layers import LSTM, Lambda, merge, Masking
@@ -18,6 +19,7 @@ import sys
 import os
 import time
 import pickle
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # record history of training
 class LossHistory(keras.callbacks.Callback):
@@ -45,6 +47,7 @@ class Simon:
         # need some threshold-specific rounding code here, presently only for 0.5 thresh.
         return K.mean(K.round(np.multiply(y_true,y_pred)),axis=0)
     
+    '''
     def eval_binary_accuracy(self,y_test, y_pred):
         correct_indices = y_test==y_pred
         all_correct_predictions = np.zeros(y_test.shape)
@@ -75,7 +78,7 @@ class Simon:
         false_negative = (1-y_pred)*y_test
 
         return np.sum(true_positive,axis=0),np.sum(true_negative,axis=0),np.sum(false_positive,axis=0),np.sum(false_negative,axis=0)
-    
+    '''
     
     def binarize_outshape(self,in_shape):
         return in_shape[0], in_shape[1], 71
@@ -162,6 +165,7 @@ class Simon:
         output = Dense(category_count, activation=activation)(output)
         # output = Activation('softmax')(output)
         model = Model(input=document, output=output)
+        print(model.summary())
 
         return model
         
@@ -351,18 +355,25 @@ class Simon:
         # print("DEBUG::y_pred:")
         # print(y_pred)
         print("'Binary' accuracy ((TP+TN)/total) sample number is:")
-        print(self.eval_binary_accuracy(data.y_test,y_pred)[0])
+        #print(self.eval_binary_accuracy(data.y_test,y_pred)[0])
+        print(accuracy_score(data.y_test,y_pred))
+        tn, fp, fn, tp = confusion_matrix(data.y_test, y_pred).ravel()
         print("'Binary' confusion ((FP+FN)/total) sample number is:")
-        print(self.eval_confusion(data.y_test,y_pred)[0])
+        print((fp + fn) / (fp + fn + tn + tp))
+        #print(self.eval_confusion(data.y_test,y_pred)[0])
         print("False Positive sample number is:")
-        print(self.eval_false_positives(data.y_test,y_pred)[0])
-        TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
+        print(fp)
+        #print(self.eval_false_positives(data.y_test,y_pred)[0])
+        #TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
         print("Precision is:")
-        print(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
+        print(precision_score(data.y_test,y_pred))
+        #print(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
         print("Recall is:")
-        print(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
+        print(recall_score(data.y_test,y_pred))
+        #print(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
         print("F1 score is:")
-        print(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
+        print(f1_score(data.y_test,y_pred))
+        #print(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
 
 
         return encoder.reverse_label_encode(probabilities,p_threshold)

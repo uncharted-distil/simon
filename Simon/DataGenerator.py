@@ -120,8 +120,8 @@ class DataGenerator:
         data_creator = FakeDataCreator()
         if try_reuse_data and os.path.isfile(matrix_name) and os.path.isfile(header_name):
             print("loading data")
-            ret_val = np.load(matrix_name)
-            temp_header = data_creator.map_column_names_to_types(np.load(header_name))
+            ret_val = np.load(matrix_name, allow_pickle=True)
+            temp_header = data_creator.map_column_names_to_types(np.load(header_name, allow_pickle=True))
             ret_header = np.asarray([temp_header[i] for i in np.arange(temp_header.shape[0]) if not temp_header[i]==None])
             # print("ret_header shape:")
             # print(ret_header.shape)
