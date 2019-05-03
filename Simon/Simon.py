@@ -146,7 +146,7 @@ class Simon:
 
         encoder = Model(input=in_sentence, output=sent_encode)
 
-        print(encoder.summary())
+        #print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
@@ -198,7 +198,7 @@ class Simon:
 
         encoder = Model(input=in_sentence, output=sent_encode)
 
-        print(encoder.summary())
+        #print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
@@ -378,7 +378,7 @@ class Simon:
             checkpoint_name = config['checkpoint']
         if checkpoint_name:
             checkpoint_path = self.resolve_file_path(checkpoint_name, checkpoint_dir)
-            print("Checkpoint : %s" % str(checkpoint_path))
+            #print("Checkpoint : %s" % str(checkpoint_path))
             model.load_weights(checkpoint_path)
 
     def save_config(self,execution_config, checkpoint_dir):
