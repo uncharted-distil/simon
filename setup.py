@@ -10,7 +10,7 @@ setup(name='Simon',
         'python-dateutil >= 2.5.3',
         'pandas >= 0.19.2',
         'scipy >= 0.19.0',
-        'tensorflow-gpu <= 1.12.0',
+        'tensorflow-gpu <= 1.12.2',
         'h5py >= 2.7.0'],
     include_package_data=True,
 )
