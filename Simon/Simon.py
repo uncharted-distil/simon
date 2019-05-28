@@ -1,13 +1,12 @@
 from Simon.DataGenerator import *
 from Simon.Encoder import *
 import pandas as pd
-from .attention import AttentionLSTM
 from keras.models import Model
-from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
+from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D, Permute, RepeatVector
 from keras.layers import LSTM, Lambda, merge, Masking
 from keras.layers import Embedding, TimeDistributed
 from keras.layers.normalization import BatchNormalization
-from keras.layers.merge import concatenate
+from keras.layers.merge import concatenate, multiply
 from keras.optimizers import SGD
 from keras.utils import np_utils
 import numpy as np
@@ -116,6 +115,21 @@ class Simon:
         data = type('data_type', (object,), {'X_train' : X_train, 'X_cv_test': X_cv_test, 'X_test': X_test, 'y_train': y_train, 'y_cv_test': y_cv_test, 'y_test':y_test})
         return data
 
+    # attention block copied from https://github.com/philipperemy/keras-attention-mechanism/blob/master/attention_lstm.py
+    def attention_3d_block(self, inputs):
+        # inputs.shape = (batch_size, time_steps, input_dim)
+        input_dim = int(inputs.shape[2])
+        time_steps = int(inputs.shape[1])
+        a = Permute((2, 1))(inputs)
+        #a = Reshape((input_dim, TIME_STEPS))(a) # this line is not useful. It's just to know which dimension is what.
+        a = Dense(time_steps, activation='softmax')(a)
+        #if SINGLE_ATTENTION_VECTOR:
+        a = Lambda(lambda x: K.mean(x, axis=1), name='dim_reduction')(a)
+        a = RepeatVector(input_dim)(a)
+        a_probs = Permute((2, 1), name='attention_vec')(a)
+        output_attention_mul = multiply([inputs, a_probs], name='attention_mul')
+        return output_attention_mul
+
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
@@ -153,10 +167,11 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
+        attention = self.attention_3d_block(encoded)
         forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(encoded)
+                        dropout_U=0.2, consume_less='gpu')(attention)
         backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(attention)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output = Dropout(0.3)(merged)
@@ -357,7 +372,7 @@ class Simon:
         print("'Binary' accuracy ((TP+TN)/total) sample number is:")
         #print(self.eval_binary_accuracy(data.y_test,y_pred)[0])
         print(accuracy_score(data.y_test,y_pred))
-        tn, fp, fn, tp = confusion_matrix(data.y_test, y_pred).ravel()
+        tn, fp, fn, tp = confusion_matrix(data.y_test.argmax(axis=1), y_pred.argmax(axis=1)).ravel()
         print("'Binary' confusion ((FP+FN)/total) sample number is:")
         print((fp + fn) / (fp + fn + tn + tp))
         #print(self.eval_confusion(data.y_test,y_pred)[0])
@@ -365,14 +380,14 @@ class Simon:
         print(fp)
         #print(self.eval_false_positives(data.y_test,y_pred)[0])
         #TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
-        print("Precision is:")
-        print(precision_score(data.y_test,y_pred))
+        print("Precision (micro, calculated globally) is:")
+        print(precision_score(data.y_test,y_pred, average='micro'))
         #print(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
-        print("Recall is:")
-        print(recall_score(data.y_test,y_pred))
+        print("Recall (micro, calculated globally) is:")
+        print(recall_score(data.y_test,y_pred, average='micro'))
         #print(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
-        print("F1 score is:")
-        print(f1_score(data.y_test,y_pred))
+        print("F1 score (micro, calculated globally) is:")
+        print(f1_score(data.y_test,y_pred, average='micro'))
         #print(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
 
 
@@ -572,7 +587,7 @@ class Simon:
             prediction_indices = probabilities > p_threshold
             y_pred = np.zeros(data.y_test.shape)
             y_pred[prediction_indices] = 1
-            TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
+            TN, FP, FN, TP = confusion_matrix(data.y_test.argmax(axis=1), y_pred.argmax(axis=1)).ravel()
             TPR_arr[i,:]= np.sum(TP)/(np.sum(TP)+np.sum(FN))
             FPR_arr[i,:]= np.sum(FP)/(np.sum(FP)+np.sum(TN))
             i = i+1
