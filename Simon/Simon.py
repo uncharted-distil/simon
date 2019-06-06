@@ -221,6 +221,7 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
+        attention = self.attention_3d_block(encoded)
         forwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
                         recurrent_dropout=0.2)(encoded)
         backwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
@@ -285,6 +286,7 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
+        attention = self.attention_3d_block(encoded)
         forwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
                         recurrent_dropout=0.2)(encoded)
         backwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
