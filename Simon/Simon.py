@@ -206,10 +206,10 @@ class Simon:
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = AttentionLSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(embedded)
-        backward_sent = AttentionLSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(embedded)
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
@@ -222,11 +222,10 @@ class Simon:
 
         # encoded: sentences to bi-lstm for document encoding
         attention = self.attention_3d_block(encoded)
-        forwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(encoded)
-        backwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(encoded)
-
+        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(attention)
+        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(attention)
         merged = concatenate([forwards, backwards], axis=-1)
         output_pre = Dropout(0.3)(merged)
         output_pre = Dense(128, activation='relu')(output_pre)
@@ -271,10 +270,10 @@ class Simon:
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = AttentionLSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(embedded)
-        backward_sent = AttentionLSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(embedded)
+        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
@@ -287,10 +286,10 @@ class Simon:
 
         # encoded: sentences to bi-lstm for document encoding
         attention = self.attention_3d_block(encoded)
-        forwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(encoded)
-        backwards = AttentionLSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(encoded)
+        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu')(attention)
+        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(attention)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output_pre = Dropout(0.3)(merged)
