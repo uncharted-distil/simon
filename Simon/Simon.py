@@ -46,39 +46,6 @@ class Simon:
         # need some threshold-specific rounding code here, presently only for 0.5 thresh.
         return K.mean(K.round(np.multiply(y_true,y_pred)),axis=0)
     
-    '''
-    def eval_binary_accuracy(self,y_test, y_pred):
-        correct_indices = y_test==y_pred
-        all_correct_predictions = np.zeros(y_test.shape)
-        all_correct_predictions[correct_indices] = 1
-        return np.mean(all_correct_predictions),np.mean(all_correct_predictions, axis=0),all_correct_predictions
-    
-    def eval_confusion(self,y_test, y_pred):
-        wrong_indices = y_test!=y_pred
-        all_wrong_predictions = np.zeros(y_test.shape)
-        all_wrong_predictions[wrong_indices] = 1
-        return np.mean(all_wrong_predictions),np.mean(all_wrong_predictions, axis=0),all_wrong_predictions
-    
-    def eval_false_positives(self,y_test, y_pred):
-        false_positive_matrix = np.zeros((y_test.shape[1],y_test.shape[1]))
-        false_positives = np.multiply(y_pred,1-y_test)
-        for i in np.arange(y_test.shape[0]):
-            for j in np.arange(y_test.shape[1]) :
-                if(false_positives[i,j]==1): #positive label for ith sample and jth predicted category
-                    for k in np.arange(y_test.shape[1]):
-                        if(y_test[i,k]==1): #positive label for ith sample and kth true category
-                            false_positive_matrix[j,k] +=1
-        return np.sum(false_positive_matrix),np.sum(false_positive_matrix, axis=0),false_positive_matrix
-    
-    def eval_ROC_metrics(self,y_test, y_pred):
-        true_positive = y_pred*y_test
-        true_negative = (1-y_pred)*(1-y_test)
-        false_positive = y_pred*(1-y_test)
-        false_negative = (1-y_pred)*y_test
-
-        return np.sum(true_positive,axis=0),np.sum(true_negative,axis=0),np.sum(false_positive,axis=0),np.sum(false_negative,axis=0)
-    '''
-    
     def binarize_outshape(self,in_shape):
         return in_shape[0], in_shape[1], 71
 
@@ -92,25 +59,25 @@ class Simon:
     def clean(s):
         return re.sub(r'[^\x00-\x7f]', r'', s)
 
-    def setup_test_sets(self,X, y):
+    def setup_test_sets(self,X, y, random_seed=1, test_split = 0, validation_split=1/3):
         ids = np.arange(len(X))
+        np.random.seed(random_seed)
         np.random.shuffle(ids)
 
         # shuffle
         X = X[ids]
         y = y[ids]
-
-        train_end = int(X.shape[0] * .6)
-        cross_validation_end = int(X.shape[0] * .3 + train_end)
-        test_end = int(X.shape[0] * .1 + cross_validation_end)
+        
+        test_end = int(X.shape[0] * test_split)
+        cross_validation_end = int(X.shape[0] * validation_split + test_end)
     
-        X_train = X[:train_end]
-        X_cv_test = X[train_end:cross_validation_end]
-        X_test = X[cross_validation_end:test_end]
+        X_train = X[cross_validation_end:]
+        X_cv_test = X[test_end:cross_validation_end]
+        X_test = X[:test_end]
 
-        y_train = y[:train_end]
-        y_cv_test = y[train_end:cross_validation_end]
-        y_test = y[cross_validation_end:test_end]
+        y_train = y[cross_validation_end:]
+        y_cv_test = y[test_end:cross_validation_end]
+        y_test = y[:test_end]
 
         data = type('data_type', (object,), {'X_train' : X_train, 'X_cv_test': X_cv_test, 'X_test': X_test, 'y_train': y_train, 'y_cv_test': y_cv_test, 'y_test':y_test})
         return data
@@ -221,10 +188,11 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
+        attention = self.attention_3d_block(encoded)
         forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(encoded)
+                        dropout_U=0.2, consume_less='gpu')(attention)
         backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(attention)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output_pre = Dropout(0.3)(merged)
@@ -239,9 +207,9 @@ class Simon:
         output = Dense(category_count_post, activation='sigmoid')(output_pre)
         model = Model(input=document, output=output)
         # retrain the last layer
-        for layer in model.layers[:8]:
+        for layer in model.layers[:14]:
             layer.trainable = False
-        model.layers[8].trainable = True
+        model.layers[14].trainable = True
 
         return model
 
@@ -285,10 +253,11 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
+        attention = self.attention_3d_block(encoded)
         forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(encoded)
+                        dropout_U=0.2, consume_less='gpu')(attention)
         backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(attention)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output_pre = Dropout(0.3)(merged)
@@ -322,7 +291,7 @@ class Simon:
         plt.legend(['train', 'test'], loc='upper left')
         plt.show()
 
-    def train_model(self,batch_size, checkpoint_dir, model, nb_epoch, data):
+    def train_model(self, model, data, checkpoint_dir, batch_size = 64, epochs = 20, class_weight=None):
         print("starting learning")
     
         check_cb = keras.callbacks.ModelCheckpoint(checkpoint_dir + "text-class" + '.{epoch:02d}-{val_loss:.2f}.hdf5',
@@ -333,64 +302,50 @@ class Simon:
                                     embeddings_layer_names=None, embeddings_metadata=None)
         loss_history = LossHistory()
         history = model.fit(data.X_train, data.y_train, validation_data=(data.X_cv_test, data.y_cv_test), batch_size=batch_size,
-                    nb_epoch=nb_epoch, shuffle=True, callbacks=[earlystop_cb, check_cb, loss_history, tbCallBack])
+                    epochs=epochs, shuffle=True, callbacks=[earlystop_cb, check_cb, loss_history, tbCallBack], class_weight = class_weight)
     
-        print('losses: ')
-        print(history.history['loss'])
-        print('accuracies: ')
-        print(history.history['val_binary_accuracy'])
+        # write best lost and best validation accuracy 
+        if not os.path.isfile(checkpoint_dir + '/training_metrics.txt'):
+            training_metrics = open('training_metrics.txt', 'a')
+        loss_argmin = np.argmin(history.history['loss'])
+        best_checkpoint = self.get_best_checkpoint(checkpoint_dir)
+        training_metrics.write(f'Checkpoint: {best_checkpoint}')
+        training_metrics.write(f'Min loss: {history.history['loss'][loss_argmin]}')
+        training_metrics.write(f'Val Acc at Min Loss: {history.history['val_binary_accuracy'][loss_argmin]}')
+        training_metrics.close()
         return history
 
-    def evaluate_model(self,max_cells, model, data, encoder, p_threshold):
+    def evaluate_model(self,max_cells, model, data, encoder, p_threshold, checkpoint_dir = None, metrics_average = 'micro'):
         print("Starting predictions:")
-    
-        start = time.time()
-        scores = model.evaluate(data.X_test, data.y_test, verbose=0)
-        end = time.time()
-        print("Accuracy: %.2f%% \n Time: {0}s \n Time/example : {1}s/ex".format(
-            end - start, (end - start) / data.X_test.shape[0]) % (scores[1] * 100))
-        
         probabilities = model.predict(data.X_test, verbose=1)
-        ##  uncomment if interested in "argmax" class, i.e., the maximum probability/class
-        # m = np.amax(probabilities, axis=1)
-        # max_index = np.argmax(probabilities, axis=1)
-        # Categories = encoder.categories
-        # print("Remember that the fixed categories are:")
-        # print(Categories)
-        # print("Most Likely Predicted Category/Labels are: ")
-        # print((np.array(Categories))[max_index])
-        # print("Associated max probabilities/confidences:")
-        # print(m)
         # next, all probabilities above a certain threshold
         prediction_indices = probabilities > p_threshold
         y_pred = np.zeros(data.y_test.shape)
         y_pred[prediction_indices] = 1
-        # print("DEBUG::y_test:")
-        # print(data.y_test)
-        # print("DEBUG::y_pred:")
-        # print(y_pred)
-        print("'Binary' accuracy ((TP+TN)/total) sample number is:")
-        #print(self.eval_binary_accuracy(data.y_test,y_pred)[0])
-        print(accuracy_score(data.y_test,y_pred))
+        # print("'Binary' accuracy ((TP+TN)/total) sample number is:")
+        # print(accuracy_score(data.y_test,y_pred))
+        # print("'Binary' confusion ((FP+FN)/total) sample number is:")
+        # print((fp + fn) / (fp + fn + tn + tp))
+        # print(f"Precision {metrics_average} is:")
+        # print(precision_score(data.y_test,y_pred, average='micro'))
+        # print("Recall (micro, calculated globally) is:")
+        # print(recall_score(data.y_test,y_pred, average='micro'))
+
+        #  metrics on test set to checkpoint dir folder
         tn, fp, fn, tp = confusion_matrix(data.y_test.argmax(axis=1), y_pred.argmax(axis=1)).ravel()
-        print("'Binary' confusion ((FP+FN)/total) sample number is:")
-        print((fp + fn) / (fp + fn + tn + tp))
-        #print(self.eval_confusion(data.y_test,y_pred)[0])
-        print("False Positive sample number is:")
-        print(fp)
-        #print(self.eval_false_positives(data.y_test,y_pred)[0])
-        #TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
-        print("Precision (micro, calculated globally) is:")
-        print(precision_score(data.y_test,y_pred, average='micro'))
-        #print(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
-        print("Recall (micro, calculated globally) is:")
-        print(recall_score(data.y_test,y_pred, average='micro'))
-        #print(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
-        print("F1 score (micro, calculated globally) is:")
-        print(f1_score(data.y_test,y_pred, average='micro'))
-        #print(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
-
-
+        if checkpoint_dir is None:
+            print(f'TP: {tp}, FP: {fp}')
+            print(f'FN: {tn}, TN: {fn}')
+            print(f"F1 score {metrics_average}: {f1_score(data.y_test,y_pred, average=metrics_average)}")
+        else:
+            if not os.path.isfile(checkpoint_dir + '/training_metrics.txt'):
+                training_metrics = open('training_metrics.txt', 'a')
+            best_checkpoint = self.get_best_checkpoint(checkpoint_dir)
+            training_metrics.write(f'Checkpoint: {best_checkpoint}')
+            training_metrics.write(f'TP: {tp}, FP: {fp}')
+            training_metrics.write(f'FN: {tn}, TN: {fn}')
+            training_metrics.write(f"F1 score {metrics_average}: {f1_score(data.y_test,y_pred, average=metrics_average)}")
+            training_metrics.close()
         return encoder.reverse_label_encode(probabilities,p_threshold)
 
     def resolve_file_path(self,filename, dir):
