@@ -309,9 +309,9 @@ class Simon:
             training_metrics = open('training_metrics.txt', 'a')
         loss_argmin = np.argmin(history.history['loss'])
         best_checkpoint = self.get_best_checkpoint(checkpoint_dir)
-        training_metrics.write(f'Checkpoint: {best_checkpoint}')
-        training_metrics.write(f'Min loss: {history.history['loss'][loss_argmin]}')
-        training_metrics.write(f'Val Acc at Min Loss: {history.history['val_binary_accuracy'][loss_argmin]}')
+        training_metrics.write('Checkpoint: {}'.format(best_checkpoint))
+        training_metrics.write('Min loss: {}'.format(history.history['loss'][loss_argmin]))
+        training_metrics.write('Val Acc at Min Loss: {}'.format(history.history['val_binary_accuracy'][loss_argmin]))
         training_metrics.close()
         return history
 
@@ -334,17 +334,17 @@ class Simon:
         #  metrics on test set to checkpoint dir folder
         tn, fp, fn, tp = confusion_matrix(data.y_test.argmax(axis=1), y_pred.argmax(axis=1)).ravel()
         if checkpoint_dir is None:
-            print(f'TP: {tp}, FP: {fp}')
-            print(f'FN: {tn}, TN: {fn}')
-            print(f"F1 score {metrics_average}: {f1_score(data.y_test,y_pred, average=metrics_average)}")
+            print('TP: {}, FP: {}'.format(tp, fp))
+            print('FN: {}, TN: {}'.format(fn, tn))
+            print("F1 score: {}".format(f1_score(data.y_test,y_pred, average=metrics_average)))
         else:
             if not os.path.isfile(checkpoint_dir + '/training_metrics.txt'):
                 training_metrics = open('training_metrics.txt', 'a')
             best_checkpoint = self.get_best_checkpoint(checkpoint_dir)
-            training_metrics.write(f'Checkpoint: {best_checkpoint}')
-            training_metrics.write(f'TP: {tp}, FP: {fp}')
-            training_metrics.write(f'FN: {tn}, TN: {fn}')
-            training_metrics.write(f"F1 score {metrics_average}: {f1_score(data.y_test,y_pred, average=metrics_average)}")
+            training_metrics.write('Checkpoint: {}'.format(best_checkpoint))
+            training_metrics.write('TP: {}, FP: {}'.format(tp, fp))
+            training_metrics.write('FN: {}, TN: {}'.format(fn, tn))
+            training_metrics.write("F1 score: {}".format(f1_score(data.y_test,y_pred, average=metrics_average)))
             training_metrics.close()
         return encoder.reverse_label_encode(probabilities,p_threshold)
 
