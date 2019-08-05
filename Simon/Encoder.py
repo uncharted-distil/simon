@@ -6,6 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MultiLabelBinarizer
 from keras.utils import np_utils
 from Simon.LengthStandardizer import *
+from sklearn.utils.class_weight import compute_class_weight
 
 
 class StringToIntArrayEncoder:
@@ -52,6 +53,8 @@ class Encoder:
         X = np.ones((raw_data.shape[0], self.cur_max_cells,
                      max_len), dtype=np.int64) * -1
         y = self.label_encode(header)
+
+        class_weights = compute_class_weight('balanced', np.unique(y), y)
         
         # track unencoded chars
         unencoded_chars = None
@@ -80,7 +83,7 @@ class Encoder:
             json.dump(unencoded_dict, out_file)
         print("X shape: {0}\ny shape: {1}".format(X.shape, y.shape))
         
-        return X, y
+        return X, y, class_weights
 
     def decode_matrix(self, X):
         ret_val = np.empty((X.shape[0], X.shape[1]), dtype='object')
