@@ -54,7 +54,8 @@ class Encoder:
                      max_len), dtype=np.int64) * -1
         y = self.label_encode(header)
 
-        class_weights = compute_class_weight('balanced', np.unique(y), y)
+        flat_header = [h[0] for h in header]
+        class_weights = compute_class_weights('balanced', np.unique(flat_header), flat_header)
         
         # track unencoded chars
         unencoded_chars = None
@@ -107,7 +108,7 @@ class Encoder:
         multi_encoder = self._multi_encoder
                 
         ret_val = multi_encoder.transform(Y)
-        
+
         return ret_val
 
     def reverse_label_encode(self, y, p_threshold):
