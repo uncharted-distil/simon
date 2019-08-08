@@ -63,21 +63,17 @@ class Simon:
         ids = np.arange(len(X))
         np.random.seed(random_seed)
         np.random.shuffle(ids)
-
-        # shuffle
-        X = X[ids]
-        y = y[ids]
         
         test_end = int(X.shape[0] * test_split)
         cross_validation_end = int(X.shape[0] * validation_split + test_end)
     
-        X_train = X[cross_validation_end:]
-        X_cv_test = X[test_end:cross_validation_end]
-        X_test = X[:test_end]
+        X_train = X[ids][cross_validation_end:]
+        X_cv_test = X[ids][test_end:cross_validation_end]
+        X_test = X[ids][:test_end]
 
-        y_train = y[cross_validation_end:]
-        y_cv_test = y[test_end:cross_validation_end]
-        y_test = y[:test_end]
+        y_train = y[ids][cross_validation_end:]
+        y_cv_test = y[ids][test_end:cross_validation_end]
+        y_test = y[ids][:test_end]
 
         data = type('data_type', (object,), {'X_train' : X_train, 'X_cv_test': X_cv_test, 'X_test': X_test, 'y_train': y_train, 'y_cv_test': y_cv_test, 'y_test':y_test})
         return data
@@ -151,7 +147,8 @@ class Simon:
 
         return model
         
-    def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post, checkpoint, checkpoint_dir,activation='sigmoid'):
+    def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post, checkpoint, checkpoint_dir,activation='sigmoid',
+                                all_trainable = False):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
         pool_length = 2
@@ -206,9 +203,10 @@ class Simon:
         # having loaded weights,rebuild model using new category_count in last layer
         output = Dense(category_count_post, activation='sigmoid')(output_pre)
         model = Model(input=document, output=output)
-        # retrain the last layer
+
+        # retrain the last layer(s)
         for layer in model.layers[:14]:
-            layer.trainable = False
+            layer.trainable = True if all_trainable else False
         model.layers[14].trainable = True
 
         return model
@@ -305,13 +303,12 @@ class Simon:
                     epochs=epochs, shuffle=True, callbacks=[earlystop_cb, check_cb, loss_history, tbCallBack], class_weight = class_weight)
     
         # write best lost and best validation accuracy 
-        if not os.path.isfile(checkpoint_dir + '/training_metrics.txt'):
-            training_metrics = open('training_metrics.txt', 'a')
+        training_metrics = open('training_metrics.txt', 'a')
         loss_argmin = np.argmin(history.history['loss'])
         best_checkpoint = self.get_best_checkpoint(checkpoint_dir)
-        training_metrics.write('Checkpoint: {}'.format(best_checkpoint))
-        training_metrics.write('Min loss: {}'.format(history.history['loss'][loss_argmin]))
-        training_metrics.write('Val Acc at Min Loss: {}'.format(history.history['val_binary_accuracy'][loss_argmin]))
+        training_metrics.write('\nCheckpoint: {}\n'.format(best_checkpoint))
+        training_metrics.write('Min loss: {}\n'.format(history.history['loss'][loss_argmin]))
+        training_metrics.write('Val Acc at Min Loss: {}\n'.format(history.history['val_binary_accuracy'][loss_argmin]))
         training_metrics.close()
         return history
 
@@ -338,13 +335,12 @@ class Simon:
             print('FN: {}, TN: {}'.format(fn, tn))
             print("F1 score: {}".format(f1_score(data.y_test,y_pred, average=metrics_average)))
         else:
-            if not os.path.isfile(checkpoint_dir + '/training_metrics.txt'):
-                training_metrics = open('training_metrics.txt', 'a')
+            training_metrics = open('training_metrics.txt', 'a')
             best_checkpoint = self.get_best_checkpoint(checkpoint_dir)
-            training_metrics.write('Checkpoint: {}'.format(best_checkpoint))
-            training_metrics.write('TP: {}, FP: {}'.format(tp, fp))
-            training_metrics.write('FN: {}, TN: {}'.format(fn, tn))
-            training_metrics.write("F1 score: {}".format(f1_score(data.y_test,y_pred, average=metrics_average)))
+            training_metrics.write('\nCheckpoint: {}\n'.format(best_checkpoint))
+            training_metrics.write('TP: {}, FP: {}\n'.format(tp, fp))
+            training_metrics.write('FN: {}, TN: {}\n'.format(fn, tn))
+            training_metrics.write("F1 score: {}\n".format(f1_score(data.y_test,y_pred, average=metrics_average)))
             training_metrics.close()
         return encoder.reverse_label_encode(probabilities,p_threshold)
 
