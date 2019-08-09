@@ -55,7 +55,7 @@ class Encoder:
         y = self.label_encode(header)
 
         flat_header = [h[0] for h in header]
-        class_weights = compute_class_weights('balanced', np.unique(flat_header), flat_header)
+        class_weights = compute_class_weight('balanced', np.unique(flat_header), flat_header)
         
         # track unencoded chars
         unencoded_chars = None
