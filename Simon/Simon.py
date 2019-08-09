@@ -126,7 +126,6 @@ class Simon:
 
         encoder = Model(input=in_sentence, output=sent_encode)
 
-        print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
@@ -143,7 +142,6 @@ class Simon:
         output = Dense(category_count, activation=activation)(output)
         # output = Activation('softmax')(output)
         model = Model(input=document, output=output)
-        print(model.summary())
 
         return model
         
@@ -181,7 +179,6 @@ class Simon:
 
         encoder = Model(input=in_sentence, output=sent_encode)
 
-        print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
@@ -247,7 +244,6 @@ class Simon:
 
         encoder = Model(input=in_sentence, output=sent_encode)
 
-        #print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
