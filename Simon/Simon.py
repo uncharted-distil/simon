@@ -10,7 +10,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
 from tensorflow.keras.layers import LSTM, Lambda, Masking
 from tensorflow.keras.layers import Embedding, TimeDistributed
-from tensorflow.keras.layers.normalization import BatchNormalization
+import tensorflow.keras.layers.BatchNormalization
 from tensorflow.keras.layers.merge import concatenate
 from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.utils import np_utils
