@@ -3,8 +3,8 @@ from Simon.Encoder import *
 import pandas as pd
 import numpy as np
 
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+# import tensorflow.compat.v1 as tf
+# tf.disable_v2_behavior()
 
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
