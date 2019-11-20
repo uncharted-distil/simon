@@ -130,20 +130,18 @@ class Simon:
         embedded = Lambda(self.binarize, output_shape=self.binarize_outshape)(in_sentence)
         # embedded: encodes sentence
         for i in range(len(nb_filter)):
-            embedded = Convolution1D(nb_filter=nb_filter[i],
-                                     filter_length=filter_length[i],
-                                     border_mode='valid',
+            embedded = Convolution1D(nb_filter[i],
+                                     filter_length[i],
                                      activation='relu',
-                                     init='glorot_normal',
-                                     subsample_length=1)(embedded)
+                                     kernel_initializer='glorot_normal')(embedded)
 
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(embedded)
-        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
+        forward_sent = LSTM(256, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2)(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2, go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
@@ -155,10 +153,10 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
-        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(encoded)
-        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+        forwards = LSTM(128, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2)(encoded)
+        backwards = LSTM(128, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2, go_backwards=True)(encoded)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output = Dropout(0.3)(merged)
@@ -182,20 +180,18 @@ class Simon:
         embedded = Lambda(self.binarize, output_shape=self.binarize_outshape)(in_sentence)
         # embedded: encodes sentence
         for i in range(len(nb_filter)):
-            embedded = Convolution1D(nb_filter=nb_filter[i],
-                                     filter_length=filter_length[i],
-                                     border_mode='valid',
+            embedded = Convolution1D(nb_filter[i],
+                                     filter_length[i],
                                      activation='relu',
-                                     init='glorot_normal',
-                                     subsample_length=1)(embedded)
+                                     kernel_initializer='glorot_normal')(embedded)
 
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(embedded)
-        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
+        forward_sent = LSTM(256, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2)(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2, go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
@@ -207,10 +203,10 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
-        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(encoded)
-        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+        forwards = LSTM(128, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2)(encoded)
+        backwards = LSTM(128, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2, go_backwards=True)(encoded)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output_pre = Dropout(0.3)(merged)
@@ -246,20 +242,18 @@ class Simon:
         embedded = Lambda(self.binarize, output_shape=self.binarize_outshape)(in_sentence)
         # embedded: encodes sentence
         for i in range(len(nb_filter)):
-            embedded = Convolution1D(nb_filter=nb_filter[i],
-                                        filter_length=filter_length[i],
-                                        border_mode='valid',
-                                        activation='relu',
-                                        init='glorot_normal',
-                                        subsample_length=1)(embedded)
+            embedded = Convolution1D(nb_filter[i],
+                                     filter_length[i],
+                                     activation='relu',
+                                     kernel_initializer='glorot_normal')(embedded)
 
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_length=pool_length)(embedded)
 
-        forward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(embedded)
-        backward_sent = LSTM(256, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(embedded)
+        forward_sent = LSTM(256, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2)(embedded)
+        backward_sent = LSTM(256, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2, go_backwards=True)(embedded)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
@@ -271,10 +265,10 @@ class Simon:
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
-        forwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu')(encoded)
-        backwards = LSTM(128, return_sequences=False, dropout_W=0.2,
-                        dropout_U=0.2, consume_less='gpu', go_backwards=True)(encoded)
+        forwards = LSTM(128, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2)(encoded)
+        backwards = LSTM(128, return_sequences=False, dropout=0.2,
+                        recurrent_dropout=0.2, go_backwards=True)(encoded)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output_pre = Dropout(0.3)(merged)
