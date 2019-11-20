@@ -10,7 +10,9 @@ from keras.layers.merge import concatenate
 from keras.optimizers import SGD
 from keras.utils import np_utils
 import numpy as np
-import tensorflow as tf
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 import re
 from keras import backend as K
 import keras.callbacks
