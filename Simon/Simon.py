@@ -18,14 +18,14 @@ from tensorflow.keras.optimizers import SGD
 
 import re
 from tensorflow.keras import backend as K
-import tensorflow.keras.callbacks
+import tensorflow.keras.callbacks as callbacks
 import sys
 import os
 import time
 import pickle
 
 # record history of training
-class LossHistory(keras.callbacks.Callback):
+class LossHistory(callbacks.Callback):
     def on_train_begin(self, logs={}):
         self.losses = []
         self.accuracies = []
@@ -311,11 +311,11 @@ class Simon:
     def train_model(self,batch_size, checkpoint_dir, model, nb_epoch, data):
         print("starting learning")
     
-        check_cb = keras.callbacks.ModelCheckpoint(checkpoint_dir + "text-class" + '.{epoch:02d}-{val_loss:.2f}.hdf5',
+        check_cb = callbacks.ModelCheckpoint(checkpoint_dir + "text-class" + '.{epoch:02d}-{val_loss:.2f}.hdf5',
                                                     monitor='val_loss', verbose=0, save_best_only=True, mode='min')
-        earlystop_cb = keras.callbacks.EarlyStopping(monitor='val_loss', patience=7, verbose=1, mode='auto')
+        earlystop_cb = callbacks.EarlyStopping(monitor='val_loss', patience=7, verbose=1, mode='auto')
 
-        tbCallBack = keras.callbacks.TensorBoard(log_dir='./logs', histogram_freq=0, write_graph=True, write_images=False, embeddings_freq=0,
+        tbCallBack = callbacks.TensorBoard(log_dir='./logs', histogram_freq=0, write_graph=True, write_images=False, embeddings_freq=0,
                                     embeddings_layer_names=None, embeddings_metadata=None)
         loss_history = LossHistory()
         history = model.fit(data.X_train, data.y_train, validation_data=(data.X_cv_test, data.y_cv_test), batch_size=batch_size,
