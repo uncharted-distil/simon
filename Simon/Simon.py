@@ -40,7 +40,7 @@ class Simon:
         self.encoder = encoder
 
     def binarize(self,x, sz=71):
-        return tf.to_float(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1))
+        return tf.to_cast(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1))
 
     def clear_session(self):
         K.clear_session()
