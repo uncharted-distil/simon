@@ -18,7 +18,7 @@ from tensorflow.keras.optimizers import SGD
 
 import re
 from tensorflow.keras import backend as K
-from tensorflow import keras.callbacks
+import tensorflow.keras.callbacks
 import sys
 import os
 import time
