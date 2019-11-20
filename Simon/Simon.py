@@ -147,7 +147,7 @@ class Simon:
         sent_encode = Dropout(0.3)(sent_encode)
         # sentence encoder
 
-        encoder = Model(input=in_sentence, output=sent_encode)
+        encoder = Model(inputs=in_sentence, outputs=sent_encode)
 
         #print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
@@ -164,7 +164,7 @@ class Simon:
         output = Dropout(0.3)(output)
         output = Dense(category_count, activation=activation)(output)
         # output = Activation('softmax')(output)
-        model = Model(input=document, output=output)
+        model = Model(inputs=document, outputs=output)
 
         return model
         
@@ -197,7 +197,7 @@ class Simon:
         sent_encode = Dropout(0.3)(sent_encode)
         # sentence encoder
 
-        encoder = Model(input=in_sentence, output=sent_encode)
+        encoder = Model(inputs=in_sentence, outputs=sent_encode)
 
         #print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
@@ -213,13 +213,13 @@ class Simon:
         output_pre = Dense(128, activation='relu')(output_pre)
         output_pre = Dropout(0.3)(output_pre)
         output = Dense(category_count_prior, activation=activation)(output_pre)
-        model = Model(input=document, output=output)
+        model = Model(inputs=document, outputs=output)
     
         # having built model of prior size, load weights
         self.load_weights(checkpoint, None, model, checkpoint_dir)
         # having loaded weights,rebuild model using new category_count in last layer
         output = Dense(category_count_post, activation='sigmoid')(output_pre)
-        model = Model(input=document, output=output)
+        model = Model(inputs=document, outputs=output)
         # retrain the last layer
         for layer in model.layers[:8]:
             layer.trainable = False
@@ -259,7 +259,7 @@ class Simon:
         sent_encode = Dropout(0.3)(sent_encode)
         # sentence encoder
 
-        encoder = Model(input=in_sentence, output=sent_encode)
+        encoder = Model(inputs=in_sentence, outputs=sent_encode)
 
         #print(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
@@ -275,7 +275,7 @@ class Simon:
         output_pre = Dense(128, activation='relu', name='features')(output_pre)
         output = Dropout(0.3)(output_pre)
         output = Dense(category_count, activation='softmax')(output)
-        model = Model(input=document, output=output)
+        model = Model(inputs=document, outputs=output)
         self.load_weights(config['checkpoint'],config,model,checkpoint_dir)
 
         '''GENERATE MODEL FOR INTERMEDIATE LAYER'''
