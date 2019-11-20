@@ -13,11 +13,12 @@ from tensorflow.keras.layers import Embedding, TimeDistributed
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.layers import concatenate
 from tensorflow.keras.optimizers import SGD
-from tensorflow.keras.utils import np_utils
+# from tensorflow.keras.utils import np_utils
+# from tensorflow.contrib.keras.python.keras.utils import np_utils
 
 import re
 from tensorflow.keras import backend as K
-import tensorflow.keras.callbacks
+from tensorflow import keras.callbacks
 import sys
 import os
 import time
