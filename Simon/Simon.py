@@ -1,21 +1,23 @@
 from Simon.DataGenerator import *
 from Simon.Encoder import *
 import pandas as pd
-from keras.models import Model
-from keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
-from keras.layers import LSTM, Lambda, merge, Masking
-from keras.layers import Embedding, TimeDistributed
-from keras.layers.normalization import BatchNormalization
-from keras.layers.merge import concatenate
-from keras.optimizers import SGD
-from keras.utils import np_utils
 import numpy as np
-# import tensorflow as tf
+
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
+
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
+from tensorflow.keras.layers import LSTM, Lambda, merge, Masking
+from tensorflow.keras.layers import Embedding, TimeDistributed
+from tensorflow.keras.layers.normalization import BatchNormalization
+from tensorflow.keras.layers.merge import concatenate
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.utils import np_utils
+
 import re
-from keras import backend as K
-import keras.callbacks
+from tensorflow.keras import backend as K
+import tensorflow.keras.callbacks
 import sys
 import os
 import time
