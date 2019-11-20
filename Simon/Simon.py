@@ -121,7 +121,7 @@ class Simon:
     def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
-        pool_length = 2
+        pool_size = 2
         # document input
         document = Input(shape=(max_cells, max_len), dtype='int64')
         # sentence input
@@ -136,7 +136,7 @@ class Simon:
                                      kernel_initializer='glorot_normal')(embedded)
 
             embedded = Dropout(0.1)(embedded)
-            embedded = MaxPooling1D(pool_length=pool_length)(embedded)
+            embedded = MaxPooling1D(pool_size=pool_size)(embedded)
 
         forward_sent = LSTM(256, return_sequences=False, dropout=0.2,
                         recurrent_dropout=0.2)(embedded)
@@ -171,7 +171,7 @@ class Simon:
     def generate_transfer_model(self,max_len, max_cells, category_count_prior, category_count_post, checkpoint, checkpoint_dir,activation='sigmoid'):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
-        pool_length = 2
+        pool_size = 2
         # document input
         document = Input(shape=(max_cells, max_len), dtype='int64')
         # sentence input
@@ -186,7 +186,7 @@ class Simon:
                                      kernel_initializer='glorot_normal')(embedded)
 
             embedded = Dropout(0.1)(embedded)
-            embedded = MaxPooling1D(pool_length=pool_length)(embedded)
+            embedded = MaxPooling1D(pool_size=pool_size)(embedded)
 
         forward_sent = LSTM(256, return_sequences=False, dropout=0.2,
                         recurrent_dropout=0.2)(embedded)
@@ -233,7 +233,7 @@ class Simon:
         '''
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
-        pool_length = 2
+        pool_size = 2
         # document input
         document = Input(shape=(max_cells, max_len), dtype='int64')
         # sentence input
@@ -248,7 +248,7 @@ class Simon:
                                      kernel_initializer='glorot_normal')(embedded)
 
             embedded = Dropout(0.1)(embedded)
-            embedded = MaxPooling1D(pool_length=pool_length)(embedded)
+            embedded = MaxPooling1D(pool_size=pool_size)(embedded)
 
         forward_sent = LSTM(256, return_sequences=False, dropout=0.2,
                         recurrent_dropout=0.2)(embedded)
