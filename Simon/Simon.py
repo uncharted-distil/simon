@@ -1,29 +1,22 @@
-from Simon.DataGenerator import *
-from Simon.Encoder import *
+#from Simon.DataGenerator import *
+#from Simon.Encoder import *
 import pandas as pd
 import numpy as np
 
-# import tensorflow.compat.v1 as tf
-# tf.disable_v2_behavior()
 import tensorflow as tf
-
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, Activation, Flatten, Input, Dropout, MaxPooling1D, Convolution1D
-from tensorflow.keras.layers import LSTM, Lambda, Masking
-from tensorflow.keras.layers import Embedding, TimeDistributed
-from tensorflow.keras.layers import BatchNormalization
-from tensorflow.keras.layers import concatenate
+from tensorflow.keras.layers import LSTM, Lambda, Masking, Embedding, TimeDistributed, BatchNormalization, concatenate
 from tensorflow.keras.optimizers import SGD
-# from tensorflow.keras.utils import np_utils
-# from tensorflow.contrib.keras.python.keras.utils import np_utils
-
-import re
 from tensorflow.keras import backend as K
 import tensorflow.keras.callbacks as callbacks
-import sys
+
+import re
 import os
 import time
 import pickle
+
+logger = logging.getLogger(__name__)
 
 # record history of training
 class LossHistory(callbacks.Callback):
@@ -40,7 +33,7 @@ class Simon:
         self.encoder = encoder
 
     def binarize(self,x, sz=71):
-        return tf.to_cast(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1))
+        return tf.cast(tf.one_hot(x, sz, on_value=1, off_value=0, axis=-1), dtype=tf.float32)
 
     def clear_session(self):
         K.clear_session()
@@ -150,7 +143,7 @@ class Simon:
 
         encoder = Model(inputs=in_sentence, outputs=sent_encode)
 
-        #print(encoder.summary())
+        #logger.debug(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
@@ -200,7 +193,7 @@ class Simon:
 
         encoder = Model(inputs=in_sentence, outputs=sent_encode)
 
-        #print(encoder.summary())
+        #logger.debug(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
@@ -262,7 +255,7 @@ class Simon:
 
         encoder = Model(inputs=in_sentence, outputs=sent_encode)
 
-        #print(encoder.summary())
+        #logger.debug(encoder.summary())
         encoded = TimeDistributed(encoder)(document)
 
         # encoded: sentences to bi-lstm for document encoding
@@ -304,7 +297,7 @@ class Simon:
         plt.show()
 
     def train_model(self,batch_size, checkpoint_dir, model, nb_epoch, data):
-        print("starting learning")
+        logger.debug("starting learning")
     
         check_cb = callbacks.ModelCheckpoint(checkpoint_dir + "text-class" + '.{epoch:02d}-{val_loss:.2f}.hdf5',
                                                     monitor='val_loss', verbose=0, save_best_only=True, mode='min')
@@ -316,53 +309,37 @@ class Simon:
         history = model.fit(data.X_train, data.y_train, validation_data=(data.X_cv_test, data.y_cv_test), batch_size=batch_size,
                     nb_epoch=nb_epoch, shuffle=True, callbacks=[earlystop_cb, check_cb, loss_history, tbCallBack])
     
-        print('losses: ')
-        print(history.history['loss'])
-        print('accuracies: ')
-        print(history.history['val_binary_accuracy'])
+        logger.debug('losses: ')
+        logger.debug(history.history['loss'])
+        logger.debug('accuracies: ')
+        logger.debug(history.history['val_binary_accuracy'])
         return history
 
     def evaluate_model(self,max_cells, model, data, encoder, p_threshold):
-        print("Starting predictions:")
+        logger.debug("Starting predictions:")
     
         start = time.time()
         scores = model.evaluate(data.X_test, data.y_test, verbose=0)
         end = time.time()
-        print("Accuracy: %.2f%% \n Time: {0}s \n Time/example : {1}s/ex".format(
+        logger.debug("Accuracy: %.2f%% \n Time: {0}s \n Time/example : {1}s/ex".format(
             end - start, (end - start) / data.X_test.shape[0]) % (scores[1] * 100))
         
         probabilities = model.predict(data.X_test, verbose=1)
-        ##  uncomment if interested in "argmax" class, i.e., the maximum probability/class
-        # m = np.amax(probabilities, axis=1)
-        # max_index = np.argmax(probabilities, axis=1)
-        # Categories = encoder.categories
-        # print("Remember that the fixed categories are:")
-        # print(Categories)
-        # print("Most Likely Predicted Category/Labels are: ")
-        # print((np.array(Categories))[max_index])
-        # print("Associated max probabilities/confidences:")
-        # print(m)
-        # next, all probabilities above a certain threshold
-        prediction_indices = probabilities > p_threshold
-        y_pred = np.zeros(data.y_test.shape)
-        y_pred[prediction_indices] = 1
-        # print("DEBUG::y_test:")
-        # print(data.y_test)
-        # print("DEBUG::y_pred:")
-        # print(y_pred)
-        print("'Binary' accuracy ((TP+TN)/total) sample number is:")
-        print(self.eval_binary_accuracy(data.y_test,y_pred)[0])
-        print("'Binary' confusion ((FP+FN)/total) sample number is:")
-        print(self.eval_confusion(data.y_test,y_pred)[0])
-        print("False Positive sample number is:")
-        print(self.eval_false_positives(data.y_test,y_pred)[0])
+        y_pred = np.where(y > p_threshold, 1, 0).astype(int)
+
+        logger.debug("'Binary' accuracy ((TP+TN)/total) sample number is:")
+        logger.debug(self.eval_binary_accuracy(data.y_test,y_pred)[0])
+        logger.debug("'Binary' confusion ((FP+FN)/total) sample number is:")
+        logger.debug(self.eval_confusion(data.y_test,y_pred)[0])
+        logger.debug("False Positive sample number is:")
+        logger.debug(self.eval_false_positives(data.y_test,y_pred)[0])
         TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
-        print("Precision is:")
-        print(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
-        print("Recall is:")
-        print(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
-        print("F1 score is:")
-        print(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
+        logger.debug("Precision is:")
+        logger.debug(np.sum(TP)/(np.sum(TP)+np.sum(FP)))
+        logger.debug("Recall is:")
+        logger.debug(np.sum(TP)/(np.sum(TP)+np.sum(FN)))
+        logger.debug("F1 score is:")
+        logger.debug(2*np.sum(TP)/(2*np.sum(TP)+np.sum(FP)+np.sum(FN)))
 
 
         return encoder.reverse_label_encode(probabilities,p_threshold)
@@ -378,7 +355,7 @@ class Simon:
             checkpoint_name = config['checkpoint']
         if checkpoint_name:
             checkpoint_path = self.resolve_file_path(checkpoint_name, checkpoint_dir)
-            #print("Checkpoint : %s" % str(checkpoint_path))
+            #logger.debug("Checkpoint : %s" % str(checkpoint_path))
             model.load_weights(checkpoint_path)
 
     def save_config(self,execution_config, checkpoint_dir):
@@ -488,7 +465,7 @@ class Simon:
                                             available_devices))
 
         def get_slice(data, i, parts):
-            shape = tf.shape(data)
+            shape = tf.shape(input=data)
             batch_size = shape[:1]
             input_shape = shape[1:]
             step = batch_size // parts
@@ -509,7 +486,7 @@ class Simon:
         # each getting a slice of the inputs.
         for i in range(gpus):
             with tf.device('/device:GPU:%d' % i):
-                with tf.name_scope('replica_%d' % i):
+                with tf.compat.v1.name_scope('replica_%d' % i):
                     inputs = []
                     # Retrieve a slice of the input.
                     for x in model.inputs:
@@ -539,28 +516,26 @@ class Simon:
             return Model(model.inputs, merged)
 
     def tune_ROC_metrics(self,max_cells, model, data, encoder,p_thresholds):
-        print("Starting to compute ROC metrics...")
+        logger.debug("Starting to compute ROC metrics...")
 
         start = time.time()
         scores = model.evaluate(data.X_test, data.y_test, verbose=0)
         end = time.time()
-        print("Initial Accuracy: %.2f%% \n Time: {0}s \n Time/example : {1}s/ex".format(
+        logger.debug("Initial Accuracy: %.2f%% \n Time: {0}s \n Time/example : {1}s/ex".format(
             end - start, (end - start) / data.X_test.shape[0]) % (scores[1] * 100))
 
         probabilities = model.predict(data.X_test, verbose=1)
 
         Categories = encoder.categories
-        print("The fixed categories are:")
-        print(Categories)
+        logger.debug("The fixed categories are:")
+        logger.debug(Categories)
 
         # evaluate ROC metrics for a number of p_threholds
         TPR_arr = np.zeros((p_thresholds.shape[0],1))
         FPR_arr = np.zeros((p_thresholds.shape[0],1))
         i = 0
         for p_threshold in p_thresholds:
-            prediction_indices = probabilities > p_threshold
-            y_pred = np.zeros(data.y_test.shape)
-            y_pred[prediction_indices] = 1
+            y_pred = np.where(y > p_threshold, 1, 0).astype(int)
             TP,TN,FP,FN = self.eval_ROC_metrics(data.y_test, y_pred)
             TPR_arr[i,:]= np.sum(TP)/(np.sum(TP)+np.sum(FN))
             FPR_arr[i,:]= np.sum(FP)/(np.sum(FP)+np.sum(TN))

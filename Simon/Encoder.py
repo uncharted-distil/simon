@@ -4,9 +4,8 @@ import os.path
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MultiLabelBinarizer
-from keras.utils import np_utils
 from Simon.LengthStandardizer import *
-
+import logging
 
 class StringToIntArrayEncoder:
     def encode(self, string, char_count):
@@ -111,19 +110,17 @@ class Encoder:
         
         multi_encoder = self._multi_encoder
         
-        prediction_indices = y > p_threshold
-        y_pred = np.zeros(y.shape)
-        y_pred[prediction_indices] = 1
+        # convert predictions to binary integers
+        y_pred = np.where(y > p_threshold, 1, 0).astype(int)
+        y = y.numpy()
 
         # extract label prediction probabilities
-        nx,ny = y.shape
-        label_probs = []
-        for i in np.arange(nx):
-            label_probs.append(y[i,prediction_indices[i,:]].tolist())
-        
+        label_probs = [[prob for prob, pred in zip(prob_list, pred_list) if pred == 1] 
+            for prob_list, pred_list in zip(y, y_pred)]
+
         # extract labels
         labels = multi_encoder.inverse_transform(y_pred)
-        
+
         return labels, label_probs
         
     def encodeDataFrame(self, df: pandas.DataFrame):
