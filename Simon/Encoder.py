@@ -112,11 +112,10 @@ class Encoder:
         
         # convert predictions to binary integers
         y_pred = np.where(y > p_threshold, 1, 0).astype(int)
-        y = y.numpy()
-
+        
         # extract label prediction probabilities
         label_probs = [[prob for prob, pred in zip(prob_list, pred_list) if pred == 1] 
-            for prob_list, pred_list in zip(y, y_pred)]
+            for prob_list, pred_list in zip(np.array(y), y_pred)]
 
         # extract labels
         labels = multi_encoder.inverse_transform(y_pred)
