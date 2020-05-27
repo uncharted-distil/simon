@@ -113,7 +113,7 @@ class Simon:
         data = type('data_type', (object,), {'X_train' : X_train, 'X_cv_test': X_cv_test, 'X_test': X_test, 'y_train': y_train, 'y_cv_test': y_cv_test, 'y_test':y_test})
         return data
 
-    def generate_model(self,max_len, max_cells, category_count,activation='sigmoid'):
+    def generate_model(self, max_len, max_cells, category_count, activation='sigmoid', training = False):
         filter_length = [1, 3, 3]
         nb_filter = [40, 200, 1000]
         pool_size = 2
@@ -132,11 +132,11 @@ class Simon:
 
             embedded = Dropout(0.1)(embedded)
             embedded = MaxPooling1D(pool_size=pool_size)(embedded)
-
+        
         forward_sent = LSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(embedded)
+                        recurrent_dropout=0.2)(embedded, training = training)
         backward_sent = LSTM(256, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(embedded)
+                        recurrent_dropout=0.2, go_backwards=True)(embedded, training = training)
 
         sent_encode = concatenate([forward_sent, backward_sent], axis=-1)
         sent_encode = Dropout(0.3)(sent_encode)
@@ -149,9 +149,9 @@ class Simon:
 
         # encoded: sentences to bi-lstm for document encoding
         forwards = LSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2)(encoded)
+                        recurrent_dropout=0.2)(encoded, training = training)
         backwards = LSTM(128, return_sequences=False, dropout=0.2,
-                        recurrent_dropout=0.2, go_backwards=True)(encoded)
+                        recurrent_dropout=0.2, go_backwards=True)(encoded, training = training)
 
         merged = concatenate([forwards, backwards], axis=-1)
         output = Dropout(0.3)(merged)
