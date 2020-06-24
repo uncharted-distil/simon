@@ -2,6 +2,8 @@
 * Heterogeneous acceleration (multiple CPUs, GPUs)
 * .csv data processing utility
 
+# v1.2.5
+* Compatbility with tensorflow-gpu==2.2.0
 # v1.2.4
 * Added function to generate feature model whose output is the final 128-d feature vector learned by SIMON
 # v1.2.3
