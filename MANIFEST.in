@@ -3,3 +3,4 @@ include Simon/penny/guesser.py
 include Simon/penny/utils.py
 include Simon/penny/value_checks.py
 include Simon/penny/guesser.py
+include LICENSE
